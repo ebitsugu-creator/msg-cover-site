@@ -748,3 +748,20 @@ table.member td:nth-child(4){background:#CFDDF0}
 .tier:nth-child(1){background:#F1F5FB}
 .tier:nth-child(2){background:#E1EAF6}
 /* .tier.pt(プラチナ)は従来どおり濃紺 */
+
+/* 「中くらい」とは？ 第1章 — キャッチの横に添えるMIYU(切り抜き) */
+.copy-miyu{display:flex;align-items:flex-end;gap:10px;min-width:0}
+.copy-miyu .fs-serif{flex:0 1 auto;min-width:0;white-space:nowrap}
+.copy-miyu-fig{
+  flex:0 1 auto;width:auto;height:auto;min-width:0;
+  max-width:150px;max-height:min(300px,36vh);
+  object-fit:contain;object-position:bottom center;
+}
+@media (max-width:899px){
+  .copy-miyu{gap:8px}
+  .copy-miyu-fig{max-width:30%;max-height:210px}
+}
+
+/* リンク先が未定のカード(党公式YouTubeチャンネル)。決まり次第 href を入れてください */
+.card[data-pending-youtube]{pointer-events:none;background:var(--soft)}
+.card[data-pending-youtube] .more.pending{color:var(--muted);font-weight:700}
