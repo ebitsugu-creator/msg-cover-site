@@ -1,0 +1,94 @@
+「中くらいの政府」公式サイト  更新分（2026-08-19）
+==================================================================
+
+■ この中に入っているもの
+  8/18・8/19 のご指示を反映して、中身が変わったファイルだけを集めました。
+  いま公開しているフォルダに、そのまま上書きコピーしてください。
+  （フォルダの形はそのままなので、中身をまとめて上書きすればOKです）
+
+■ 新しく増えたファイル（9件）
+    assets/img/miyu-m1.webp            … MIYUの画像（背景なしの透過）
+    assets/img/miyu-m2.webp            … MIYUの画像（背景なしの透過）
+    assets/img/miyu-m3.webp            … MIYUの画像（背景なしの透過）
+    assets/img/miyu-m4.webp            … MIYUの画像（背景なしの透過）
+    assets/img/miyu-m5.webp            … MIYUの画像（背景なしの透過）
+    assets/img/miyu-m6.webp            … MIYUの画像（背景なしの透過）
+    assets/img/miyu-m7.webp            … MIYUの画像（背景なしの透過）
+    assets/img/msg-logo-white-ja.png   … フッター用の白いロゴ（和文のみ）
+    rules.html                         … 党則・倫理規定のページ
+
+■ 中身が変わったファイル（12件）
+    about.html               … 「中くらい」とは？ … 末尾のMIYUの帯を削除／1画面目にMIYUを追加
+    activity.html            … 活動・お知らせ … 末尾のMIYUを差し替え
+    assets/msg-nav.css       … 同上（ロゴまわりの調整）
+    assets/msg-nav.js        … ロゴを 左上=和文＋英文 / 左下=和文のみ に
+    assets/site.css          … 会員表の地色、MIYUの見せ方などの調整
+    assets/top-2026.js       … 表紙 … ボタンがフッターに重ならないよう調整／SKIPで音が鳴らないよう修正
+    join.html                … 寄附をする・会員になる … 入会金の行を削除／年会費を 4,000・7,000・10,000 に
+    organization.html        … 団体概要 … 活動趣旨・代表者を追加／所在地等を削除／党則リンク／関連リンク集を入替
+    policies.html            … 推しネタ … サブフレーズ変更／開催ラベル追加／MIYU削除／「別サイト」表記を廃止
+    readme.txt               … この一式の説明メモ（変更点の一覧つき）
+    style.html               … 私たちのスタイル … MIYUを2点差し替え／「別サイト」表記を廃止
+    system.html              … 成熟期の政治システム … MIYUを2点差し替え
+
+■ 使わなくなったファイル（52件）
+  下記は今どこからも使っていません。消していただくと軽くなりますが、
+  残したままでも表示には影響しません。
+
+    assets/click-next.js
+    assets/img/background-main.jpg
+    assets/img/boss.png
+    assets/img/bowing.png
+    assets/img/city-1400.webp
+    assets/img/city-1900.webp
+    assets/img/city-900.webp
+    assets/img/miyu-city-1200.jpg
+    assets/img/miyu-city-720.jpg
+    assets/img/miyu-cut.png
+    assets/img/miyu-duotone-420.webp
+    assets/img/miyu-duotone-640.webp
+    assets/img/miyu-face-400.webp
+    assets/img/miyu-face-alt-160.webp
+    assets/img/miyu-face-alt-240.webp
+    assets/img/miyu-face-alt-400.webp
+    assets/img/miyu-hero-1000.webp
+    assets/img/miyu-hero-1400.webp
+    assets/img/miyu-hero-700.webp
+    assets/img/miyu-panel-380.webp
+    assets/img/miyu-panel-640.webp
+    assets/img/miyu-pose-about-480.webp
+    assets/img/miyu-pose-about-760.webp
+    assets/img/miyu-pose-about-bg-1400.webp
+    assets/img/miyu-pose-about-bg-900.webp
+    assets/img/miyu-pose-point-480.webp
+    assets/img/miyu-pose-point-760.webp
+    assets/img/miyu-pose-point-bg-1400.webp
+    assets/img/miyu-pose-point-bg-900.webp
+    assets/img/miyu-pose-rise-480.webp
+    assets/img/miyu-pose-rise-760.webp
+    assets/img/miyu-pose-rise-bg-1400.webp
+    assets/img/miyu-pose-rise-bg-900.webp
+    assets/img/miyu-pose-surprise-bg-1400.webp
+    assets/img/miyu-pose-surprise-bg-900.webp
+    assets/img/miyu-pose-think-480.webp
+    assets/img/miyu-pose-think-760.webp
+    assets/img/miyu-pose-think-bg-1400.webp
+    assets/img/miyu-pose-think-bg-900.webp
+    assets/img/miyu-pose-up-480.webp
+    assets/img/miyu-pose-up-760.webp
+    assets/img/miyu-pose-up-bg-1400.webp
+    assets/img/miyu-pose-up-bg-900.webp
+    assets/img/miyu-pose-welcome-480.webp
+    assets/img/miyu-pose-welcome-760.webp
+    assets/img/miyu-pose-welcome-bg-1400.webp
+    assets/img/miyu-pose-welcome-bg-900.webp
+    assets/img/miyu.png
+    assets/img/msg-logo-white.png
+    assets/img/pyramid.png
+    assets/main.js
+    assets/top-style.css
+
+==================================================================
+※ 差し替えではなく、まるごと新しくする場合は
+   「中くらいの政府_公式サイト一式_20260819.zip」をお使いください。
+   そちらは、この更新分もすべて反映済みの完成形です。
