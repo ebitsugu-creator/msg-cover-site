@@ -2,30 +2,75 @@
   "schemaVersion": 1,
   "collections": [
     {
-      "name": "freeArticles",
-      "label": "フリー記事",
-      "description": "私たちについて／イベント・勉強会等の自由記事",
-      "path": "content/free-articles",
+      "name": "aboutArticles",
+      "label": "私たちについて",
+      "description": "私たちについての記事",
+      "path": "content/about",
       "extension": "md",
       "fields": [
-        { "name": "title", "type": "text", "label": "タイトル", "required": true },
-        { "name": "subtitle", "type": "text", "label": "サブタイトル" },
-        { "name": "summary", "type": "textarea", "label": "概要" },
-        { "name": "content", "type": "richtext", "label": "本文" },
-        { "name": "image1", "type": "image", "label": "画像1" },
-        { "name": "image2", "type": "image", "label": "画像2" },
-        { "name": "videoUrl", "type": "text", "label": "動画URL" },
-        { "name": "linkLabel", "type": "text", "label": "リンク表示文字" },
-        { "name": "linkUrl", "type": "text", "label": "リンク参照URL" },
-        { "name": "eventAt", "type": "date", "label": "開催日時", "includeTime": true },
+        {
+          "name": "title",
+          "type": "text",
+          "label": "タイトル",
+          "required": true
+        },
+        {
+          "name": "subtitle",
+          "type": "text",
+          "label": "サブタイトル"
+        },
+        {
+          "name": "summary",
+          "type": "textarea",
+          "label": "概要"
+        },
+        {
+          "name": "content",
+          "type": "richtext",
+          "label": "本文"
+        },
+        {
+          "name": "image1",
+          "type": "image",
+          "label": "画像1"
+        },
+        {
+          "name": "image2",
+          "type": "image",
+          "label": "画像2"
+        },
+        {
+          "name": "videoUrl",
+          "type": "text",
+          "label": "動画URL"
+        },
+        {
+          "name": "linkLabel",
+          "type": "text",
+          "label": "リンク表示文字"
+        },
+        {
+          "name": "linkUrl",
+          "type": "text",
+          "label": "リンク参照URL"
+        },
+        {
+          "name": "eventAt",
+          "type": "date",
+          "label": "開催日時",
+          "includeTime": true
+        },
         {
           "name": "category",
           "type": "select",
           "label": "大カテゴリ",
           "required": true,
+          "default": "about",
           "options": [
-            { "value": "about", "label": "私たちについて" },
-            { "value": "events", "label": "イベント・勉強会" }
+            {
+              "value": "about",
+              "label": "私たちについて"
+            }
           ]
         },
         {
@@ -34,23 +79,68 @@
           "label": "サブカテゴリ",
           "required": true,
           "options": [
-            { "value": "about_intro_message", "label": "私たちについて｜紹介・メッセージ" },
-            { "value": "about_profile", "label": "私たちについて｜団体概要" },
-            { "value": "about_people_org", "label": "私たちについて｜人事・組織" },
-            { "value": "about_media", "label": "私たちについて｜広報・マスコミ登場" },
-            { "value": "about_feedback", "label": "私たちについて｜頂いたご意見" },
-            { "value": "about_other", "label": "私たちについて｜その他" },
-            { "value": "events_study", "label": "イベント・勉強会｜勉強会" },
-            { "value": "events_party", "label": "イベント・勉強会｜パーティ､交流" },
-            { "value": "events_party_policy_other", "label": "イベント・勉強会｜党運営､政策関連､その他" }
+            {
+              "value": "about_intro_message",
+              "label": "紹介・メッセージ"
+            },
+            {
+              "value": "about_profile",
+              "label": "団体概要"
+            },
+            {
+              "value": "about_people_org",
+              "label": "人事・組織"
+            },
+            {
+              "value": "about_media",
+              "label": "広報・マスコミ登場"
+            },
+            {
+              "value": "about_feedback",
+              "label": "頂いたご意見"
+            },
+            {
+              "value": "about_other",
+              "label": "その他"
+            }
           ]
         },
-        { "name": "publishable", "type": "boolean", "label": "掲載可否", "default": true },
-        { "name": "whatsNew", "type": "boolean", "label": "What's New表示", "default": true },
-        { "name": "publishedAt", "type": "date", "label": "掲載日時", "includeTime": true },
-        { "name": "publishStartAt", "type": "date", "label": "掲載開始日時", "includeTime": true },
-        { "name": "publishEndAt", "type": "date", "label": "掲載終了日時", "includeTime": true },
-        { "name": "isDraft", "type": "boolean", "label": "下書き", "default": true }
+        {
+          "name": "publishable",
+          "type": "boolean",
+          "label": "掲載可否",
+          "default": true
+        },
+        {
+          "name": "whatsNew",
+          "type": "boolean",
+          "label": "What's New表示",
+          "default": true
+        },
+        {
+          "name": "publishedAt",
+          "type": "date",
+          "label": "掲載日時",
+          "includeTime": true
+        },
+        {
+          "name": "publishStartAt",
+          "type": "date",
+          "label": "掲載開始日時",
+          "includeTime": true
+        },
+        {
+          "name": "publishEndAt",
+          "type": "date",
+          "label": "掲載終了日時",
+          "includeTime": true
+        },
+        {
+          "name": "isDraft",
+          "type": "boolean",
+          "label": "下書き",
+          "default": true
+        }
       ],
       "pit": {
         "title": "title",
@@ -62,38 +152,85 @@
       }
     },
     {
-      "name": "textQa",
-      "label": "テキスト・Q&A",
-      "description": "私たちについてのテキスト情報／Q&A記事",
-      "path": "content/text-qa",
+      "name": "qaArticles",
+      "label": "QA",
+      "description": "QAの記事",
+      "path": "content/qa",
       "extension": "md",
       "fields": [
         {
-          "name": "articleType",
-          "type": "select",
-          "label": "記事タイプ",
-          "required": true,
-          "options": [
-            { "value": "text", "label": "テキスト情報" },
-            { "value": "qa", "label": "Q&A" }
-          ]
+          "name": "title",
+          "type": "text",
+          "label": "タイトル",
+          "required": true
         },
-        { "name": "title", "type": "text", "label": "タイトル", "required": true },
-        { "name": "subtitle", "type": "text", "label": "サブタイトル" },
-        { "name": "summary", "type": "textarea", "label": "概要" },
-        { "name": "content", "type": "richtext", "label": "本文・質問" },
-        { "name": "answerSummary", "type": "textarea", "label": "回答概略" },
-        { "name": "answer", "type": "richtext", "label": "回答" },
-        { "name": "linkLabel", "type": "text", "label": "リンク表示文字" },
-        { "name": "linkUrl", "type": "text", "label": "リンク参照URL" },
+        {
+          "name": "subtitle",
+          "type": "text",
+          "label": "サブタイトル"
+        },
+        {
+          "name": "summary",
+          "type": "textarea",
+          "label": "概要"
+        },
+        {
+          "name": "content",
+          "type": "richtext",
+          "label": "本文"
+        },
+        {
+          "name": "answerSummary",
+          "type": "textarea",
+          "label": "回答概略"
+        },
+        {
+          "name": "answer",
+          "type": "richtext",
+          "label": "回答"
+        },
+        {
+          "name": "image1",
+          "type": "image",
+          "label": "画像1"
+        },
+        {
+          "name": "image2",
+          "type": "image",
+          "label": "画像2"
+        },
+        {
+          "name": "videoUrl",
+          "type": "text",
+          "label": "動画URL"
+        },
+        {
+          "name": "linkLabel",
+          "type": "text",
+          "label": "リンク表示文字"
+        },
+        {
+          "name": "linkUrl",
+          "type": "text",
+          "label": "リンク参照URL"
+        },
+        {
+          "name": "eventAt",
+          "type": "date",
+          "label": "開催日時",
+          "includeTime": true
+        },
         {
           "name": "category",
           "type": "select",
           "label": "大カテゴリ",
           "required": true,
+          "default": "qa",
           "options": [
-            { "value": "about", "label": "私たちについて" },
-            { "value": "qa", "label": "QA" }
+            {
+              "value": "qa",
+              "label": "QA"
+            }
           ]
         },
         {
@@ -102,26 +239,206 @@
           "label": "サブカテゴリ",
           "required": true,
           "options": [
-            { "value": "about_intro_message", "label": "私たちについて｜紹介・メッセージ" },
-            { "value": "about_profile", "label": "私たちについて｜団体概要" },
-            { "value": "about_people_org", "label": "私たちについて｜人事・組織" },
-            { "value": "about_media", "label": "私たちについて｜広報・マスコミ登場" },
-            { "value": "about_feedback", "label": "私たちについて｜頂いたご意見" },
-            { "value": "about_other", "label": "私たちについて｜その他" },
-            { "value": "qa_membership", "label": "QA｜会員に関して" },
-            { "value": "qa_donation", "label": "QA｜寄付に関して" },
-            { "value": "qa_events", "label": "QA｜勉強会・イベントに関して" },
-            { "value": "qa_party", "label": "QA｜党に対して" },
-            { "value": "qa_policy", "label": "QA｜政策に対して" },
-            { "value": "qa_other", "label": "QA｜その他" }
+            {
+              "value": "qa_membership",
+              "label": "会員に関して"
+            },
+            {
+              "value": "qa_donation",
+              "label": "寄付に関して"
+            },
+            {
+              "value": "qa_events",
+              "label": "勉強会・イベントに関して"
+            },
+            {
+              "value": "qa_party",
+              "label": "党に対して"
+            },
+            {
+              "value": "qa_policy",
+              "label": "政策に対して"
+            },
+            {
+              "value": "qa_other",
+              "label": "その他"
+            }
           ]
         },
-        { "name": "publishable", "type": "boolean", "label": "掲載可否", "default": true },
-        { "name": "whatsNew", "type": "boolean", "label": "What's New表示", "default": true },
-        { "name": "publishedAt", "type": "date", "label": "掲載日時", "includeTime": true },
-        { "name": "publishStartAt", "type": "date", "label": "掲載開始日時", "includeTime": true },
-        { "name": "publishEndAt", "type": "date", "label": "掲載終了日時", "includeTime": true },
-        { "name": "isDraft", "type": "boolean", "label": "下書き", "default": true }
+        {
+          "name": "publishable",
+          "type": "boolean",
+          "label": "掲載可否",
+          "default": true
+        },
+        {
+          "name": "whatsNew",
+          "type": "boolean",
+          "label": "What's New表示",
+          "default": true
+        },
+        {
+          "name": "publishedAt",
+          "type": "date",
+          "label": "掲載日時",
+          "includeTime": true
+        },
+        {
+          "name": "publishStartAt",
+          "type": "date",
+          "label": "掲載開始日時",
+          "includeTime": true
+        },
+        {
+          "name": "publishEndAt",
+          "type": "date",
+          "label": "掲載終了日時",
+          "includeTime": true
+        },
+        {
+          "name": "isDraft",
+          "type": "boolean",
+          "label": "下書き",
+          "default": true
+        }
+      ],
+      "pit": {
+        "title": "title",
+        "body": "content",
+        "createdAt": "publishedAt",
+        "draft": "isDraft",
+        "defaultSortField": "_createdAt",
+        "defaultSortOrder": "desc"
+      }
+    },
+    {
+      "name": "eventArticles",
+      "label": "イベント・勉強会",
+      "description": "イベント・勉強会の記事",
+      "path": "content/events",
+      "extension": "md",
+      "fields": [
+        {
+          "name": "title",
+          "type": "text",
+          "label": "タイトル",
+          "required": true
+        },
+        {
+          "name": "subtitle",
+          "type": "text",
+          "label": "サブタイトル"
+        },
+        {
+          "name": "summary",
+          "type": "textarea",
+          "label": "概要"
+        },
+        {
+          "name": "content",
+          "type": "richtext",
+          "label": "本文"
+        },
+        {
+          "name": "image1",
+          "type": "image",
+          "label": "画像1"
+        },
+        {
+          "name": "image2",
+          "type": "image",
+          "label": "画像2"
+        },
+        {
+          "name": "videoUrl",
+          "type": "text",
+          "label": "動画URL"
+        },
+        {
+          "name": "linkLabel",
+          "type": "text",
+          "label": "リンク表示文字"
+        },
+        {
+          "name": "linkUrl",
+          "type": "text",
+          "label": "リンク参照URL"
+        },
+        {
+          "name": "eventAt",
+          "type": "date",
+          "label": "開催日時",
+          "includeTime": true
+        },
+        {
+          "name": "category",
+          "type": "select",
+          "label": "大カテゴリ",
+          "required": true,
+          "default": "events",
+          "options": [
+            {
+              "value": "events",
+              "label": "イベント・勉強会"
+            }
+          ]
+        },
+        {
+          "name": "subcategory",
+          "type": "select",
+          "label": "サブカテゴリ",
+          "required": true,
+          "options": [
+            {
+              "value": "events_study",
+              "label": "勉強会"
+            },
+            {
+              "value": "events_party",
+              "label": "パーティ､交流"
+            },
+            {
+              "value": "events_party_policy_other",
+              "label": "党運営､政策関連､その他"
+            }
+          ]
+        },
+        {
+          "name": "publishable",
+          "type": "boolean",
+          "label": "掲載可否",
+          "default": true
+        },
+        {
+          "name": "whatsNew",
+          "type": "boolean",
+          "label": "What's New表示",
+          "default": true
+        },
+        {
+          "name": "publishedAt",
+          "type": "date",
+          "label": "掲載日時",
+          "includeTime": true
+        },
+        {
+          "name": "publishStartAt",
+          "type": "date",
+          "label": "掲載開始日時",
+          "includeTime": true
+        },
+        {
+          "name": "publishEndAt",
+          "type": "date",
+          "label": "掲載終了日時",
+          "includeTime": true
+        },
+        {
+          "name": "isDraft",
+          "type": "boolean",
+          "label": "下書き",
+          "default": true
+        }
       ],
       "pit": {
         "title": "title",
@@ -135,18 +452,63 @@
     {
       "name": "videoArticles",
       "label": "動画",
-      "description": "動画を中心にした記事",
+      "description": "動画の記事",
       "path": "content/videos",
       "extension": "md",
       "fields": [
-        { "name": "title", "type": "text", "label": "タイトル", "required": true },
-        { "name": "subtitle", "type": "text", "label": "サブタイトル" },
-        { "name": "summary", "type": "textarea", "label": "概要" },
-        { "name": "videoUrl", "type": "text", "label": "動画URL", "required": true },
-        { "name": "image1", "type": "image", "label": "独自サムネイル画像" },
-        { "name": "content", "type": "richtext", "label": "本文" },
-        { "name": "linkLabel", "type": "text", "label": "リンク表示文字" },
-        { "name": "linkUrl", "type": "text", "label": "リンク参照URL" },
+        {
+          "name": "title",
+          "type": "text",
+          "label": "タイトル",
+          "required": true
+        },
+        {
+          "name": "subtitle",
+          "type": "text",
+          "label": "サブタイトル"
+        },
+        {
+          "name": "summary",
+          "type": "textarea",
+          "label": "概要"
+        },
+        {
+          "name": "content",
+          "type": "richtext",
+          "label": "本文"
+        },
+        {
+          "name": "image1",
+          "type": "image",
+          "label": "画像1"
+        },
+        {
+          "name": "image2",
+          "type": "image",
+          "label": "画像2"
+        },
+        {
+          "name": "videoUrl",
+          "type": "text",
+          "label": "動画URL",
+          "required": true
+        },
+        {
+          "name": "linkLabel",
+          "type": "text",
+          "label": "リンク表示文字"
+        },
+        {
+          "name": "linkUrl",
+          "type": "text",
+          "label": "リンク参照URL"
+        },
+        {
+          "name": "eventAt",
+          "type": "date",
+          "label": "開催日時",
+          "includeTime": true
+        },
         {
           "name": "category",
           "type": "select",
@@ -154,7 +516,10 @@
           "required": true,
           "default": "video",
           "options": [
-            { "value": "video", "label": "動画" }
+            {
+              "value": "video",
+              "label": "動画"
+            }
           ]
         },
         {
@@ -163,19 +528,64 @@
           "label": "サブカテゴリ",
           "required": true,
           "options": [
-            { "value": "video_city_oddities", "label": "都会にこんなものいる？" },
-            { "value": "video_minato_prices", "label": "クレイジーな港区物価" },
-            { "value": "video_minato_closures", "label": "港区廃業という闇" },
-            { "value": "video_members", "label": "メンバー紹介" },
-            { "value": "video_other", "label": "その他" }
+            {
+              "value": "video_city_oddities",
+              "label": "都会にこんなものいる？"
+            },
+            {
+              "value": "video_minato_prices",
+              "label": "クレイジーな港区物価"
+            },
+            {
+              "value": "video_minato_closures",
+              "label": "港区廃業という闇"
+            },
+            {
+              "value": "video_members",
+              "label": "メンバー紹介"
+            },
+            {
+              "value": "video_other",
+              "label": "その他"
+            }
           ]
         },
-        { "name": "publishable", "type": "boolean", "label": "掲載可否", "default": true },
-        { "name": "whatsNew", "type": "boolean", "label": "What's New表示", "default": true },
-        { "name": "publishedAt", "type": "date", "label": "掲載日時", "includeTime": true },
-        { "name": "publishStartAt", "type": "date", "label": "掲載開始日時", "includeTime": true },
-        { "name": "publishEndAt", "type": "date", "label": "掲載終了日時", "includeTime": true },
-        { "name": "isDraft", "type": "boolean", "label": "下書き", "default": true }
+        {
+          "name": "publishable",
+          "type": "boolean",
+          "label": "掲載可否",
+          "default": true
+        },
+        {
+          "name": "whatsNew",
+          "type": "boolean",
+          "label": "What's New表示",
+          "default": true
+        },
+        {
+          "name": "publishedAt",
+          "type": "date",
+          "label": "掲載日時",
+          "includeTime": true
+        },
+        {
+          "name": "publishStartAt",
+          "type": "date",
+          "label": "掲載開始日時",
+          "includeTime": true
+        },
+        {
+          "name": "publishEndAt",
+          "type": "date",
+          "label": "掲載終了日時",
+          "includeTime": true
+        },
+        {
+          "name": "isDraft",
+          "type": "boolean",
+          "label": "下書き",
+          "default": true
+        }
       ],
       "pit": {
         "title": "title",
