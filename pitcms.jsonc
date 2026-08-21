@@ -1,213 +1,71 @@
 {
-  "schemaVersion": 1,
-  "media": {
-    "storagePath": "assets/cms/images",
-    "publicPath": "/assets/cms/images"
-  },
   "collections": [
     {
-      "name": "free_articles",
+      "name": "freeArticles",
       "label": "フリー記事",
-      "description": "お知らせ、イベント告知・報告など、自由度の高い記事",
-      "path": "content/free",
-      "extension": ".md",
+      "description": "私たちについて／イベント・勉強会等の自由記事",
+      "path": "content/free-articles",
+      "extension": "md",
       "fields": [
+        { "name": "title", "type": "text", "label": "タイトル", "required": true },
+        { "name": "subtitle", "type": "text", "label": "サブタイトル" },
+        { "name": "summary", "type": "textarea", "label": "概要" },
+        { "name": "content", "type": "richtext", "label": "本文" },
+        { "name": "image1", "type": "image", "label": "画像1" },
+        { "name": "image2", "type": "image", "label": "画像2" },
+        { "name": "videoUrl", "type": "text", "label": "動画URL" },
+        { "name": "linkLabel", "type": "text", "label": "リンク表示文字" },
+        { "name": "linkUrl", "type": "text", "label": "リンク参照URL" },
+        { "name": "eventAt", "type": "date", "label": "開催日時", "includeTime": true },
         {
-          "name": "title",
-          "type": "text",
-          "label": "タイトル",
-          "required": true,
-          "note": "25文字以内を目安に入力してください。"
-        },
-        {
-          "name": "subtitle",
-          "type": "text",
-          "label": "サブタイトル",
-          "required": false,
-          "note": "50文字以内。タイトルを補足したり、内容を短く示唆・強調するための項目です。"
-        },
-        {
-          "name": "summary",
-          "type": "textarea",
-          "label": "概要",
-          "required": false,
-          "note": "150文字以内を目安に、記事内容を短く説明してください。"
-        },
-        {
-          "name": "body",
-          "type": "richtext",
-          "label": "本文",
-          "required": false
-        },
-        {
-          "name": "image1",
-          "type": "image",
-          "label": "画像1",
-          "required": false
-        },
-        {
-          "name": "image2",
-          "type": "image",
-          "label": "画像2",
-          "required": false
-        },
-        {
-          "name": "videoUrl",
-          "type": "text",
-          "label": "動画URL",
-          "required": false,
-          "note": "ページ内で動画として表示するURL。YouTubeはサイト側でサムネイルを自動取得します。"
-        },
-        {
-          "name": "linkLabel",
-          "type": "text",
-          "label": "リンク表示文字",
-          "required": false
-        },
-        {
-          "name": "linkUrl",
-          "type": "text",
-          "label": "リンク参照URL",
-          "required": false
-        },
-        {
-          "name": "eventAt",
-          "type": "date",
-          "label": "開催日時",
-          "required": false,
-          "includeTime": true,
-          "note": "イベント・勉強会の告知では、掲載終了日時が空欄の場合、この開催日時をサイト側で終了判定に利用します。"
-        },
-        {
-          "name": "sections",
-          "type": "checkbox",
-          "label": "掲載カテゴリ",
+          "name": "category",
+          "type": "select",
+          "label": "大カテゴリ",
           "required": true,
           "options": [
-            {
-              "value": "about",
-              "label": "私たちについて"
-            },
-            {
-              "value": "qa",
-              "label": "Q&A"
-            },
-            {
-              "value": "events",
-              "label": "イベント・勉強会"
-            },
-            {
-              "value": "featured",
-              "label": "推しネタ"
-            }
-          ],
-          "note": "記事を表示する大カテゴリを選択してください。"
+            { "value": "about", "label": "私たちについて" },
+            { "value": "events", "label": "イベント・勉強会" }
+          ]
         },
         {
           "name": "subcategory",
-          "type": "text",
+          "type": "select",
           "label": "サブカテゴリ",
-          "required": false,
-          "note": "必要な場合のみ入力。例：党からのお知らせ／団体概要／規定／関連リンク／イベント／勉強会。無料プラン3コレクション制限のため、現段階では自由入力で可変運用します。"
-        },
-        {
-          "name": "showInWhatsNew",
-          "type": "boolean",
-          "label": "What's Newに表示",
-          "required": false,
-          "default": true
-        },
-        {
-          "name": "publishedAt",
-          "type": "date",
-          "label": "掲載日時",
           "required": true,
-          "includeTime": true,
-          "default": "now"
+          "options": [
+            { "value": "about_intro_message", "label": "私たちについて｜紹介・メッセージ" },
+            { "value": "about_profile", "label": "私たちについて｜団体概要" },
+            { "value": "about_people_org", "label": "私たちについて｜人事・組織" },
+            { "value": "about_media", "label": "私たちについて｜広報・マスコミ登場" },
+            { "value": "about_feedback", "label": "私たちについて｜頂いたご意見" },
+            { "value": "about_other", "label": "私たちについて｜その他" },
+            { "value": "events_study", "label": "イベント・勉強会｜勉強会" },
+            { "value": "events_party", "label": "イベント・勉強会｜パーティ､交流" },
+            { "value": "events_party_policy_other", "label": "イベント・勉強会｜党運営､政策関連､その他" }
+          ]
         },
-        {
-          "name": "publishStartAt",
-          "type": "date",
-          "label": "掲載開始日時",
-          "required": false,
-          "includeTime": true
-        },
-        {
-          "name": "publishEndAt",
-          "type": "date",
-          "label": "掲載終了日時",
-          "required": false,
-          "includeTime": true
-        },
-        {
-          "name": "updatedAt",
-          "type": "date",
-          "label": "更新日時",
-          "required": false,
-          "includeTime": true
-        },
-        {
-          "name": "isDraft",
-          "type": "boolean",
-          "label": "下書き",
-          "required": false,
-          "default": false
-        }
-      ],
-      "layout": [
-        [
-          "title"
-        ],
-        [
-          "subtitle",
-          "summary"
-        ],
-        [
-          "sections",
-          "subcategory"
-        ],
-        [
-          "publishedAt",
-          "eventAt"
-        ],
-        [
-          "publishStartAt",
-          "publishEndAt"
-        ],
-        [
-          "showInWhatsNew"
-        ],
-        [
-          "image1",
-          "image2"
-        ],
-        [
-          "videoUrl"
-        ],
-        [
-          "linkLabel",
-          "linkUrl"
-        ],
-        [
-          "body"
-        ]
+        { "name": "publishable", "type": "boolean", "label": "掲載可否", "default": true },
+        { "name": "whatsNew", "type": "boolean", "label": "What's New表示", "default": true },
+        { "name": "publishedAt", "type": "date", "label": "掲載日時", "includeTime": true },
+        { "name": "publishStartAt", "type": "date", "label": "掲載開始日時", "includeTime": true },
+        { "name": "publishEndAt", "type": "date", "label": "掲載終了日時", "includeTime": true },
+        { "name": "isDraft", "type": "boolean", "label": "下書き", "default": true }
       ],
       "pit": {
         "title": "title",
-        "body": "body",
+        "body": "content",
         "createdAt": "publishedAt",
-        "updatedAt": "updatedAt",
         "draft": "isDraft",
         "defaultSortField": "_createdAt",
         "defaultSortOrder": "desc"
       }
     },
     {
-      "name": "text_qa",
+      "name": "textQa",
       "label": "テキスト・Q&A",
-      "description": "団体概要・規定等のテキスト情報とQ&Aを共通管理",
+      "description": "私たちについてのテキスト情報／Q&A記事",
       "path": "content/text-qa",
-      "extension": ".md",
+      "extension": "md",
       "fields": [
         {
           "name": "articleType",
@@ -215,362 +73,113 @@
           "label": "記事タイプ",
           "required": true,
           "options": [
-            {
-              "value": "text",
-              "label": "テキスト情報"
-            },
-            {
-              "value": "qa",
-              "label": "Q&A"
-            }
+            { "value": "text", "label": "テキスト情報" },
+            { "value": "qa", "label": "Q&A" }
+          ]
+        },
+        { "name": "title", "type": "text", "label": "タイトル", "required": true },
+        { "name": "subtitle", "type": "text", "label": "サブタイトル" },
+        { "name": "summary", "type": "textarea", "label": "概要" },
+        { "name": "content", "type": "richtext", "label": "本文・質問" },
+        { "name": "answerSummary", "type": "textarea", "label": "回答概略" },
+        { "name": "answer", "type": "richtext", "label": "回答" },
+        { "name": "linkLabel", "type": "text", "label": "リンク表示文字" },
+        { "name": "linkUrl", "type": "text", "label": "リンク参照URL" },
+        {
+          "name": "category",
+          "type": "select",
+          "label": "大カテゴリ",
+          "required": true,
+          "options": [
+            { "value": "about", "label": "私たちについて" },
+            { "value": "qa", "label": "QA" }
           ]
         },
         {
-          "name": "title",
-          "type": "text",
-          "label": "タイトル",
-          "required": true,
-          "note": "25文字以内を目安に入力してください。"
-        },
-        {
-          "name": "subtitle",
-          "type": "text",
-          "label": "サブタイトル",
-          "required": false,
-          "note": "50文字以内。タイトルを補足したり、内容を短く示唆・強調するための項目です。"
-        },
-        {
-          "name": "summary",
-          "type": "textarea",
-          "label": "概要",
-          "required": false,
-          "note": "150文字以内を目安に、記事内容を短く説明してください。"
-        },
-        {
-          "name": "body",
-          "type": "richtext",
-          "label": "本文・質問本文",
-          "required": false
-        },
-        {
-          "name": "answerSummary",
-          "type": "textarea",
-          "label": "回答概略",
-          "required": false
-        },
-        {
-          "name": "answer",
-          "type": "richtext",
-          "label": "回答",
-          "required": false
-        },
-        {
-          "name": "linkLabel",
-          "type": "text",
-          "label": "リンク表示文字",
-          "required": false
-        },
-        {
-          "name": "linkUrl",
-          "type": "text",
-          "label": "リンク参照URL",
-          "required": false
-        },
-        {
-          "name": "sections",
-          "type": "checkbox",
-          "label": "掲載カテゴリ",
+          "name": "subcategory",
+          "type": "select",
+          "label": "サブカテゴリ",
           "required": true,
           "options": [
-            {
-              "value": "about",
-              "label": "私たちについて"
-            },
-            {
-              "value": "qa",
-              "label": "Q&A"
-            },
-            {
-              "value": "events",
-              "label": "イベント・勉強会"
-            },
-            {
-              "value": "featured",
-              "label": "推しネタ"
-            }
-          ],
-          "note": "記事を表示する大カテゴリを選択してください。"
+            { "value": "about_intro_message", "label": "私たちについて｜紹介・メッセージ" },
+            { "value": "about_profile", "label": "私たちについて｜団体概要" },
+            { "value": "about_people_org", "label": "私たちについて｜人事・組織" },
+            { "value": "about_media", "label": "私たちについて｜広報・マスコミ登場" },
+            { "value": "about_feedback", "label": "私たちについて｜頂いたご意見" },
+            { "value": "about_other", "label": "私たちについて｜その他" },
+            { "value": "qa_membership", "label": "QA｜会員に関して" },
+            { "value": "qa_donation", "label": "QA｜寄付に関して" },
+            { "value": "qa_events", "label": "QA｜勉強会・イベントに関して" },
+            { "value": "qa_party", "label": "QA｜党に対して" },
+            { "value": "qa_policy", "label": "QA｜政策に対して" },
+            { "value": "qa_other", "label": "QA｜その他" }
+          ]
         },
-        {
-          "name": "subcategory",
-          "type": "text",
-          "label": "サブカテゴリ",
-          "required": false,
-          "note": "必要な場合のみ入力。例：党からのお知らせ／団体概要／規定／関連リンク／イベント／勉強会。無料プラン3コレクション制限のため、現段階では自由入力で可変運用します。"
-        },
-        {
-          "name": "showInWhatsNew",
-          "type": "boolean",
-          "label": "What's Newに表示",
-          "required": false,
-          "default": true
-        },
-        {
-          "name": "publishedAt",
-          "type": "date",
-          "label": "掲載日時",
-          "required": true,
-          "includeTime": true,
-          "default": "now"
-        },
-        {
-          "name": "publishStartAt",
-          "type": "date",
-          "label": "掲載開始日時",
-          "required": false,
-          "includeTime": true
-        },
-        {
-          "name": "publishEndAt",
-          "type": "date",
-          "label": "掲載終了日時",
-          "required": false,
-          "includeTime": true
-        },
-        {
-          "name": "updatedAt",
-          "type": "date",
-          "label": "更新日時",
-          "required": false,
-          "includeTime": true
-        },
-        {
-          "name": "isDraft",
-          "type": "boolean",
-          "label": "下書き",
-          "required": false,
-          "default": false
-        }
-      ],
-      "layout": [
-        [
-          "articleType",
-          "sections"
-        ],
-        [
-          "title"
-        ],
-        [
-          "subtitle",
-          "summary"
-        ],
-        [
-          "subcategory",
-          "showInWhatsNew"
-        ],
-        [
-          "publishedAt"
-        ],
-        [
-          "publishStartAt",
-          "publishEndAt"
-        ],
-        [
-          "body"
-        ],
-        [
-          "answerSummary"
-        ],
-        [
-          "answer"
-        ],
-        [
-          "linkLabel",
-          "linkUrl"
-        ]
+        { "name": "publishable", "type": "boolean", "label": "掲載可否", "default": true },
+        { "name": "whatsNew", "type": "boolean", "label": "What's New表示", "default": true },
+        { "name": "publishedAt", "type": "date", "label": "掲載日時", "includeTime": true },
+        { "name": "publishStartAt", "type": "date", "label": "掲載開始日時", "includeTime": true },
+        { "name": "publishEndAt", "type": "date", "label": "掲載終了日時", "includeTime": true },
+        { "name": "isDraft", "type": "boolean", "label": "下書き", "default": true }
       ],
       "pit": {
         "title": "title",
-        "body": "body",
+        "body": "content",
         "createdAt": "publishedAt",
-        "updatedAt": "updatedAt",
         "draft": "isDraft",
         "defaultSortField": "_createdAt",
         "defaultSortOrder": "desc"
       }
     },
     {
-      "name": "video_articles",
-      "label": "動画メイン記事",
-      "description": "動画を主役として見せる記事。YouTubeはサイト側でサムネイル自動取得。",
-      "path": "content/video",
-      "extension": ".md",
+      "name": "videoArticles",
+      "label": "動画",
+      "description": "動画を中心にした記事",
+      "path": "content/videos",
+      "extension": "md",
       "fields": [
+        { "name": "title", "type": "text", "label": "タイトル", "required": true },
+        { "name": "subtitle", "type": "text", "label": "サブタイトル" },
+        { "name": "summary", "type": "textarea", "label": "概要" },
+        { "name": "videoUrl", "type": "text", "label": "動画URL", "required": true },
+        { "name": "image1", "type": "image", "label": "独自サムネイル画像" },
+        { "name": "content", "type": "richtext", "label": "本文" },
+        { "name": "linkLabel", "type": "text", "label": "リンク表示文字" },
+        { "name": "linkUrl", "type": "text", "label": "リンク参照URL" },
         {
-          "name": "title",
-          "type": "text",
-          "label": "タイトル",
+          "name": "category",
+          "type": "select",
+          "label": "大カテゴリ",
           "required": true,
-          "note": "25文字以内を目安に入力してください。"
-        },
-        {
-          "name": "subtitle",
-          "type": "text",
-          "label": "サブタイトル",
-          "required": false,
-          "note": "50文字以内。タイトルを補足したり、内容を短く示唆・強調するための項目です。"
-        },
-        {
-          "name": "summary",
-          "type": "textarea",
-          "label": "概要",
-          "required": false,
-          "note": "150文字以内を目安に、記事内容を短く説明してください。"
-        },
-        {
-          "name": "videoUrl",
-          "type": "text",
-          "label": "動画URL",
-          "required": true
-        },
-        {
-          "name": "image1",
-          "type": "image",
-          "label": "独自サムネイル画像",
-          "required": false,
-          "note": "指定した場合はYouTube自動サムネイルより優先。非YouTubeでは手製サムネイルとして利用。"
-        },
-        {
-          "name": "body",
-          "type": "richtext",
-          "label": "本文",
-          "required": false
-        },
-        {
-          "name": "linkLabel",
-          "type": "text",
-          "label": "リンク表示文字",
-          "required": false
-        },
-        {
-          "name": "linkUrl",
-          "type": "text",
-          "label": "リンク参照URL",
-          "required": false
-        },
-        {
-          "name": "sections",
-          "type": "checkbox",
-          "label": "掲載カテゴリ",
-          "required": true,
+          "default": "video",
           "options": [
-            {
-              "value": "about",
-              "label": "私たちについて"
-            },
-            {
-              "value": "qa",
-              "label": "Q&A"
-            },
-            {
-              "value": "events",
-              "label": "イベント・勉強会"
-            },
-            {
-              "value": "featured",
-              "label": "推しネタ"
-            }
-          ],
-          "note": "記事を表示する大カテゴリを選択してください。"
+            { "value": "video", "label": "動画" }
+          ]
         },
         {
           "name": "subcategory",
-          "type": "text",
+          "type": "select",
           "label": "サブカテゴリ",
-          "required": false,
-          "note": "必要な場合のみ入力。例：党からのお知らせ／団体概要／規定／関連リンク／イベント／勉強会。無料プラン3コレクション制限のため、現段階では自由入力で可変運用します。"
-        },
-        {
-          "name": "showInWhatsNew",
-          "type": "boolean",
-          "label": "What's Newに表示",
-          "required": false,
-          "default": true
-        },
-        {
-          "name": "publishedAt",
-          "type": "date",
-          "label": "掲載日時",
           "required": true,
-          "includeTime": true,
-          "default": "now"
+          "options": [
+            { "value": "video_city_oddities", "label": "都会にこんなものいる？" },
+            { "value": "video_minato_prices", "label": "クレイジーな港区物価" },
+            { "value": "video_minato_closures", "label": "港区廃業という闇" },
+            { "value": "video_members", "label": "メンバー紹介" },
+            { "value": "video_other", "label": "その他" }
+          ]
         },
-        {
-          "name": "publishStartAt",
-          "type": "date",
-          "label": "掲載開始日時",
-          "required": false,
-          "includeTime": true
-        },
-        {
-          "name": "publishEndAt",
-          "type": "date",
-          "label": "掲載終了日時",
-          "required": false,
-          "includeTime": true
-        },
-        {
-          "name": "updatedAt",
-          "type": "date",
-          "label": "更新日時",
-          "required": false,
-          "includeTime": true
-        },
-        {
-          "name": "isDraft",
-          "type": "boolean",
-          "label": "下書き",
-          "required": false,
-          "default": false
-        }
-      ],
-      "layout": [
-        [
-          "title"
-        ],
-        [
-          "subtitle",
-          "summary"
-        ],
-        [
-          "videoUrl",
-          "image1"
-        ],
-        [
-          "sections",
-          "subcategory"
-        ],
-        [
-          "publishedAt",
-          "showInWhatsNew"
-        ],
-        [
-          "publishStartAt",
-          "publishEndAt"
-        ],
-        [
-          "body"
-        ],
-        [
-          "linkLabel",
-          "linkUrl"
-        ]
+        { "name": "publishable", "type": "boolean", "label": "掲載可否", "default": true },
+        { "name": "whatsNew", "type": "boolean", "label": "What's New表示", "default": true },
+        { "name": "publishedAt", "type": "date", "label": "掲載日時", "includeTime": true },
+        { "name": "publishStartAt", "type": "date", "label": "掲載開始日時", "includeTime": true },
+        { "name": "publishEndAt", "type": "date", "label": "掲載終了日時", "includeTime": true },
+        { "name": "isDraft", "type": "boolean", "label": "下書き", "default": true }
       ],
       "pit": {
         "title": "title",
-        "body": "body",
+        "body": "content",
         "createdAt": "publishedAt",
-        "updatedAt": "updatedAt",
         "draft": "isDraft",
         "defaultSortField": "_createdAt",
         "defaultSortOrder": "desc"
