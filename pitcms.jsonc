@@ -1,5 +1,9 @@
 {
   "schemaVersion": 1,
+  "media": {
+    "storagePath": "public/images",
+    "publicPath": "/images"
+  },
   "collections": [
     {
       "name": "freeArticles",
@@ -25,7 +29,7 @@
         },
         {
           "name": "summary",
-          "type": "textarea",
+          "type": "text",
           "label": "概略",
           "maxLength": 150,
           "note": "150文字以内。一覧画面に反映されます。"
@@ -34,7 +38,7 @@
           "name": "content",
           "type": "richtext",
           "label": "本文",
-          "note": "ツールで書体・文字サイズ変更・改行・画像追加などが可能です。"
+          "note": "ツールで見出し・文字装飾・改行・画像追加などが可能です。"
         },
         {
           "name": "image1",
@@ -259,7 +263,7 @@
         },
         {
           "name": "summary",
-          "type": "textarea",
+          "type": "text",
           "label": "概略",
           "maxLength": 150,
           "note": "150文字以内。一覧画面に反映されます。"
@@ -268,7 +272,7 @@
           "name": "content",
           "type": "richtext",
           "label": "本文",
-          "note": "ツールで書体・文字サイズ変更・改行・画像追加などが可能です。"
+          "note": "ツールで見出し・文字装飾・改行・画像追加などが可能です。"
         },
         {
           "name": "answerSummary",
@@ -522,7 +526,7 @@
         },
         {
           "name": "summary",
-          "type": "textarea",
+          "type": "text",
           "label": "概略",
           "maxLength": 150,
           "note": "150文字以内。一覧画面に反映されます。"
@@ -531,7 +535,7 @@
           "name": "content",
           "type": "richtext",
           "label": "本文",
-          "note": "ツールで書体・文字サイズ変更・改行・画像追加などが可能です。"
+          "note": "ツールで見出し・文字装飾・改行・画像追加などが可能です。"
         },
         {
           "name": "image1",
