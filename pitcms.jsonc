@@ -1,9 +1,5 @@
 {
   "schemaVersion": 1,
-  "media": {
-    "storagePath": "public/images",
-    "publicPath": "/images"
-  },
   "collections": [
     {
       "name": "freeArticles",
@@ -38,7 +34,7 @@
           "name": "content",
           "type": "richtext",
           "label": "本文",
-          "note": "ツールで見出し・文字装飾・改行・画像追加などが可能です。"
+          "note": "ツールで見出し・文字装飾・改行などが可能です。"
         },
         {
           "name": "image1",
@@ -272,7 +268,7 @@
           "name": "content",
           "type": "richtext",
           "label": "本文",
-          "note": "ツールで見出し・文字装飾・改行・画像追加などが可能です。"
+          "note": "ツールで見出し・文字装飾・改行などが可能です。"
         },
         {
           "name": "answerSummary",
@@ -283,6 +279,7 @@
         {
           "name": "answer",
           "type": "richtext",
+          "disabledFeatures": ["image"],
           "label": "回答",
           "note": "QAの回答本文です。テキスト情報記事では空欄で構いません。"
         },
@@ -535,7 +532,7 @@
           "name": "content",
           "type": "richtext",
           "label": "本文",
-          "note": "ツールで見出し・文字装飾・改行・画像追加などが可能です。"
+          "note": "ツールで見出し・文字装飾・改行などが可能です。"
         },
         {
           "name": "image1",
