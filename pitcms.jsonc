@@ -12,53 +12,66 @@
           "name": "title",
           "type": "text",
           "label": "タイトル",
-          "required": true
+          "required": true,
+          "maxLength": 25,
+          "note": "25文字以内。記事の主題を端的に入力してください。"
         },
         {
           "name": "subtitle",
           "type": "text",
-          "label": "サブタイトル"
+          "label": "サブタイトル",
+          "maxLength": 50,
+          "note": "50文字以内。タイトルの補足や興味喚起ワードを入力してください。"
         },
         {
           "name": "summary",
           "type": "textarea",
-          "label": "概要"
+          "label": "概略",
+          "maxLength": 150,
+          "note": "150文字以内。一覧画面に反映されます。"
         },
         {
           "name": "content",
           "type": "richtext",
-          "label": "本文"
+          "label": "本文",
+          "note": "ツールで書体・文字サイズ変更・改行・画像追加などが可能です。"
         },
         {
           "name": "image1",
           "type": "image",
-          "label": "画像1"
+          "label": "アイキャッチ画像",
+          "note": "一覧やサムネールに使われます。未設定の場合は本文内の最初の画像を優先して使用します。"
         },
         {
           "name": "image2",
           "type": "image",
-          "label": "画像2"
+          "label": "補助画像",
+          "note": "必要な場合に使用する補助画像です。"
         },
         {
           "name": "videoUrl",
           "type": "text",
-          "label": "動画URL"
+          "label": "動画URL",
+          "note": "ページ内で動画として表示するURLです。リンク参照URLとは別用途です。"
         },
         {
           "name": "linkLabel",
           "type": "text",
-          "label": "リンク表示文字"
+          "label": "リンク表示文字",
+          "note": "リンクボタン等に表示する文字です。"
         },
         {
           "name": "linkUrl",
           "type": "text",
-          "label": "リンク参照URL"
+          "label": "リンク参照URL",
+          "note": "サイト内または外部サイトへの遷移先URLです。動画URLとは別用途です。"
         },
         {
           "name": "eventAt",
           "type": "date",
           "label": "開催日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "イベント・勉強会の開催日時です。告知記事では掲載終了日時が未指定の場合、この日時を終了判定に使用します。"
         },
         {
           "name": "category",
@@ -182,25 +195,29 @@
           "name": "whatsNew",
           "type": "boolean",
           "label": "What's New表示",
-          "default": true
+          "default": true,
+          "note": "ONの場合、What's Newの掲載候補になります。"
         },
         {
           "name": "publishedAt",
           "type": "date",
           "label": "掲載日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "一覧・新着順の基準となる掲載日時です。"
         },
         {
           "name": "publishStartAt",
           "type": "date",
           "label": "掲載開始日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "指定した場合、この日時まではサイトに表示しません。"
         },
         {
           "name": "publishEndAt",
           "type": "date",
           "label": "掲載終了日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "指定した場合、この日時以降はサイトに表示しません。"
         },
         {
           "name": "isDraft",
@@ -229,63 +246,78 @@
           "name": "title",
           "type": "text",
           "label": "タイトル",
-          "required": true
+          "required": true,
+          "maxLength": 25,
+          "note": "25文字以内。記事の主題を端的に入力してください。"
         },
         {
           "name": "subtitle",
           "type": "text",
-          "label": "サブタイトル"
+          "label": "サブタイトル",
+          "maxLength": 50,
+          "note": "50文字以内。タイトルの補足や興味喚起ワードを入力してください。"
         },
         {
           "name": "summary",
           "type": "textarea",
-          "label": "概要"
+          "label": "概略",
+          "maxLength": 150,
+          "note": "150文字以内。一覧画面に反映されます。"
         },
         {
           "name": "content",
           "type": "richtext",
-          "label": "本文"
+          "label": "本文",
+          "note": "ツールで書体・文字サイズ変更・改行・画像追加などが可能です。"
         },
         {
           "name": "answerSummary",
           "type": "textarea",
-          "label": "回答概略"
+          "label": "回答概略",
+          "note": "QAの回答を短く要約します。テキスト情報記事では空欄で構いません。"
         },
         {
           "name": "answer",
           "type": "richtext",
-          "label": "回答"
+          "label": "回答",
+          "note": "QAの回答本文です。テキスト情報記事では空欄で構いません。"
         },
         {
           "name": "image1",
           "type": "image",
-          "label": "画像1"
+          "label": "アイキャッチ画像",
+          "note": "一覧やサムネールに使われます。未設定の場合は本文内の最初の画像を優先して使用します。"
         },
         {
           "name": "image2",
           "type": "image",
-          "label": "画像2"
+          "label": "補助画像",
+          "note": "必要な場合に使用する補助画像です。"
         },
         {
           "name": "videoUrl",
           "type": "text",
-          "label": "動画URL"
+          "label": "動画URL",
+          "note": "ページ内で動画として表示するURLです。リンク参照URLとは別用途です。"
         },
         {
           "name": "linkLabel",
           "type": "text",
-          "label": "リンク表示文字"
+          "label": "リンク表示文字",
+          "note": "リンクボタン等に表示する文字です。"
         },
         {
           "name": "linkUrl",
           "type": "text",
-          "label": "リンク参照URL"
+          "label": "リンク参照URL",
+          "note": "サイト内または外部サイトへの遷移先URLです。動画URLとは別用途です。"
         },
         {
           "name": "eventAt",
           "type": "date",
           "label": "開催日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "イベント・勉強会の開催日時です。告知記事では掲載終了日時が未指定の場合、この日時を終了判定に使用します。"
         },
         {
           "name": "articleType",
@@ -426,25 +458,29 @@
           "name": "whatsNew",
           "type": "boolean",
           "label": "What's New表示",
-          "default": true
+          "default": true,
+          "note": "ONの場合、What's Newの掲載候補になります。"
         },
         {
           "name": "publishedAt",
           "type": "date",
           "label": "掲載日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "一覧・新着順の基準となる掲載日時です。"
         },
         {
           "name": "publishStartAt",
           "type": "date",
           "label": "掲載開始日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "指定した場合、この日時まではサイトに表示しません。"
         },
         {
           "name": "publishEndAt",
           "type": "date",
           "label": "掲載終了日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "指定した場合、この日時以降はサイトに表示しません。"
         },
         {
           "name": "isDraft",
@@ -473,54 +509,67 @@
           "name": "title",
           "type": "text",
           "label": "タイトル",
-          "required": true
+          "required": true,
+          "maxLength": 25,
+          "note": "25文字以内。記事の主題を端的に入力してください。"
         },
         {
           "name": "subtitle",
           "type": "text",
-          "label": "サブタイトル"
+          "label": "サブタイトル",
+          "maxLength": 50,
+          "note": "50文字以内。タイトルの補足や興味喚起ワードを入力してください。"
         },
         {
           "name": "summary",
           "type": "textarea",
-          "label": "概要"
+          "label": "概略",
+          "maxLength": 150,
+          "note": "150文字以内。一覧画面に反映されます。"
         },
         {
           "name": "content",
           "type": "richtext",
-          "label": "本文"
+          "label": "本文",
+          "note": "ツールで書体・文字サイズ変更・改行・画像追加などが可能です。"
         },
         {
           "name": "image1",
           "type": "image",
-          "label": "画像1"
+          "label": "アイキャッチ画像",
+          "note": "一覧やサムネールに使われます。未設定の場合は本文内の最初の画像を優先して使用します。"
         },
         {
           "name": "image2",
           "type": "image",
-          "label": "画像2"
+          "label": "補助画像",
+          "note": "必要な場合に使用する補助画像です。"
         },
         {
           "name": "videoUrl",
           "type": "text",
           "label": "動画URL",
-          "required": true
+          "required": true,
+          "note": "ページ内で動画として表示するURLです。リンク参照URLとは別用途です。"
         },
         {
           "name": "linkLabel",
           "type": "text",
-          "label": "リンク表示文字"
+          "label": "リンク表示文字",
+          "note": "リンクボタン等に表示する文字です。"
         },
         {
           "name": "linkUrl",
           "type": "text",
-          "label": "リンク参照URL"
+          "label": "リンク参照URL",
+          "note": "サイト内または外部サイトへの遷移先URLです。動画URLとは別用途です。"
         },
         {
           "name": "eventAt",
           "type": "date",
           "label": "開催日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "イベント・勉強会の開催日時です。告知記事では掲載終了日時が未指定の場合、この日時を終了判定に使用します。"
         },
         {
           "name": "category",
@@ -644,25 +693,29 @@
           "name": "whatsNew",
           "type": "boolean",
           "label": "What's New表示",
-          "default": true
+          "default": true,
+          "note": "ONの場合、What's Newの掲載候補になります。"
         },
         {
           "name": "publishedAt",
           "type": "date",
           "label": "掲載日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "一覧・新着順の基準となる掲載日時です。"
         },
         {
           "name": "publishStartAt",
           "type": "date",
           "label": "掲載開始日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "指定した場合、この日時まではサイトに表示しません。"
         },
         {
           "name": "publishEndAt",
           "type": "date",
           "label": "掲載終了日時",
-          "includeTime": true
+          "includeTime": true,
+          "note": "指定した場合、この日時以降はサイトに表示しません。"
         },
         {
           "name": "isDraft",
