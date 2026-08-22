@@ -1,13 +1,14 @@
 ---
+category: events
+subcategory: events_study
 title: 第1回勉強会を開催します
 subtitle: 成熟社会の政治を、一緒に考えてみませんか？
 summary: 「大きな政府か、小さな政府か」ではなく、成熟社会に合った政治の仕組みについて考える第1回勉強会を開催します。
+image2: /images/1787368762750-j1q7vj.png
 videoUrl: https://youtu.be/Lhbf6e47A44?si=7AkVDwpPXQ4DVE7d
 linkLabel: 申し込む
 linkUrl: https://congrant.com/jp/index.html
 eventAt: 2026-08-26T11:22
-category: events
-subcategory: events_study
 publishable: true
 whatsNew: true
 publishedAt: 2026-08-22T11:17
