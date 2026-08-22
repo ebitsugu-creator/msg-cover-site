@@ -155,9 +155,11 @@
       {
           "name": "image1",
           "type": "image",
-          "label": "アイキャッチ画像",
-          "note": "一覧やサムネールに使われます。未設定の場合は本文内の最初の画像を優先して使用します。"
-        },
+          "label": "アイキャッチ画像1"},
+      {
+          "name": "image2",
+          "type": "image",
+          "label": "アイキャッチ画像2"},
       {
           "name": "videoUrl",
           "type": "text",
@@ -238,9 +240,7 @@
       [
             "summary"
       ],
-      [
-            "image1"
-      ],
+      ["image1", "image2"],
       [
             "content"
       ],
@@ -433,9 +433,11 @@
       {
           "name": "image1",
           "type": "image",
-          "label": "アイキャッチ画像",
-          "note": "一覧やサムネールに使われます。未設定の場合は本文内の最初の画像を優先して使用します。"
-        },
+          "label": "アイキャッチ画像1"},
+      {
+          "name": "image2",
+          "type": "image",
+          "label": "アイキャッチ画像2"},
       {
           "name": "videoUrl",
           "type": "text",
@@ -536,9 +538,7 @@
       [
             "summary"
       ],
-      [
-            "image1"
-      ],
+      ["image1", "image2"],
       [
             "content"
       ],
@@ -718,9 +718,11 @@
       {
           "name": "image1",
           "type": "image",
-          "label": "アイキャッチ画像",
-          "note": "一覧やサムネールに使われます。未設定の場合は本文内の最初の画像を優先して使用します。"
-        },
+          "label": "アイキャッチ画像1"},
+      {
+          "name": "image2",
+          "type": "image",
+          "label": "アイキャッチ画像2"},
       {
           "name": "videoUrl",
           "type": "text",
@@ -805,9 +807,7 @@
       [
             "videoUrl"
       ],
-      [
-            "image1"
-      ],
+      ["image1", "image2"],
       [
             "linkUrl",
             "linkLabel"
