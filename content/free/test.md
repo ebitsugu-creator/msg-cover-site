@@ -4,7 +4,6 @@ subcategory: events_study
 title: 第1回勉強会を開催します
 subtitle: 成熟社会の政治を、一緒に考えてみませんか？
 summary: 「大きな政府か、小さな政府か」ではなく、成熟社会に合った政治の仕組みについて考える第1回勉強会を開催します。
-image1: /images/1787481694326-vy6yae.png
 image2: /images/1787368762750-j1q7vj.png
 videoUrl: https://youtu.be/Lhbf6e47A44?si=7AkVDwpPXQ4DVE7d
 linkLabel: 申し込む
