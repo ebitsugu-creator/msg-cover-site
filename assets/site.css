@@ -765,3 +765,28 @@ table.member td:nth-child(4){background:#CFDDF0}
 /* リンク先が未定のカード(党公式YouTubeチャンネル)。決まり次第 href を入れてください */
 .card[data-pending-youtube]{pointer-events:none;background:var(--soft)}
 .card[data-pending-youtube] .more.pending{color:var(--muted);font-weight:700}
+
+/* ---------- PitCMS: イベント・勉強会LP ---------- */
+.cms-events{margin-top:24px}
+.cms-events-status{padding:18px 0;color:var(--muted);font-size:14px}
+.cms-event-group{margin-top:30px}
+.cms-event-group:first-child{margin-top:0}
+.cms-event-group-title{font-size:14px;font-weight:800;letter-spacing:.08em;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.cms-event-list{display:grid;gap:18px;margin-top:16px}
+.cms-event-card{display:grid;grid-template-columns:minmax(0,1fr);background:#fff;border:1px solid var(--line)}
+.cms-event-image{aspect-ratio:16/9;overflow:hidden;background:var(--soft)}
+.cms-event-image img{width:100%;height:100%;object-fit:cover;display:block}
+.cms-event-main{padding:20px}
+.cms-event-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.cms-event-meta time{font-size:14px;font-weight:800;color:var(--navy)}
+.cms-event-meta time small{font-size:11px;font-weight:700;color:var(--muted);margin-left:6px}
+.cms-event-card h3{font-size:20px;line-height:1.55;margin:0}
+.cms-event-subtitle{margin:6px 0 0;font-size:14px;font-weight:700;color:var(--navy)}
+.cms-event-summary{margin:10px 0 0;font-size:14px;line-height:1.8;color:var(--muted)}
+.cms-event-button{display:inline-block;margin-top:16px;padding:9px 15px;background:var(--navy);color:#fff;text-decoration:none;font-size:13px;font-weight:800}
+.cms-event-button:hover{opacity:.86}
+@media (min-width:768px){
+  .cms-event-card{grid-template-columns:minmax(220px,32%) minmax(0,1fr)}
+  .cms-event-image{aspect-ratio:auto;min-height:210px}
+  .cms-event-main{padding:24px 26px}
+}
