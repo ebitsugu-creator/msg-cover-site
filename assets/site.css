@@ -813,3 +813,11 @@ a.cms-event-image{display:block}
 @media(max-width:767px){.cms-article{padding-top:34px;padding-bottom:56px}.cms-article-eyecatch{margin-top:24px}.cms-article-summary{padding:17px}.cms-article-body{margin-top:30px}}
 /* v76 events */
 #events.sec{padding-top:34px;padding-bottom:54px}.cms-events{margin-top:22px}.cms-event-group{margin-top:42px}.cms-event-group-head{display:flex;align-items:baseline;gap:18px;padding-bottom:11px;border-bottom:1px solid var(--line)}.cms-event-group-title{margin:0;padding:0;border:0;white-space:nowrap;font-size:18px;font-weight:800}.cms-event-group-desc{margin:0;font-size:16px;line-height:1.7;color:#46556d}.cms-event-list{display:grid;gap:18px;margin-top:18px}.cms-event-card{display:grid;grid-template-columns:minmax(240px,31%) minmax(0,1fr);background:#fff;border:1px solid var(--line)}.cms-event-image{display:block;min-height:220px;overflow:hidden;background:var(--soft)}.cms-event-image img{display:block;width:100%;height:100%;object-fit:cover}.cms-event-main{padding:24px 28px}.cms-event-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.cms-event-meta time{font-size:15px;font-weight:800;color:var(--navy)}.cms-event-card h3{font-size:22px;line-height:1.5;margin:0}.cms-event-subtitle,.cms-event-summary{font-size:16px;line-height:1.8}.cms-event-summary{color:#46556d}.cms-events-empty{margin:16px 0 0;padding:18px;background:var(--soft);color:var(--muted)}.cms-backnumber{text-align:right;margin-top:14px}.cms-backnumber a{font-weight:800;color:var(--navy)}@media(max-width:767px){.cms-event-group-head{display:block}.cms-event-group-desc{margin-top:5px}.cms-event-card{grid-template-columns:1fr}.cms-event-image{min-height:0;aspect-ratio:16/9}.cms-event-main{padding:19px}}
+
+/* ---------- v77: event LP refinements ---------- */
+@media(min-width:768px){
+  .cms-event-group-head{display:flex;align-items:baseline;gap:18px;flex-wrap:nowrap}
+  .cms-event-group-title,.cms-event-group-desc{white-space:nowrap}
+  .cms-event-image{align-self:start;min-height:0;aspect-ratio:16/9}
+  .cms-event-image img{width:100%;height:100%;object-fit:cover;object-position:center}
+}
