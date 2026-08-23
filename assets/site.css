@@ -790,3 +790,24 @@ table.member td:nth-child(4){background:#CFDDF0}
   .cms-event-image{aspect-ratio:auto;min-height:210px}
   .cms-event-main{padding:24px 26px}
 }
+
+/* ---------- v74: PitCMS 記事詳細 ---------- */
+.cms-event-title-link{color:inherit;text-decoration:none}
+.cms-event-title-link:hover{text-decoration:underline;text-underline-offset:4px}
+a.cms-event-image{display:block}
+.cms-article{max-width:920px;padding-top:56px;padding-bottom:80px}
+.cms-article-status{color:var(--muted)}
+.cms-article-breadcrumb{display:flex;gap:9px;align-items:center;font-size:12px;color:var(--muted);margin-bottom:34px}
+.cms-article-breadcrumb a{color:var(--navy)}
+.cms-article-labels{display:flex;align-items:center;gap:10px;margin-bottom:15px}
+.cms-article-subcat{font-size:12px;font-weight:800;color:var(--navy)}
+.cms-article-head h1{font-size:clamp(30px,4.2vw,48px);line-height:1.3;letter-spacing:.01em;margin:0}
+.cms-article-subtitle{font-size:clamp(16px,2vw,20px);line-height:1.7;font-weight:700;color:var(--navy);margin:14px 0 0}
+.cms-article-head time{display:block;margin-top:14px;font-size:12px;color:var(--muted)}
+.cms-article-eyecatch{margin:34px 0 0}
+.cms-article-eyecatch img{display:block;width:100%;height:auto;max-height:560px;object-fit:contain;background:var(--soft)}
+.cms-article-summary{margin:30px 0 0;padding:20px 22px;background:var(--soft);font-size:15px;line-height:1.9;font-weight:700}
+.cms-article-body{margin-top:38px;font-size:16px;line-height:2}
+.cms-article-body p{margin:0 0 1.4em}.cms-article-body h2,.cms-article-body h3,.cms-article-body h4{color:var(--navy);line-height:1.5;margin:2em 0 .7em}.cms-article-body h2{font-size:25px}.cms-article-body h3{font-size:21px}.cms-article-body h4{font-size:18px}.cms-article-body ul{padding-left:1.5em;margin:0 0 1.5em}.cms-article-body mark{background:#fff2b8}.cms-article-body a{color:#174f9b}
+.cms-article-video{margin-top:30px}.cms-article-action{margin-top:24px}.cms-article-back{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);font-size:14px}.cms-article-error{padding:40px 0}
+@media(max-width:767px){.cms-article{padding-top:34px;padding-bottom:56px}.cms-article-eyecatch{margin-top:24px}.cms-article-summary{padding:17px}.cms-article-body{margin-top:30px}}

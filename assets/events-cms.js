@@ -37,7 +37,7 @@
       if (i < 1) return;
       data[line.slice(0, i).trim()] = parseScalar(line.slice(i + 1));
     });
-    return { ...data, body: m[2].trim(), sourceUrl };
+    return { ...data, body: m[2].trim(), sourceUrl, fileName: sourceUrl ? decodeURIComponent(sourceUrl.split('/').pop()) : '' };
   }
 
   function toDate(value) {
@@ -70,8 +70,9 @@
     const date = formatDate(article.eventAt);
     const sub = subcategoryLabels[article.subcategory] || article.subcategory || 'その他';
     const image = article.image1 || article.image2 || '';
-    const action = article.linkUrl ? `<a class="cms-event-button" href="${escapeHtml(article.linkUrl)}">${escapeHtml(article.linkLabel || '詳しく見る')} →</a>` : '';
-    const imageHtml = image ? `<div class="cms-event-image"><img src="${escapeHtml(image)}" alt="" loading="lazy"></div>` : '';
+    const detailUrl = `article.html?collection=free&file=${encodeURIComponent(article.fileName)}`;
+    const action = article.linkUrl ? `<a class="cms-event-button" href="${escapeHtml(article.linkUrl)}">${escapeHtml(article.linkLabel || '申し込む')} →</a>` : '';
+    const imageHtml = image ? `<a class="cms-event-image" href="${detailUrl}" aria-label="${escapeHtml(article.title || '記事を読む')}"><img src="${escapeHtml(image)}" alt="" loading="lazy"></a>` : '';
     return `
       <article class="cms-event-card" data-subcategory="${escapeHtml(article.subcategory || '')}">
         ${imageHtml}
@@ -80,7 +81,7 @@
             <span class="tag">${escapeHtml(sub)}</span>
             <time datetime="${escapeHtml(date.iso)}">${escapeHtml(date.main)} <small>${escapeHtml(date.sub)}</small></time>
           </div>
-          <h3>${escapeHtml(article.title || '無題')}</h3>
+          <h3><a class="cms-event-title-link" href="${detailUrl}">${escapeHtml(article.title || '無題')}</a></h3>
           ${article.subtitle ? `<p class="cms-event-subtitle">${escapeHtml(article.subtitle)}</p>` : ''}
           ${article.summary ? `<p class="cms-event-summary">${escapeHtml(article.summary)}</p>` : ''}
           ${action}
