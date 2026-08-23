@@ -91,16 +91,12 @@
               "label": "【QA】その他"
             },
             {
-              "value": "events_study",
-              "label": "【イベント・勉強会】勉強会"
+              "value": "events_advance",
+              "label": "【イベント・勉強会】事前告知"
             },
             {
-              "value": "events_party",
-              "label": "【イベント・勉強会】パーティ､交流"
-            },
-            {
-              "value": "events_party_policy_other",
-              "label": "【イベント・勉強会】党運営､政策関連､その他"
+              "value": "events_report",
+              "label": "【イベント・勉強会】開催レポート"
             },
             {
               "value": "video_city_oddities",
@@ -361,16 +357,12 @@
               "label": "【QA】その他"
             },
             {
-              "value": "events_study",
-              "label": "【イベント・勉強会】勉強会"
+              "value": "events_advance",
+              "label": "【イベント・勉強会】事前告知"
             },
             {
-              "value": "events_party",
-              "label": "【イベント・勉強会】パーティ､交流"
-            },
-            {
-              "value": "events_party_policy_other",
-              "label": "【イベント・勉強会】党運営､政策関連､その他"
+              "value": "events_report",
+              "label": "【イベント・勉強会】開催レポート"
             },
             {
               "value": "video_city_oddities",
@@ -672,16 +664,12 @@
               "label": "【QA】その他"
             },
             {
-              "value": "events_study",
-              "label": "【イベント・勉強会】勉強会"
+              "value": "events_advance",
+              "label": "【イベント・勉強会】事前告知"
             },
             {
-              "value": "events_party",
-              "label": "【イベント・勉強会】パーティ､交流"
-            },
-            {
-              "value": "events_party_policy_other",
-              "label": "【イベント・勉強会】党運営､政策関連､その他"
+              "value": "events_report",
+              "label": "【イベント・勉強会】開催レポート"
             },
             {
               "value": "video_city_oddities",

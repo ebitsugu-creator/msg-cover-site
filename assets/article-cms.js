@@ -7,7 +7,7 @@
   const file = params.get('file') || '';
   const allowedCollections = new Set(['free']);
   const categoryLabels = { events: 'イベント・勉強会' };
-  const subcategoryLabels = { events_study:'勉強会', events_party:'パーティ・交流', events_policy:'党運営・政策関連・その他', events_member:'メンバー紹介', events_other:'その他' };
+  const subcategoryLabels = { events_advance:'事前告知', events_notice:'事前告知', events_study:'事前告知', events_report:'開催レポート' };
   const esc = (v='') => String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   function scalar(raw){ const v=raw.trim(); if(v==='true')return true;if(v==='false')return false;if(v==='null')return null;if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))return v.slice(1,-1);return v; }
   function parse(text){ const m=text.replace(/^\uFEFF/,'').match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/); if(!m)return null; const d={}; m[1].split(/\r?\n/).forEach(line=>{const i=line.indexOf(':');if(i>0)d[line.slice(0,i).trim()]=scalar(line.slice(i+1));}); return {...d,body:m[2].trim()}; }
@@ -24,7 +24,7 @@
       const url=`https://raw.githubusercontent.com/ebitsugu-creator/msg-cover-site/main/content/${encodeURIComponent(collection)}/${encodeURIComponent(file)}`;
       const r=await fetch(url,{cache:'no-store'}); if(!r.ok)throw new Error(`GitHub ${r.status}`); const a=parse(await r.text()); if(!a || a.publishable!==true || a.isDraft===true)throw new Error('not published');
       const cat=categoryLabels[a.category]||a.category||''; const sub=subcategoryLabels[a.subcategory]||a.subcategory||'';
-      const image=a.image1||a.image2||''; document.title=`${a.title||'記事'}｜中くらいの政府`;
+      const rawImage=a.image1||a.image2||''; const image=rawImage.startsWith('/images/')?`/public${rawImage}`:rawImage; document.title=`${a.title||'記事'}｜中くらいの政府`;
       mount.innerHTML=`
         <nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="activity.html#events">イベント・勉強会</a><span>›</span><span>${esc(sub||cat)}</span></nav>
         <header class="cms-article-head">
