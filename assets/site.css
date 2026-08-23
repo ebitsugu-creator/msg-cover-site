@@ -811,3 +811,39 @@ a.cms-event-image{display:block}
 .cms-article-body p{margin:0 0 1.4em}.cms-article-body h2,.cms-article-body h3,.cms-article-body h4{color:var(--navy);line-height:1.5;margin:2em 0 .7em}.cms-article-body h2{font-size:25px}.cms-article-body h3{font-size:21px}.cms-article-body h4{font-size:18px}.cms-article-body ul{padding-left:1.5em;margin:0 0 1.5em}.cms-article-body mark{background:#fff2b8}.cms-article-body a{color:#174f9b}
 .cms-article-video{margin-top:30px}.cms-article-action{margin-top:24px}.cms-article-back{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);font-size:14px}.cms-article-error{padding:40px 0}
 @media(max-width:767px){.cms-article{padding-top:34px;padding-bottom:56px}.cms-article-eyecatch{margin-top:24px}.cms-article-summary{padding:17px}.cms-article-body{margin-top:30px}}
+
+
+/* ---------- v75: activity LP compact layout ---------- */
+/* What's New: PCは1行2件。概要は小さくしすぎず、読みやすさを優先。 */
+#news.sec{padding-top:24px;padding-bottom:34px}
+#news .lead{margin-top:6px;font-size:15px}
+#news .news{
+  display:grid;grid-template-columns:1fr 1fr;column-gap:26px;row-gap:0;
+  margin-top:14px;padding-top:2px;border-top:2px solid var(--navy);
+}
+#news .news li{min-width:0;border-bottom:1px solid var(--line)}
+#news .news a{padding:10px 4px;border-bottom:0;gap:6px 10px;min-height:0}
+#news .news h3{font-size:15px;line-height:1.55}
+#news .news-desc{font-size:14px;line-height:1.65;color:#4f5d73;margin-top:1px}
+
+/* イベント見出しから重複英字を除去。サブカテゴリ名＋説明を1行に。 */
+#events.sec{padding-top:38px}
+#events .sec-title{margin-bottom:0}
+.cms-events{margin-top:18px}
+.cms-event-group{margin-top:24px}
+.cms-event-group-head{
+  display:flex;align-items:baseline;gap:14px;padding-bottom:9px;border-bottom:1px solid var(--line);
+}
+.cms-event-group-title{padding:0;border:0;margin:0;font-size:15px;font-weight:800;letter-spacing:.06em;white-space:nowrap}
+.cms-event-group-desc{margin:0;font-size:14px;line-height:1.6;color:#4f5d73}
+.cms-event-list{margin-top:14px}
+.cms-event-subtitle{font-size:15px;line-height:1.65}
+.cms-event-summary{font-size:15px;line-height:1.75;color:#4f5d73}
+
+@media (max-width:767px){
+  #news .news{grid-template-columns:1fr}
+  #news.sec{padding-top:22px;padding-bottom:28px}
+  #events.sec{padding-top:30px}
+  .cms-event-group-head{display:block}
+  .cms-event-group-desc{margin-top:5px}
+}

@@ -66,10 +66,20 @@
     };
   }
 
+  function resolveImagePath(value) {
+    if (!value) return '';
+    const v = String(value).trim();
+    if (/^https?:\/\//i.test(v) || v.startsWith('data:')) return v;
+    // PitCMS stores media as /images/... while this GitHub Pages project publishes it under /public/images/...
+    if (v.startsWith('/images/')) return `public${v}`;
+    if (v.startsWith('images/')) return `public/${v}`;
+    return v;
+  }
+
   function renderCard(article) {
     const date = formatDate(article.eventAt);
     const sub = subcategoryLabels[article.subcategory] || article.subcategory || 'その他';
-    const image = article.image1 || article.image2 || '';
+    const image = resolveImagePath(article.image1 || article.image2 || '');
     const detailUrl = `article.html?collection=free&file=${encodeURIComponent(article.fileName)}`;
     const action = article.linkUrl ? `<a class="cms-event-button" href="${escapeHtml(article.linkUrl)}">${escapeHtml(article.linkLabel || '申し込む')} →</a>` : '';
     const imageHtml = image ? `<a class="cms-event-image" href="${detailUrl}" aria-label="${escapeHtml(article.title || '記事を読む')}"><img src="${escapeHtml(image)}" alt="" loading="lazy"></a>` : '';
@@ -116,7 +126,10 @@
       });
       mount.innerHTML = [...groups.entries()].map(([key, items]) => `
         <section class="cms-event-group" aria-label="${escapeHtml(subcategoryLabels[key] || key)}">
-          <h3 class="cms-event-group-title">${escapeHtml(subcategoryLabels[key] || key)}</h3>
+          <div class="cms-event-group-head">
+            <h3 class="cms-event-group-title">${escapeHtml(subcategoryLabels[key] || key)}</h3>
+            <p class="cms-event-group-desc">私たちの取り組みを、ぜひご一緒に。</p>
+          </div>
           <div class="cms-event-list">${items.map(renderCard).join('')}</div>
         </section>`).join('');
     } catch (err) {
