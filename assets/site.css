@@ -846,3 +846,12 @@ a.cms-event-image{display:block}
 .cms-video-link{font-weight:700;color:#082c63;text-decoration:none}
 .cms-video-link:hover{text-decoration:underline}
 @media(max-width:900px){.cms-video-grid{grid-template-columns:1fr}.cms-archive-divider{margin-top:38px}}
+
+/* v79: events LP — 1 line / 2 columns on desktop */
+@media (min-width: 900px){
+  #events .cms-event-list{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+  #events .cms-event-card{grid-template-columns:1fr;height:100%}
+  #events .cms-event-image{min-height:0;aspect-ratio:16/9}
+  #events .cms-event-main{padding:22px 24px}
+  #events .cms-event-card h3{font-size:20px}
+}
