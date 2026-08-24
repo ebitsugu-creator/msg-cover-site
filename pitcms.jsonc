@@ -620,6 +620,10 @@
               "label": "【推しネタ】港区狂乱物価"
             },
             {
+              "value": "featured_employment_social",
+              "label": "【推しネタ】雇用・社会問題を斬る"
+            },
+            {
               "value": "events_party_library",
               "label": "【イベント・勉強会】パーティライブラリ"
             },

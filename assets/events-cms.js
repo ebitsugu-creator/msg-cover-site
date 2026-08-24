@@ -3,11 +3,11 @@
 const host=document.getElementById('cms-events');if(!host)return;
 const API='https://api.github.com/repos/ebitsugu-creator/msg-cover-site/contents/content/videos?ref=main';
 const esc=(v='')=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-function scalar(r){const v=r.trim();if(v==='true')return true;if(v==='false')return false;if(v==='null')return null;return v}
+function scalar(r){let v=r.trim();if(v==='true')return true;if(v==='false')return false;if(v==='null')return null;if((v.startsWith('\"')&&v.endsWith('\"'))||(v.startsWith("'")&&v.endsWith("'"))){v=v.slice(1,-1)}return v}
 function parse(t,f){const m=t.replace(/^\uFEFF/,'').match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);if(!m)return null;const d={};m[1].split(/\r?\n/).forEach(l=>{const i=l.indexOf(':');if(i>0)d[l.slice(0,i).trim()]=scalar(l.slice(i+1))});return {...d,fileName:f}}
 function dt(v){if(!v)return null;const d=new Date(v);return Number.isNaN(d.getTime())?null:d}
 function visible(a,n){if(a.category!=='events'||a.publishable!==true||a.isDraft===true)return false;const s=dt(a.publishStartAt),e=dt(a.publishEndAt);return !(s&&n<s)&&!(e&&n>e)}
-function image(v){if(!v)return '';v=String(v).trim();if(/^https?:\/\//i.test(v))return v;if(v.startsWith('/images/'))return '/public'+v;if(v.startsWith('images/'))return '/public/'+v;return v}
+function image(v){if(!v)return '';v=String(v).trim().replace(/^[\"']|[\"']$/g,'');if(/^https?:\/\//i.test(v))return v;if(v.startsWith('/public/'))return v;if(v.startsWith('public/'))return '/'+v;if(v.startsWith('/images/'))return '/public'+v;if(v.startsWith('images/'))return '/public/'+v;return v}
 function yt(v){try{const u=new URL(v);if(u.hostname==='youtu.be')return u.pathname.slice(1);if(u.hostname.includes('youtube.com')){if(u.pathname==='/watch')return u.searchParams.get('v')||'';const m=u.pathname.match(/\/(?:shorts|embed)\/([^/?]+)/);return m?m[1]:''}}catch(_){}return ''}
 function thumb(a){const manual=image(a.image1||'');if(manual)return manual;const id=yt(a.videoUrl||'');return id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:''}
 function date(v){const d=dt(v);if(!d)return '';return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`}
