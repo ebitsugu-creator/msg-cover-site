@@ -652,7 +652,7 @@
           "name": "image1",
           "type": "image",
           "label": "サムネイル画像",
-          "note": "YouTubeの場合、原則不要。敢えて入れたい場合のみアップを。"
+          "note": "非YouTubeは必須。YouTube系は特に入れたい場合のみ（基本はYouTubeのサムネイルが自動挿入される）"
         },
         {
           "name": "videoUrl",
