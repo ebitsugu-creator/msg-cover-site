@@ -1,6 +1,6 @@
 ---
 category: events
-subcategory: events_advance
+subcategory: events_report
 title: 標示委上手くいってるかな？
 summary: いよいよイベント勉強会のしあげ
 eventAt: 2026-08-23T10:40
