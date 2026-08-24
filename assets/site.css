@@ -833,3 +833,27 @@ a.cms-event-image{display:block}
 .cms-video-link{font-weight:700;color:#082c63;text-decoration:none}
 .cms-video-link:hover{text-decoration:underline}
 @media(max-width:900px){.cms-video-grid{grid-template-columns:1fr}.cms-archive-divider{margin-top:38px}}
+
+/* ---------- CLEAN3: event card image frame ---------- */
+/* Keep the card itself at 2 columns; shrink only the 16:9 image frame. */
+#events .cms-event-card > .cms-event-image{
+  width:75% !important;
+  max-width:75% !important;
+  justify-self:center;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  aspect-ratio:16/9 !important;
+  overflow:hidden;
+}
+#events .cms-event-card > .cms-event-image > img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center !important;
+}
+@media(max-width:767px){
+  #events .cms-event-card > .cms-event-image{
+    width:75% !important;
+    max-width:75% !important;
+  }
+}
