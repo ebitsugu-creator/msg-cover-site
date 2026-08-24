@@ -635,19 +635,20 @@
           "label": "タイトル",
           "required": true,
           "maxLength": 25,
-          "note": "25文字以内。記事の主題を端的に入力してください。"
+          "note": "25W以内"
         },
         {
           "name": "summary",
           "type": "text",
           "label": "概略",
           "maxLength": 150,
-          "note": "150文字以内。動画LPの概略として表示します。"
+          "note": "150W以内"
         },
         {
           "name": "image1",
           "type": "image",
-          "label": "サムネイル画像"
+          "label": "サムネイル画像",
+          "note": "YouTubeの場合、原則不要。敢えて入れたい場合のみアップを。"
         },
         {
           "name": "videoUrl",
@@ -702,10 +703,10 @@
           "summary"
         ],
         [
-          "image1"
+          "videoUrl"
         ],
         [
-          "videoUrl"
+          "image1"
         ],
         [
           "publishedAt"
