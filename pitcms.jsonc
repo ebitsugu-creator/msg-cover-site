@@ -253,7 +253,9 @@
           "linkLabel"
         ],
         [
-          "eventAt",
+          "eventAt"
+        ],
+        [
           "publishStartAt",
           "publishEndAt"
         ],
@@ -560,7 +562,9 @@
           "linkLabel"
         ],
         [
-          "eventAt",
+          "eventAt"
+        ],
+        [
           "publishStartAt",
           "publishEndAt"
         ],
