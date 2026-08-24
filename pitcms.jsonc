@@ -664,6 +664,13 @@
           "default": true
         },
         {
+          "name": "whatsNew",
+          "type": "boolean",
+          "label": "What's New表示",
+          "default": false,
+          "note": "ONの場合、What's Newの掲載候補になります。"
+        },
+        {
           "name": "publishedAt",
           "type": "date",
           "label": "公開日",
@@ -717,6 +724,7 @@
         ],
         [
           "publishable",
+          "whatsNew",
           "isDraft"
         ]
       ],
