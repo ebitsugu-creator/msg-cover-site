@@ -1,14 +1,13 @@
 ---
 category: events
-subcategory: events_party_library
-title: クランボルツ理論　YouTube　サムネ有
-summary: サムネまで入れてみました。さて、、どんな表示になるか？
-image1: /images/1787532362980-0i106u.jpg
-videoUrl: https://youtu.be/Lhbf6e47A44?si=54NF5HUb-dMLqQNM
+subcategory: events_study_library
+title: プロモビデオ　非YouTube　サムネ有
+image1: /images/1787532495720-9jv8bq.jpg
+videoUrl: https://miraiwithyou.jp/mv.html
 publishable: true
 whatsNew: true
-publishedAt: 2026-08-24T09:43
-publishStartAt: 2026-08-24T09:45
-publishEndAt: 2026-08-24T09:45
+publishedAt: 2026-08-24T09:46
+publishStartAt: 2026-08-24T09:47
+publishEndAt: 2026-08-25T09:47
 isDraft: false
 ---
