@@ -2,15 +2,14 @@
 category: events
 subcategory: events_advance
 title: 第二回勉強会
-subtitle: いよいよ2回目
-summary: っまたやります。
-image1: /images/1787535287735-wkiush.jpg
-eventAt: 2026-08-18T10:34
+subtitle: テストテストテスト
+summary: この仕組みがうまく表示されるか
+eventAt: 2026-08-17T10:35
 publishable: true
 whatsNew: true
-publishedAt: 2026-08-24T10:32
-publishStartAt: 2026-08-25T10:33
-publishEndAt: 2026-08-25T10:33
+publishedAt: 2026-08-24T10:34
+publishStartAt: 2026-08-24T10:36
+publishEndAt: 2026-08-26T10:36
 isDraft: false
 ---
-ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
+ああああああああああああ
