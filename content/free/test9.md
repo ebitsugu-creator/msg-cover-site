@@ -3,6 +3,7 @@ category: events
 subcategory: events_report
 title: 標示委上手くいってるかな？
 summary: いよいよイベント勉強会のしあげ
+image2: /images/1787537967743-yt7oyl.png
 eventAt: 2026-08-23T10:40
 publishable: true
 whatsNew: true
