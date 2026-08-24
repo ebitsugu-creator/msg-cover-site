@@ -4,6 +4,8 @@ subcategory: events_report
 title: 楽しかった勉強会
 subtitle: だ一回勉強会
 summary: 激論になりました。
+image1: /images/1787538011896-4m0t1g.jpg
+image2: /images/1787538015507-s65ku7.png
 eventAt: 2026-08-23T10:38
 publishable: true
 whatsNew: true
