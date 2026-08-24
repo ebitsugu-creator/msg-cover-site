@@ -592,20 +592,12 @@
           "required": true,
           "options": [
             {
-              "value": "about",
-              "label": "私たちについて"
-            },
-            {
-              "value": "qa",
-              "label": "QA"
+              "value": "featured",
+              "label": "推しネタ"
             },
             {
               "value": "events",
               "label": "イベント・勉強会"
-            },
-            {
-              "value": "video",
-              "label": "動画"
             }
           ]
         },
@@ -616,80 +608,24 @@
           "required": true,
           "options": [
             {
-              "value": "about_intro_message",
-              "label": "【私たちについて】紹介・メッセージ"
+              "value": "featured_hakomono",
+              "label": "【推しネタ】ハコモノ探偵団"
             },
             {
-              "value": "about_profile",
-              "label": "【私たちについて】団体概要"
+              "value": "featured_closure",
+              "label": "【推しネタ】港区廃業"
             },
             {
-              "value": "about_people_org",
-              "label": "【私たちについて】人事・組織"
+              "value": "featured_prices",
+              "label": "【推しネタ】港区狂乱物価"
             },
             {
-              "value": "about_media",
-              "label": "【私たちについて】広報・マスコミ登場"
+              "value": "events_party_library",
+              "label": "【イベント・勉強会】パーティライブラリ"
             },
             {
-              "value": "about_feedback",
-              "label": "【私たちについて】頂いたご意見"
-            },
-            {
-              "value": "about_other",
-              "label": "【私たちについて】その他"
-            },
-            {
-              "value": "qa_membership",
-              "label": "【QA】会員に関して"
-            },
-            {
-              "value": "qa_donation",
-              "label": "【QA】寄付に関して"
-            },
-            {
-              "value": "qa_events",
-              "label": "【QA】勉強会・イベントに関して"
-            },
-            {
-              "value": "qa_party",
-              "label": "【QA】党に対して"
-            },
-            {
-              "value": "qa_policy",
-              "label": "【QA】政策に対して"
-            },
-            {
-              "value": "qa_other",
-              "label": "【QA】その他"
-            },
-            {
-              "value": "events_advance",
-              "label": "【イベント・勉強会】事前告知"
-            },
-            {
-              "value": "events_report",
-              "label": "【イベント・勉強会】開催レポート"
-            },
-            {
-              "value": "video_city_oddities",
-              "label": "【動画】都会にこんなものいる？"
-            },
-            {
-              "value": "video_minato_prices",
-              "label": "【動画】クレイジーな港区物価"
-            },
-            {
-              "value": "video_minato_closures",
-              "label": "【動画】港区廃業という闇"
-            },
-            {
-              "value": "video_members",
-              "label": "【動画】メンバー紹介"
-            },
-            {
-              "value": "video_other",
-              "label": "【動画】その他"
+              "value": "events_study_library",
+              "label": "【イベント・勉強会】スタディライブラリ"
             }
           ]
         },
@@ -702,54 +638,23 @@
           "note": "25文字以内。記事の主題を端的に入力してください。"
         },
         {
-          "name": "subtitle",
-          "type": "text",
-          "label": "サブタイトル",
-          "maxLength": 50,
-          "note": "50文字以内。タイトルの補足や興味喚起ワードを入力してください。"
-        },
-        {
           "name": "summary",
           "type": "text",
           "label": "概略",
           "maxLength": 150,
-          "note": "150文字以内。一覧画面に反映されます。"
+          "note": "150文字以内。動画LPの概略として表示します。"
         },
         {
           "name": "image1",
           "type": "image",
-          "label": "アイキャッチ画像1"
-        },
-        {
-          "name": "image2",
-          "type": "image",
-          "label": "アイキャッチ画像2"
+          "label": "サムネイル画像"
         },
         {
           "name": "videoUrl",
           "type": "text",
           "label": "動画URL",
           "required": true,
-          "note": "ページ内で動画として表示するURLです。リンク参照URLとは別用途です。"
-        },
-        {
-          "name": "linkLabel",
-          "type": "text",
-          "label": "リンク表示文字",
-          "note": "リンクボタン等に表示する文字です。"
-        },
-        {
-          "name": "linkUrl",
-          "type": "text",
-          "label": "リンク参照URL",
-          "note": "サイト内または外部サイトへの遷移先URLです。動画URLとは別用途です。"
-        },
-        {
-          "name": "eventAt",
-          "type": "date",
-          "label": "開催日時",
-          "includeTime": true,
-          "note": "イベント・勉強会の開催日時です。告知記事では掲載終了日時が未指定の場合、この日時を終了判定に使用します。"
+          "note": "YouTube等の動画URLを入力してください。"
         },
         {
           "name": "publishable",
@@ -758,18 +663,11 @@
           "default": true
         },
         {
-          "name": "whatsNew",
-          "type": "boolean",
-          "label": "What's New表示",
-          "default": true,
-          "note": "ONの場合、What's Newの掲載候補になります。"
-        },
-        {
           "name": "publishedAt",
           "type": "date",
-          "label": "掲載日時",
+          "label": "公開日",
           "includeTime": true,
-          "note": "一覧・新着順の基準となる掲載日時です。"
+          "note": "動画LPに表示する公開日です。"
         },
         {
           "name": "publishStartAt",
@@ -801,30 +699,24 @@
           "title"
         ],
         [
-          "subtitle"
+          "summary"
         ],
         [
-          "summary"
+          "image1"
         ],
         [
           "videoUrl"
         ],
         [
-          "image1",
-          "image2"
+          "publishedAt"
         ],
         [
-          "linkUrl",
-          "linkLabel"
-        ],
-        [
-          "eventAt",
           "publishStartAt",
           "publishEndAt"
         ],
         [
           "publishable",
-          "whatsNew"
+          "isDraft"
         ]
       ],
       "pit": {
