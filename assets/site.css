@@ -829,3 +829,20 @@ a.cms-event-image{display:block}
 @media(min-width:768px){
   .cms-event-image img{object-fit:contain;object-position:center center}
 }
+
+/* V78: event/study video archives */
+.cms-archive-divider{border-top:2px solid #0b2a59;margin:54px 0 34px}
+.cms-archive-heading{font-size:clamp(28px,2.4vw,42px);margin:0 0 28px;color:#071f47}
+.cms-video-section{margin:0 0 44px}
+.cms-video-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.cms-video-card{border:1px solid #d7dfeb;background:#fff;min-width:0}
+.cms-video-thumb{display:block;aspect-ratio:16/9;background:#edf2f8;overflow:hidden}
+.cms-video-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.cms-video-noimage{height:100%;display:grid;place-items:center;font-weight:700;letter-spacing:.12em;color:#53657c}
+.cms-video-body{padding:18px}
+.cms-video-body time{display:block;font-size:14px;color:#53657c;margin-bottom:8px}
+.cms-video-body h4{font-size:20px;line-height:1.45;margin:0 0 9px;color:#071f47}
+.cms-video-body p{font-size:16px;line-height:1.75;margin:0 0 16px;color:#334a66}
+.cms-video-link{font-weight:700;color:#082c63;text-decoration:none}
+.cms-video-link:hover{text-decoration:underline}
+@media(max-width:900px){.cms-video-grid{grid-template-columns:1fr}.cms-archive-divider{margin-top:38px}}
