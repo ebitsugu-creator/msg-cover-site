@@ -766,6 +766,31 @@ table.member td:nth-child(4){background:#CFDDF0}
 .card[data-pending-youtube]{pointer-events:none;background:var(--soft)}
 .card[data-pending-youtube] .more.pending{color:var(--muted);font-weight:700}
 
+/* ---------- PitCMS: イベント・勉強会LP ---------- */
+.cms-events{margin-top:24px}
+.cms-events-status{padding:18px 0;color:var(--muted);font-size:14px}
+.cms-event-group{margin-top:30px}
+.cms-event-group:first-child{margin-top:0}
+.cms-event-group-title{font-size:14px;font-weight:800;letter-spacing:.08em;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.cms-event-list{display:grid;gap:18px;margin-top:16px}
+.cms-event-card{display:grid;grid-template-columns:minmax(0,1fr);background:#fff;border:1px solid var(--line)}
+.cms-event-image{aspect-ratio:16/9;overflow:hidden;background:var(--soft)}
+.cms-event-image img{width:100%;height:100%;object-fit:cover;display:block}
+.cms-event-main{padding:20px}
+.cms-event-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.cms-event-meta time{font-size:14px;font-weight:800;color:var(--navy)}
+.cms-event-meta time small{font-size:11px;font-weight:700;color:var(--muted);margin-left:6px}
+.cms-event-card h3{font-size:20px;line-height:1.55;margin:0}
+.cms-event-subtitle{margin:6px 0 0;font-size:14px;font-weight:700;color:var(--navy)}
+.cms-event-summary{margin:10px 0 0;font-size:14px;line-height:1.8;color:var(--muted)}
+.cms-event-button{display:inline-block;margin-top:16px;padding:9px 15px;background:var(--navy);color:#fff;text-decoration:none;font-size:13px;font-weight:800}
+.cms-event-button:hover{opacity:.86}
+@media (min-width:768px){
+  .cms-event-card{grid-template-columns:minmax(220px,32%) minmax(0,1fr)}
+  .cms-event-image{aspect-ratio:auto;min-height:210px}
+  .cms-event-main{padding:24px 26px}
+}
+
 /* ---------- v74: PitCMS 記事詳細 ---------- */
 .cms-event-title-link{color:inherit;text-decoration:none}
 .cms-event-title-link:hover{text-decoration:underline;text-underline-offset:4px}
@@ -786,36 +811,24 @@ a.cms-event-image{display:block}
 .cms-article-body p{margin:0 0 1.4em}.cms-article-body h2,.cms-article-body h3,.cms-article-body h4{color:var(--navy);line-height:1.5;margin:2em 0 .7em}.cms-article-body h2{font-size:25px}.cms-article-body h3{font-size:21px}.cms-article-body h4{font-size:18px}.cms-article-body ul{padding-left:1.5em;margin:0 0 1.5em}.cms-article-body mark{background:#fff2b8}.cms-article-body a{color:#174f9b}
 .cms-article-video{margin-top:30px}.cms-article-action{margin-top:24px}.cms-article-back{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);font-size:14px}.cms-article-error{padding:40px 0}
 @media(max-width:767px){.cms-article{padding-top:34px;padding-bottom:56px}.cms-article-eyecatch{margin-top:24px}.cms-article-summary{padding:17px}.cms-article-body{margin-top:30px}}
+/* v76 events */
+#events.sec{padding-top:34px;padding-bottom:54px}.cms-events{margin-top:22px}.cms-event-group{margin-top:42px}.cms-event-group-head{display:flex;align-items:baseline;gap:18px;padding-bottom:11px;border-bottom:1px solid var(--line)}.cms-event-group-title{margin:0;padding:0;border:0;white-space:nowrap;font-size:18px;font-weight:800}.cms-event-group-desc{margin:0;font-size:16px;line-height:1.7;color:#46556d}.cms-event-list{display:grid;gap:18px;margin-top:18px}.cms-event-card{display:grid;grid-template-columns:minmax(240px,31%) minmax(0,1fr);background:#fff;border:1px solid var(--line)}.cms-event-image{display:block;min-height:220px;overflow:hidden;background:var(--soft)}.cms-event-image img{display:block;width:100%;height:100%;object-fit:cover}.cms-event-main{padding:24px 28px}.cms-event-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.cms-event-meta time{font-size:15px;font-weight:800;color:var(--navy)}.cms-event-card h3{font-size:22px;line-height:1.5;margin:0}.cms-event-subtitle,.cms-event-summary{font-size:16px;line-height:1.8}.cms-event-summary{color:#46556d}.cms-events-empty{margin:16px 0 0;padding:18px;background:var(--soft);color:var(--muted)}.cms-backnumber{text-align:right;margin-top:14px}.cms-backnumber a{font-weight:800;color:var(--navy)}@media(max-width:767px){.cms-event-group-head{display:block}.cms-event-group-desc{margin-top:5px}.cms-event-card{grid-template-columns:1fr}.cms-event-image{min-height:0;aspect-ratio:16/9}.cms-event-main{padding:19px}}
 
-/* ---------- CLEAN2: PitCMS イベント・勉強会LP ---------- */
-#events.sec{padding-top:34px;padding-bottom:54px}
-.cms-events{margin-top:22px}
-.cms-events-status{padding:18px 0;color:var(--muted);font-size:14px}
-.cms-event-group{margin-top:42px}
-.cms-event-group:first-child{margin-top:0}
-.cms-event-group-head{display:flex;align-items:baseline;gap:18px;padding-bottom:11px;border-bottom:1px solid var(--line)}
-.cms-event-group-title{margin:0;padding:0;border:0;white-space:nowrap;font-size:23.4px;font-weight:800;letter-spacing:.08em}
-.cms-event-group-desc{margin:0;font-size:16px;line-height:1.7;color:#46556d}
-.cms-event-list{display:grid;gap:18px;margin-top:18px}
-.cms-event-card{display:grid;grid-template-columns:1fr;background:#fff;border:1px solid var(--line);min-width:0}
-.cms-event-image{display:block;width:60%;margin:0 auto;aspect-ratio:16/9;overflow:hidden;background:#fff}
-.cms-event-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
-.cms-event-main{padding:22px 24px}
-.cms-event-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-.cms-event-meta time{font-size:15px;font-weight:800;color:var(--navy)}
-.cms-event-meta time small{font-size:11px;font-weight:700;color:var(--muted);margin-left:6px}
-.cms-event-date-label{font-size:.78em;font-weight:800;margin-right:7px;color:#53657c}
-.cms-event-card h3{font-size:20px;line-height:1.5;margin:0}
-.cms-event-title-link{color:inherit;text-decoration:none}
-.cms-event-title-link:hover{text-decoration:underline;text-underline-offset:4px}
-.cms-event-subtitle{margin:6px 0 0;font-size:16px;line-height:1.8;font-weight:700;color:var(--navy)}
-.cms-event-summary{margin:10px 0 0;font-size:16px;line-height:1.8;color:#46556d}
-.cms-event-button{display:inline-block;margin-top:16px;padding:9px 15px;background:var(--navy);color:#fff;text-decoration:none;font-size:13px;font-weight:800}
-.cms-event-button:hover{opacity:.86}
-.cms-events-empty{margin:16px 0 0;padding:18px;background:var(--soft);color:var(--muted)}
-.cms-backnumber{text-align:right;margin-top:14px}.cms-backnumber a{font-weight:800;color:var(--navy)}
-@media(min-width:900px){#events .cms-event-list{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}#events .cms-event-card{height:100%}}
-@media(max-width:767px){.cms-event-group-head{display:block}.cms-event-group-desc{margin-top:5px}.cms-event-image{width:100%}.cms-event-main{padding:19px}}
+/* ---------- v77: event LP refinements ---------- */
+@media(min-width:768px){
+  .cms-event-group-head{display:flex;align-items:baseline;gap:18px;flex-wrap:nowrap}
+  .cms-event-group-title,.cms-event-group-desc{white-space:nowrap}
+  .cms-event-image{align-self:start;min-height:0;aspect-ratio:16/9}
+  .cms-event-image img{width:100%;height:100%;object-fit:cover;object-position:center}
+}
+
+/* ---------- v77 revised: event image + subcategory readability ---------- */
+.cms-event-group-title{font-size:23.4px}
+.cms-event-image{background:#fff}
+.cms-event-image img{width:100%;height:100%;object-fit:contain;object-position:center center;background:#fff}
+@media(min-width:768px){
+  .cms-event-image img{object-fit:contain;object-position:center center}
+}
 
 /* V78: event/study video archives */
 .cms-archive-divider{border-top:2px solid #0b2a59;margin:54px 0 34px}
@@ -834,26 +847,17 @@ a.cms-event-image{display:block}
 .cms-video-link:hover{text-decoration:underline}
 @media(max-width:900px){.cms-video-grid{grid-template-columns:1fr}.cms-archive-divider{margin-top:38px}}
 
-/* ---------- CLEAN3: event card image frame ---------- */
-/* Keep the card itself at 2 columns; shrink only the 16:9 image frame. */
-#events .cms-event-card > .cms-event-image{
-  width:60% !important;
-  max-width:60% !important;
-  justify-self:center;
-  margin-left:auto !important;
-  margin-right:auto !important;
-  aspect-ratio:16/9 !important;
-  overflow:hidden;
+/* v79: events LP — 1 line / 2 columns on desktop */
+@media (min-width: 900px){
+  #events .cms-event-list{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+  #events .cms-event-card{grid-template-columns:1fr;height:100%}
+  #events .cms-event-image{min-height:0;aspect-ratio:16/9}
+  #events .cms-event-main{padding:22px 24px}
+  #events .cms-event-card h3{font-size:20px}
 }
-#events .cms-event-card > .cms-event-image > img{
-  width:100% !important;
-  height:100% !important;
-  object-fit:cover !important;
-  object-position:center !important;
-}
-@media(max-width:767px){
-  #events .cms-event-card > .cms-event-image{
-    width:75% !important;
-    max-width:75% !important;
-  }
+
+/* v79 fixed: event date semantics + stable two-column cards */
+.cms-event-date-label{font-size:.78em;font-weight:800;margin-right:7px;color:#53657c}
+@media (min-width:900px){
+  #events .cms-event-list>.cms-event-card{display:grid!important;visibility:visible!important;opacity:1!important;min-width:0}
 }
