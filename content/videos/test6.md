@@ -1,7 +1,7 @@
 ---
 category: events
 subcategory: events_party_library
-productionType: original
+productionType: external
 title: プロモビデオ　非YouTube　サムネ無し
 videoUrl: https://miraiwithyou.jp/mv.html
 publishable: true
