@@ -8,6 +8,6 @@ publishable: true
 whatsNew: true
 publishedAt: 2026-08-24T09:50
 publishStartAt: 2026-08-24T09:51
-publishEndAt: 2026-08-31T09:51
+publishEndAt: 2026-09-30T23:59
 isDraft: false
 ---
