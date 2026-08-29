@@ -30,7 +30,7 @@
     ]},
     { group: "今", items: [
       { label: "What's New", href: "activity.html#news", key: "activity", hash: "#news" },
-      { label: "推しネタ",   href: "policies.html#progress", key: "policies" }
+      { label: "推しネタ",   href: "featured.html", key: "featured" }
     ]},
     { group: "ともに", items: [
       { label: "寄付をする・会員になる", href: "join.html", key: "join" },
