@@ -634,25 +634,40 @@
           ]
         },
         {
-          "name": "title",
-          "type": "text",
-          "label": "タイトル",
+          "name": "productionType",
+          "type": "select",
+          "label": "動画区分",
           "required": true,
-          "maxLength": 25,
-          "note": "25W以内"
+          "options": [
+            {
+              "value": "original",
+              "label": "中くらいの政府制作"
+            },
+            {
+              "value": "external",
+              "label": "外部制作"
+            }
+          ],
+          "note": "中くらいの政府制作はサイト内の視聴ページへ、外部制作は配信元へ直接リンクします。"
         },
         {
-          "name": "summary",
+          "name": "title",
           "type": "text",
-          "label": "概略",
-          "maxLength": 150,
-          "note": "150W以内"
+          "label": "タイトル（任意）",
+          "maxLength": 25,
+          "note": "YouTube動画は原則YouTube側のタイトルを使用。非YouTube等で必要な場合のみ入力します。"
         },
         {
           "name": "image1",
           "type": "image",
-          "label": "サムネイル画像",
-          "note": "非YouTubeは必須。YouTube系は特に入れたい場合のみ（基本はYouTubeのサムネイルが自動挿入される）"
+          "label": "画像①（任意）",
+          "note": "固定された小スペースに表示する自由画像。外部動画の指定ロゴ、オリジナル動画のQR等に使用できます。"
+        },
+        {
+          "name": "note",
+          "type": "textarea",
+          "label": "備考",
+          "note": "外部動画のクレジット・出典・指定表記、オリジナル動画の案内文など自由に入力できます。サイト上では「備考」という見出しは表示しません。"
         },
         {
           "name": "videoUrl",
@@ -708,16 +723,17 @@
           "subcategory"
         ],
         [
-          "title"
-        ],
-        [
-          "summary"
+          "productionType"
         ],
         [
           "videoUrl"
         ],
         [
-          "image1"
+          "title"
+        ],
+        [
+          "image1",
+          "note"
         ],
         [
           "publishedAt"

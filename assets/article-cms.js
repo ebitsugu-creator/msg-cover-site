@@ -5,8 +5,8 @@
   const params = new URLSearchParams(location.search);
   const collection = params.get('collection') || 'free';
   const file = params.get('file') || '';
-  const allowedCollections = new Set(['free']);
-  const categoryLabels = { events: 'イベント・勉強会' };
+  const allowedCollections = new Set(['free','videos']);
+  const categoryLabels = { events: 'イベント・勉強会', featured: '推しネタ' };
   const subcategoryLabels = { events_advance:'事前告知', events_notice:'事前告知', events_study:'事前告知', events_report:'開催レポート' };
   const esc = (v='') => String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   function scalar(raw){ const v=raw.trim(); if(v==='true')return true;if(v==='false')return false;if(v==='null')return null;if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))return v.slice(1,-1);return v; }
@@ -18,11 +18,20 @@
     for(const raw of lines){ const line=raw.trim(); if(!line){close();continue;} const h=line.match(/^(#{1,6})\s+(.+)$/); if(h){close();const n=Math.min(4,Math.max(2,h[1].length));out.push(`<h${n}>${inline(h[2])}</h${n}>`);continue;} if(/^[-*]\s+/.test(line)){if(!list){out.push('<ul>');list=true;}out.push(`<li>${inline(line.replace(/^[-*]\s+/,''))}</li>`);continue;} close();out.push(`<p>${inline(line)}</p>`); } close(); return out.join('\n');
   }
   function date(v){ if(!v)return ''; const d=new Date(v); if(Number.isNaN(d.getTime()))return esc(v); return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`; }
+  function imagePath(v){ if(!v)return ''; v=String(v).trim().replace(/^[\"']|[\"']$/g,''); if(/^https?:\/\//i.test(v))return v; if(v.startsWith('/public/'))return v; if(v.startsWith('public/'))return '/'+v; if(v.startsWith('/images/'))return '/public'+v; if(v.startsWith('images/'))return '/public/'+v; return v; }
+  function youtubeId(v){ try{const u=new URL(v);if(u.hostname==='youtu.be')return u.pathname.slice(1);if(u.hostname.includes('youtube.com')){if(u.pathname==='/watch')return u.searchParams.get('v')||'';const m=u.pathname.match(/\/(?:shorts|embed)\/([^/?]+)/);return m?m[1]:''}}catch(_){}return ''; }
+  async function youtubeMeta(v){ try{const r=await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(v)}&format=json`,{cache:'force-cache'});if(!r.ok)return {};return await r.json()}catch(_){return {}} }
   async function load(){
     try{
       if(!allowedCollections.has(collection) || !/^[^/\\]+\.md$/i.test(file)) throw new Error('invalid article');
       const url=`https://raw.githubusercontent.com/ebitsugu-creator/msg-cover-site/main/content/${encodeURIComponent(collection)}/${encodeURIComponent(file)}`;
       const r=await fetch(url,{cache:'no-store'}); if(!r.ok)throw new Error(`GitHub ${r.status}`); const a=parse(await r.text()); if(!a || a.publishable!==true || a.isDraft===true)throw new Error('not published');
+      if(collection==='videos'){
+        if(a.productionType!=='original'){ if(a.videoUrl){ location.replace(a.videoUrl); return; } throw new Error('external video url missing'); }
+        const id=youtubeId(a.videoUrl||''); if(!id)throw new Error('original video must be YouTube');
+        const ym=await youtubeMeta(a.videoUrl); const title=ym.title||a.title||'動画'; const channel=ym.author_name||''; const extra=imagePath(a.image1||''); document.title=`${title}｜中くらいの政府`;
+        mount.innerHTML=`<nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="activity.html#events">イベント・勉強会</a><span>›</span><span>動画</span></nav><div class="cms-video-watch"><header class="cms-article-head"><div class="cms-article-labels"><span class="tag">中くらいの政府制作</span></div><h1>${esc(title)}</h1>${channel?`<p class="cms-video-watch-channel">${esc(channel)}</p>`:''}</header><div class="cms-video-player"><iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}" title="${esc(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>${extra||a.note?`<div class="cms-video-watch-meta">${extra?`<img class="cms-video-watch-extra" src="${esc(extra)}" alt="">`:''}${a.note?`<p class="cms-video-watch-note">${esc(a.note)}</p>`:''}</div>`:''}<p class="cms-article-back"><a href="activity.html#events">← イベント・勉強会へ戻る</a></p></div>`; return;
+      }
       const cat=categoryLabels[a.category]||a.category||''; const sub=subcategoryLabels[a.subcategory]||a.subcategory||'';
       const rawImage=a.image1||a.image2||''; const image=rawImage.startsWith('/images/')?`/public${rawImage}`:rawImage; document.title=`${a.title||'記事'}｜中くらいの政府`;
       mount.innerHTML=`
