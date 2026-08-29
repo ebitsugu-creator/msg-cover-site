@@ -955,4 +955,26 @@ a.cms-event-image{display:block}
   #featured .cms-featured-new{margin-bottom:24px}
   #featured .cms-featured .cms-archive-divider{margin:24px 0}
 }
-\n\n/* V80 FIX4 revised: visibly compact featured LP */\n@media(min-width:701px){\n  #featured.sec{padding-top:22px}\n  #featured .featured-intro{display:flex;align-items:baseline;gap:22px;margin:0 0 12px}\n  #featured .featured-intro .sec-title{display:block;margin:0;flex:0 0 auto}\n  #featured .featured-intro .lead{display:block;margin:0;max-width:none}\n  #featured .cms-featured{margin-top:0}\n  #featured .cms-featured-new-head{margin-bottom:8px}\n  #featured .cms-featured-new{margin-bottom:10px}\n  #featured .cms-featured .cms-archive-divider{margin:12px 0 16px}\n}\n@media(max-width:700px){\n  #featured.sec{padding-top:24px}\n  #featured .featured-intro{margin:0 0 14px}\n  #featured .featured-intro .sec-title{margin:0}\n  #featured .featured-intro .lead{margin:5px 0 0}\n  #featured .cms-featured{margin-top:0}\n  #featured .cms-featured-new-head{margin-bottom:8px}\n  #featured .cms-featured-new{margin-bottom:12px}\n  #featured .cms-featured .cms-archive-divider{margin:12px 0 16px}\n}\n
+
+
+/* V80 FIX5: compact one-line desktop heading + tighter vertical rhythm */
+@media(min-width:701px){
+  #featured.sec{padding-top:18px;padding-bottom:48px}
+  #featured .featured-topline{display:flex;align-items:baseline;gap:20px;margin:0 0 10px;white-space:nowrap}
+  #featured .featured-topline .sec-title{margin:0;flex:0 0 auto}
+  #featured .featured-topline .lead{margin:0;flex:0 1 auto}
+  #featured .featured-pickup-label{margin-left:auto;font-size:14px;font-weight:900;letter-spacing:.13em;color:var(--navy);flex:0 0 auto}
+  #featured .cms-featured{margin-top:0}
+  #featured .cms-featured-new{margin-bottom:6px}
+  #featured .cms-featured .cms-archive-divider{margin:8px 0 12px}
+}
+@media(max-width:700px){
+  #featured.sec{padding-top:22px}
+  #featured .featured-topline{margin:0 0 10px}
+  #featured .featured-topline .sec-title{margin:0}
+  #featured .featured-topline .lead{margin:4px 0 0}
+  #featured .featured-pickup-label{display:block;margin-top:10px;font-size:13px;font-weight:900;letter-spacing:.13em;color:var(--navy)}
+  #featured .cms-featured{margin-top:0}
+  #featured .cms-featured-new{margin-bottom:10px}
+  #featured .cms-featured .cms-archive-divider{margin:10px 0 14px}
+}
