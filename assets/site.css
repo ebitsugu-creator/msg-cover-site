@@ -875,3 +875,20 @@ a.cms-event-image{display:block}
 /* V80: 推しネタ */
 #featured.sec{padding-top:34px;padding-bottom:64px}.cms-featured{margin-top:26px}.cms-featured-new{margin-bottom:48px}.cms-featured-new-head{display:flex;align-items:center;margin-bottom:14px}.cms-featured-new-head span{font-size:14px;font-weight:900;letter-spacing:.13em;color:var(--navy)}.cms-featured-hero-grid{display:grid;gap:24px}.cms-featured-hero-grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.cms-featured-hero-grid--1{grid-template-columns:1fr}.cms-featured-hero-card{display:grid;background:#fff;border:1px solid #d7dfeb;min-width:0}.cms-featured-hero-grid--1 .cms-featured-hero-card{grid-template-columns:minmax(0,58%) minmax(0,1fr)}.cms-featured-hero-thumb{display:block;aspect-ratio:16/9;overflow:hidden;background:#edf2f8}.cms-featured-hero-grid--1 .cms-featured-hero-thumb{aspect-ratio:auto;min-height:340px}.cms-featured-hero-thumb img{width:100%;height:100%;object-fit:cover;display:block}.cms-featured-hero-body{padding:24px}.cms-featured-hero-body time{display:block;font-size:14px;color:#53657c;margin-bottom:9px}.cms-featured-hero-body h3{font-size:25px;line-height:1.45;margin:0 0 10px;color:#071f47}.cms-featured-hero-grid--1 .cms-featured-hero-body{display:flex;flex-direction:column;justify-content:center;padding:32px}.cms-featured-hero-grid--1 .cms-featured-hero-body h3{font-size:30px}.cms-featured .cms-archive-divider{margin:46px 0}.cms-featured .cms-video-grid{margin-top:18px}
 @media(max-width:900px){.cms-featured-hero-grid--2{grid-template-columns:1fr}.cms-featured-hero-grid--1 .cms-featured-hero-card{grid-template-columns:1fr}.cms-featured-hero-grid--1 .cms-featured-hero-thumb{aspect-ratio:16/9;min-height:0}.cms-featured-hero-grid--1 .cms-featured-hero-body{padding:22px}.cms-featured-hero-grid--1 .cms-featured-hero-body h3{font-size:24px}}
+
+/* V80 FIX2: category columns + mobile horizontal swipe */
+.cms-featured-categories{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start}
+.cms-featured-categories .cms-video-section{min-width:0;margin:0;padding:0}
+.cms-featured-categories .cms-event-group-head{margin-bottom:12px;min-height:3.2em;align-items:flex-start}
+.cms-featured-categories .cms-event-group-title{font-size:18px;line-height:1.45}
+.cms-featured-categories .cms-video-grid{display:block;margin-top:0}
+.cms-featured-categories .cms-video-card{margin-bottom:16px}
+.cms-featured-categories .cms-backnumber{margin-top:8px}
+@media(max-width:700px){
+  .cms-featured-categories{display:flex;overflow-x:auto;gap:14px;margin-left:-18px;margin-right:-18px;padding:0 18px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .cms-featured-categories::-webkit-scrollbar{display:none}
+  .cms-featured-categories .cms-featured-category{flex:0 0 82vw;max-width:360px;scroll-snap-align:start}
+  .cms-featured-categories .cms-event-group-head{min-height:0}
+  .cms-featured-categories .cms-video-card:nth-child(n+2){display:none}
+  .cms-featured-categories .cms-video-card{margin-bottom:10px}
+}
