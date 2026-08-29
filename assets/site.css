@@ -892,3 +892,66 @@ a.cms-event-image{display:block}
   .cms-featured-categories .cms-video-card:nth-child(n+2){display:none}
   .cms-featured-categories .cms-video-card{margin-bottom:10px}
 }
+
+/* V80 FIX3: typography hierarchy, equal category dividers, CTA colors */
+.cms-featured-categories{align-items:stretch;gap:0}
+.cms-featured-categories .cms-featured-category{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  padding:0 18px;
+}
+.cms-featured-categories .cms-featured-category:first-child{padding-left:0}
+.cms-featured-categories .cms-featured-category:last-child{padding-right:0}
+.cms-featured-categories .cms-featured-category:not(:last-child)::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  width:1px;
+  background:rgba(0,0,0,.16);
+}
+.cms-featured-categories .cms-video-grid{flex:0 0 auto}
+.cms-featured-categories .cms-backnumber{margin-top:auto;padding-top:12px}
+.cms-featured-categories .cms-video-note{
+  font-size:12.5px!important;
+  font-weight:400!important;
+  line-height:1.55!important;
+  color:#53657c!important;
+}
+.cms-featured .cms-video-link{
+  color:var(--accent-d,#B94B08)!important;
+  font-weight:800!important;
+}
+.cms-featured .cms-backnumber a{
+  color:#071f47!important;
+  font-weight:900!important;
+  text-decoration:none;
+}
+.cms-featured .cms-backnumber a:hover,
+.cms-featured .cms-video-link:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:700px){
+  .cms-featured-categories{gap:14px;align-items:stretch}
+  .cms-featured-categories .cms-featured-category,
+  .cms-featured-categories .cms-featured-category:first-child,
+  .cms-featured-categories .cms-featured-category:last-child{padding:0}
+  .cms-featured-categories .cms-featured-category:not(:last-child)::after{display:none}
+  .cms-featured-categories .cms-backnumber{margin-top:auto}
+}
+
+/* V80 FIX4: compact vertical rhythm */
+@media(min-width:701px){
+  #featured>.wrap{position:relative}
+  #featured .sec-title{display:inline-block;margin:0 20px 0 0;vertical-align:baseline}
+  #featured .lead{display:inline-block;margin:0;vertical-align:baseline}
+  #featured .cms-featured{margin-top:20px}
+  #featured .cms-featured-new{margin-bottom:24px}
+  #featured .cms-featured .cms-archive-divider{margin:23px 0}
+}
+@media(max-width:700px){
+  #featured .cms-featured{margin-top:18px}
+  #featured .cms-featured-new{margin-bottom:24px}
+  #featured .cms-featured .cms-archive-divider{margin:24px 0}
+}
