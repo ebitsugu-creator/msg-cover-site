@@ -29,7 +29,7 @@
       { label: "港区からはじめよう", href: "https://miraiwithyou-minato.sites.repaint.com", ext: true }
     ]},
     { group: "今", items: [
-      { label: "What's New", href: "activity.html#news", key: "activity", hash: "#news" },
+      { label: "What's New", href: "whatsnew.html", key: "whatsnew" },
       { label: "推しネタ",   href: "featured.html", key: "featured" }
     ]},
     { group: "ともに", items: [
