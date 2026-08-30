@@ -985,4 +985,97 @@ a.cms-event-image{display:block}
  #featured .featured-topline .sec-title,#featured .featured-topline .lead,#featured .featured-topline .featured-pickup-label{display:block!important;margin-top:0!important;margin-bottom:0!important}
  #featured .featured-topline .featured-pickup-label{margin-left:auto!important}
 }
-\n\n/* V80 FIX6: tighter 12-char cards + centered category labels + promo rail */\n@media(min-width:701px){\n  /* Four main columns: reclaim horizontal space for roughly 12 Japanese chars per title line. */\n  .cms-featured-categories .cms-featured-category:not(.cms-featured-promo){padding-left:10px;padding-right:10px}\n  .cms-featured-categories .cms-featured-category:first-child{padding-left:0}\n  .cms-featured-categories .cms-featured-category:nth-child(4){padding-right:0}\n  .cms-featured-categories .cms-featured-category:not(.cms-featured-promo):not(:nth-child(4))::after{display:block}\n  .cms-featured-categories .cms-featured-category:nth-child(4)::after{display:none}\n  .cms-featured-categories .cms-video-body{padding:14px 11px}\n\n  /* Category names are labels, not article titles: centered in both axes and larger. */\n  .cms-featured-categories .cms-event-group-head{display:flex;align-items:center;justify-content:center;min-height:58px;margin-bottom:10px;padding:0 4px;border-bottom:1px solid var(--line)}\n  .cms-featured-categories .cms-event-group-title{width:100%;margin:0;text-align:center;font-size:22px;line-height:1.25;font-weight:900;white-space:normal}\n\n  /* Article title / overview hierarchy. */\n  .cms-featured-categories .cms-video-body h3{margin:0 0 8px;font-size:20px;line-height:1.45;color:#071f47;font-weight:800}\n  .cms-featured-categories .cms-video-note{font-size:12.5px!important;line-height:1.5!important;font-weight:400!important;color:#53657c!important}\n\n  /* Fifth category: a full-width horizontal promo gallery, not another vertical column. */\n  .cms-featured-categories .cms-featured-promo{grid-column:1/-1;padding:18px 0 0!important;margin-top:14px!important;border-top:1px solid var(--line)}\n  .cms-featured-categories .cms-featured-promo::after{display:none!important}\n  .cms-featured-categories .cms-featured-promo .cms-event-group-head{min-height:48px;margin-bottom:10px}\n  .cms-featured-categories .cms-featured-promo .cms-event-group-title{font-size:23px}\n  .cms-featured-categories .cms-featured-promo .cms-video-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}\n  .cms-featured-categories .cms-featured-promo .cms-video-card{margin:0;min-width:0}\n  .cms-featured-categories .cms-featured-promo .cms-backnumber{margin:8px 0 0;padding:0;text-align:right}\n}\n@media(max-width:700px){\n  /* Mobile keeps the existing swipe model; promo is simply the fifth panel. */\n  .cms-featured-categories .cms-event-group-head{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 4px}\n  .cms-featured-categories .cms-event-group-title{width:100%;margin:0;text-align:center;font-size:21px;line-height:1.3;font-weight:900}\n  .cms-featured-categories .cms-video-body h3{margin:0 0 8px;font-size:20px;line-height:1.45;color:#071f47}\n  .cms-featured-categories .cms-video-note{font-size:12.5px!important;font-weight:400!important;line-height:1.5!important}\n}\n
+
+
+/* V80 FIX7: main category spacing / hierarchy + horizontal promo rail */
+@media(min-width:701px){
+  .cms-featured-categories{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    column-gap:0;
+    row-gap:0;
+  }
+  .cms-featured-categories .cms-featured-category:not(.cms-featured-promo){
+    padding-left:7px;
+    padding-right:7px;
+  }
+  .cms-featured-categories .cms-featured-category:first-child{padding-left:0}
+  .cms-featured-categories .cms-featured-category:nth-child(4){padding-right:0}
+  .cms-featured-categories .cms-featured-category:not(.cms-featured-promo):not(:nth-child(4))::after{
+    display:block;
+    background:rgba(0,0,0,.16);
+  }
+  .cms-featured-categories .cms-featured-category:nth-child(4)::after{display:none}
+
+  /* Subcategory labels: clearly separate from article titles. */
+  .cms-featured-categories .cms-event-group-head{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:62px;
+    margin:0 0 9px;
+    padding:0 4px;
+    border-bottom:1px solid var(--line);
+  }
+  .cms-featured-categories .cms-event-group-title{
+    width:100%;
+    margin:0;
+    text-align:center;
+    font-size:23px;
+    line-height:1.22;
+    font-weight:900;
+    white-space:normal;
+  }
+
+  /* Reclaim card width: target about 12 Japanese characters per title line. */
+  .cms-featured-categories .cms-video-body{padding:13px 8px 14px}
+  .cms-featured-categories .cms-video-body h3{
+    margin:0 0 7px;
+    font-size:20px;
+    line-height:1.42;
+    font-weight:800;
+    color:#071f47;
+  }
+  .cms-featured-categories .cms-video-note{
+    margin:5px 0 11px!important;
+    font-size:12px!important;
+    line-height:1.48!important;
+    font-weight:400!important;
+    color:#66758a!important;
+  }
+
+  /* Promo/other: visually separated and cards grow horizontally. */
+  .cms-featured-categories .cms-featured-promo{
+    grid-column:1/-1;
+    padding:18px 0 0!important;
+    margin:18px 0 0!important;
+    border-top:2px solid #0b2a59;
+  }
+  .cms-featured-categories .cms-featured-promo::after{display:none!important}
+  .cms-featured-categories .cms-featured-promo .cms-event-group-head{
+    min-height:54px;
+    margin:0 0 10px;
+  }
+  .cms-featured-categories .cms-featured-promo .cms-event-group-title{font-size:23px}
+  .cms-featured-categories .cms-featured-promo .cms-video-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:10px;
+    margin:0;
+  }
+  .cms-featured-categories .cms-featured-promo .cms-video-card{margin:0;min-width:0}
+  .cms-featured-categories .cms-featured-promo .cms-backnumber{margin:9px 0 0;padding:0;text-align:right}
+}
+@media(max-width:700px){
+  .cms-featured-categories .cms-event-group-head{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:54px;
+    padding:0 4px;
+  }
+  .cms-featured-categories .cms-event-group-title{
+    width:100%;margin:0;text-align:center;font-size:21px;line-height:1.28;font-weight:900;white-space:normal;
+  }
+  .cms-featured-categories .cms-video-body h3{font-size:20px;line-height:1.42}
+  .cms-featured-categories .cms-video-note{font-size:12px!important;font-weight:400!important;line-height:1.48!important;color:#66758a!important}
+}
