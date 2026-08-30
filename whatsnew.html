@@ -8,7 +8,43 @@
 <link rel="canonical" href="https://miraiwithyou.jp/whatsnew.html">
 <link rel="stylesheet" href="assets/site.css?v=90wn1">
 <link rel="stylesheet" href="assets/msg-nav.css">
-<link rel="stylesheet" href="assets/whatsnew.css?v=90wn2">
+<link rel="stylesheet" href="assets/whatsnew.css?v=90wn3">
+<style id="wn-critical-v90fix3">
+.wn-main-list{margin-top:26px;border-top:2px solid #0b2854}
+.wn-main-card{display:grid;grid-template-columns:minmax(280px,34%) minmax(0,1fr);gap:0;padding:28px 0;border-bottom:1px solid #d9e1eb;min-height:210px}
+.wn-main-image{display:block;aspect-ratio:16/9;overflow:hidden;background:#edf2f8;align-self:start}
+.wn-main-image img{display:block;width:100%;height:100%;object-fit:cover}
+.wn-main-body{padding:3px 10px 3px 34px;min-width:0}.wn-main-card--noimage .wn-main-body{grid-column:1/-1;padding-left:0}
+.wn-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 10px;font-size:13px;line-height:1.5;color:#53657c}
+.wn-subcat{font-weight:800;color:#0b2854}.wn-event{padding:4px 9px;background:#fff3d2;color:#715716;font-weight:800}
+.wn-main-body h2{margin:0;font-size:clamp(22px,2vw,30px);line-height:1.45;color:#071f47}.wn-main-body h2 a{color:inherit;text-decoration:none}.wn-main-body h2 a:hover{text-decoration:underline;text-underline-offset:4px}
+.wn-summary{margin:12px 0 0;font-size:15px;line-height:1.85;color:#46556d}
+.wn-older{margin-top:34px;border-top:2px solid #0b2854}.wn-older-head{display:flex;align-items:baseline;gap:14px;padding:20px 0 10px}.wn-older-head span{font-size:12px;font-weight:800;letter-spacing:.12em;color:#9a7b27}.wn-older-head strong{font-size:20px;color:#071f47}
+.wn-compact{display:grid;grid-template-columns:minmax(0,1fr);padding:14px 0;border-top:1px solid #d9e1eb}.wn-compact .wn-meta{margin-bottom:5px}.wn-compact-line{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(0,1.4fr);gap:24px;align-items:start}.wn-compact h3{margin:0;font-size:16px;line-height:1.65;color:#071f47}.wn-compact h3 a{color:inherit;text-decoration:none}.wn-compact h3 a:hover{text-decoration:underline}.wn-compact p{margin:0;font-size:14px;line-height:1.7;color:#53657c}
+.cms-events-status{padding:28px 0;color:#65748a}
+@media(max-width:767px){.wn-main-card{grid-template-columns:1fr;padding:20px 0}.wn-main-body{padding:16px 0 0}.wn-main-card--noimage .wn-main-body{padding-top:0}.wn-main-body h2{font-size:21px}.wn-compact-line{grid-template-columns:1fr;gap:4px}.wn-older-head{display:block}.wn-older-head strong{display:block;margin-top:4px}}
+
+/* FIX2: heading in one line + compact older rows in one line */
+.wn-head{display:flex;align-items:baseline;gap:28px;flex-wrap:wrap}
+.wn-head .sec-title{margin-bottom:0}
+.wn-head p{margin:0;color:#53657c}
+.wn-compact{display:grid;grid-template-columns:92px minmax(130px,220px) minmax(0,1fr);gap:14px;align-items:baseline;padding:10px 0;border-top:1px solid #d9e1eb}
+.wn-compact>time{font-size:13px;color:#53657c;white-space:nowrap}
+.wn-compact>.wn-subcat{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wn-compact h3{margin:0;font-size:15px;line-height:1.5;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wn-compact h3 a{color:#071f47;text-decoration:none}
+.wn-compact h3 a:hover{text-decoration:underline}
+@media(max-width:767px){.wn-head{display:block}.wn-head p{margin-top:8px}.wn-compact{grid-template-columns:78px minmax(100px,145px) minmax(0,1fr);gap:8px}.wn-compact h3{font-size:14px}}
+
+/* FIX3: horizontal use of space */
+.wn-title-summary{display:flex;align-items:baseline;min-width:0;flex-wrap:wrap}
+.wn-title-summary h2{flex:0 0 auto}
+.wn-inline-summary{font-size:15px;line-height:1.85;color:#46556d;font-weight:400}
+.wn-compact{grid-template-columns:92px minmax(130px,190px) minmax(220px,.8fr) minmax(0,1.5fr)}
+.wn-compact p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:767px){.wn-title-summary{display:block}.wn-inline-summary{display:block;margin-top:6px}.wn-compact{grid-template-columns:76px 110px minmax(0,1fr)}.wn-compact p{grid-column:1/-1;padding-left:0}}
+
+</style>
 </head>
 <body data-page-title="What's New" data-chapters='[{"href":"#news","label":"What&apos;s New"}]'>
 <a class="skip" href="#main">本文へスキップ</a>
@@ -29,6 +65,6 @@
 <footer id="msg-footer"></footer>
 <script src="assets/msg-nav.js?v=90wn2" defer></script>
 <script src="assets/site.js" defer></script>
-<script src="assets/whatsnew-cms.js?v=90wn2" defer></script>
+<script src="assets/whatsnew-cms.js?v=90wn3" defer></script>
 </body>
 </html>

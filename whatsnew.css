@@ -23,3 +23,11 @@
 .wn-compact h3 a{color:#071f47;text-decoration:none}
 .wn-compact h3 a:hover{text-decoration:underline}
 @media(max-width:767px){.wn-head{display:block}.wn-head p{margin-top:8px}.wn-compact{grid-template-columns:78px minmax(100px,145px) minmax(0,1fr);gap:8px}.wn-compact h3{font-size:14px}}
+
+/* FIX3: horizontal use of space */
+.wn-title-summary{display:flex;align-items:baseline;min-width:0;flex-wrap:wrap}
+.wn-title-summary h2{flex:0 0 auto}
+.wn-inline-summary{font-size:15px;line-height:1.85;color:#46556d;font-weight:400}
+.wn-compact{grid-template-columns:92px minmax(130px,190px) minmax(220px,.8fr) minmax(0,1.5fr)}
+.wn-compact p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:767px){.wn-title-summary{display:block}.wn-inline-summary{display:block;margin-top:6px}.wn-compact{grid-template-columns:76px 110px minmax(0,1fr)}.wn-compact p{grid-column:1/-1;padding-left:0}}
