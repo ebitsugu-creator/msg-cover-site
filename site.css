@@ -1172,12 +1172,9 @@ a.cms-event-image{display:block}
 @media(max-width:900px){.cms-backnumber-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.cms-backnumber-page{padding-top:18px}.cms-breadcrumb{margin-bottom:18px;font-size:12px}.cms-backnumber-heading{display:block;margin-bottom:16px}.cms-backnumber-kicker{margin-bottom:6px}.cms-backnumber-heading .sec-title{font-size:28px}.cms-backnumber-grid{grid-template-columns:1fr;gap:14px}.cms-backnumber-grid .cms-video-body{padding:14px 12px 16px}}
 
-/* V80 Back Number: event/study library buttons match Featured */
-.cms-video-archives .cms-backnumber{
-  margin-top:14px!important;
-  text-align:right!important;
-}
-.cms-video-archives .cms-backnumber a{
+/* V80 Back Number button fix: event/study video libraries */
+.cms-video-section .cms-backnumber{margin-top:14px;text-align:right}
+.cms-video-section .cms-backnumber a{
   display:inline-flex!important;
   align-items:center;
   justify-content:center;
@@ -1190,9 +1187,5 @@ a.cms-event-image{display:block}
   line-height:1!important;
   font-weight:800!important;
   text-decoration:none!important;
-  box-shadow:0 1px 0 rgba(0,0,0,.08);
 }
-.cms-video-archives .cms-backnumber a:hover{
-  opacity:.88;
-  text-decoration:none!important;
-}
+.cms-video-section .cms-backnumber a:hover{opacity:.88;text-decoration:none!important}
