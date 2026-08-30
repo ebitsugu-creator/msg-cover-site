@@ -624,6 +624,10 @@
               "label": "【推しネタ】雇用・社会問題を斬る"
             },
             {
+              "value": "featured_promo",
+              "label": "【推しネタ】プロモ・その他"
+            },
+            {
               "value": "events_party_library",
               "label": "【イベント・勉強会】パーティライブラリ"
             },
