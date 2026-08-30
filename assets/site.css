@@ -1154,3 +1154,20 @@ a.cms-event-image{display:block}
 .cms-featured-categories .cms-video-note{
   margin-top:0!important;
 }
+
+/* Back Number prototype: shared hierarchy + four-column archive */
+.cms-backnumber-page{padding-top:26px;padding-bottom:64px}
+.cms-breadcrumb{display:flex;align-items:center;gap:9px;margin:0 0 24px;font-size:13px;line-height:1.4;color:#66758a}
+.cms-breadcrumb a{color:#52677f;text-decoration:none}.cms-breadcrumb a:hover{text-decoration:underline;text-underline-offset:3px}
+.cms-backnumber-heading{display:flex;align-items:baseline;gap:22px;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid #0b2a59}
+.cms-backnumber-kicker{margin:0;font-size:13px;font-weight:900;letter-spacing:.12em;color:#173b6c;white-space:nowrap}
+.cms-backnumber-heading .sec-title{margin:0;font-size:34px;line-height:1.2}
+.cms-backnumber-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0}
+.cms-backnumber-grid .cms-video-card{margin:0;min-width:0}
+.cms-backnumber-grid .cms-video-body{padding:13px 8px 14px}
+.cms-backnumber-grid .cms-video-body time{font-size:14px;margin-bottom:8px}
+.cms-backnumber-grid .cms-video-body h3{margin:0 0 14px;font-size:16px;line-height:1.5;font-weight:800;color:#071f47}
+.cms-backnumber-grid .cms-video-extra{margin:0 0 10px}
+.cms-backnumber-grid .cms-video-link{font-weight:800;color:#c54b00}
+@media(max-width:900px){.cms-backnumber-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.cms-backnumber-page{padding-top:18px}.cms-breadcrumb{margin-bottom:18px;font-size:12px}.cms-backnumber-heading{display:block;margin-bottom:16px}.cms-backnumber-kicker{margin-bottom:6px}.cms-backnumber-heading .sec-title{font-size:28px}.cms-backnumber-grid{grid-template-columns:1fr;gap:14px}.cms-backnumber-grid .cms-video-body{padding:14px 12px 16px}}
