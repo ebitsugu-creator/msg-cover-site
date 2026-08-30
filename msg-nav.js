@@ -29,8 +29,8 @@
       { label: "港区からはじめよう", href: "https://miraiwithyou-minato.sites.repaint.com", ext: true }
     ]},
     { group: "今", items: [
-      { label: "What's New", href: "activity.html#news", key: "activity", hash: "#news" },
-      { label: "推しネタ",   href: "policies.html#progress", key: "policies" }
+      { label: "What's New", href: "whatsnew.html", key: "whatsnew" },
+      { label: "推しネタ",   href: "featured.html", key: "featured" }
     ]},
     { group: "ともに", items: [
       { label: "寄付をする・会員になる", href: "join.html", key: "join" },
@@ -54,7 +54,7 @@
 
   /* お知らせ：固定2件（ここを書き換えてください） */
   var NOTICE_FIXED = [
-    { label: "政治団体設立のお知らせ", href: "activity.html#news" },
+    { label: "政治団体設立のお知らせ", href: "whatsnew.html" },
     { label: "寄附・会員のご案内",     href: "join.html" }
   ];
   var NOTICE_ROTATE = 3;   /* 新着から自動で載せる件数 */
@@ -142,7 +142,7 @@
               '<ul class="mn-notice-fixed"></ul>' +
               '<p class="mn-notice-sub">新着</p>' +
               '<ul class="mn-notice-new"><li class="mn-notice-loading">読み込み中…</li></ul>' +
-              '<a class="mn-notice-more" href="activity.html#news">すべて見る →</a>' +
+              '<a class="mn-notice-more" href="whatsnew.html">すべて見る →</a>' +
             '</div>' +
           '</div>' +
           '<a class="mn-cta" href="join.html">参加する</a>' +
