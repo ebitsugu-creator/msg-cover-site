@@ -1079,3 +1079,66 @@ a.cms-event-image{display:block}
   .cms-featured-categories .cms-video-body h3{font-size:20px;line-height:1.42}
   .cms-featured-categories .cms-video-note{font-size:12px!important;font-weight:400!important;line-height:1.48!important;color:#66758a!important}
 }
+
+/* V80 FIX8: two-item LP rule, supporting-summary hierarchy, Back Number buttons */
+@media(min-width:701px){
+  /* Summary is supporting copy: clearly smaller/lighter than the article title. */
+  .cms-featured-categories .cms-video-note{
+    font-size:11px!important;
+    line-height:1.45!important;
+    font-weight:300!important;
+    color:#718096!important;
+    letter-spacing:0!important;
+  }
+  /* Back Number is an explicit continuation affordance after the two newest items. */
+  .cms-featured-categories .cms-backnumber{
+    margin-top:auto!important;
+    padding-top:14px!important;
+    text-align:center!important;
+  }
+  .cms-featured-categories .cms-backnumber a{
+    display:inline-flex!important;
+    align-items:center;
+    justify-content:center;
+    min-height:36px;
+    padding:8px 16px!important;
+    border-radius:999px;
+    background:#173b6c!important;
+    color:#fff!important;
+    font-size:13px!important;
+    line-height:1!important;
+    font-weight:800!important;
+    text-decoration:none!important;
+    box-shadow:0 1px 0 rgba(0,0,0,.08);
+  }
+  .cms-featured-categories .cms-backnumber a:hover{
+    opacity:.88;
+    text-decoration:none!important;
+  }
+  .cms-featured-categories .cms-featured-promo .cms-backnumber{
+    margin-top:12px!important;
+    padding-top:0!important;
+    text-align:right!important;
+  }
+}
+@media(max-width:700px){
+  .cms-featured-categories .cms-video-note{
+    font-size:11px!important;
+    line-height:1.45!important;
+    font-weight:300!important;
+    color:#718096!important;
+  }
+  .cms-featured-categories .cms-backnumber a{
+    display:inline-flex!important;
+    align-items:center;
+    justify-content:center;
+    min-height:36px;
+    padding:8px 16px!important;
+    border-radius:999px;
+    background:#173b6c!important;
+    color:#fff!important;
+    font-size:13px!important;
+    font-weight:800!important;
+    text-decoration:none!important;
+  }
+}
