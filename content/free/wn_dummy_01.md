@@ -3,7 +3,7 @@ category: events
 subcategory: events_advance
 title: 港区まちづくり勉強会を開催します
 summary: 9月の公開勉強会。地域のこれからを一緒に考えます。
-image1: /images/1787538011896-4m0t1g.jpg
+image1: assets/img/miyu-m1.webp
 eventAt: 2026-09-05T18:30
 publishable: true
 whatsNew: true

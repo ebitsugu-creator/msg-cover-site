@@ -4,7 +4,7 @@ subcategory: featured_prices
 productionType: original
 title: 港区狂乱物価・新作公開
 summary: 港区の身近な価格を入口に、都市生活のリアルを見ていきます。
-image1: /images/1787532606558-igc2dz.png
+image1: assets/img/pyramid.webp
 publishable: true
 whatsNew: true
 publishedAt: 2026-08-30T12:00

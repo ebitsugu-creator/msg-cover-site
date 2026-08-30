@@ -3,7 +3,7 @@ category: about
 subcategory: about_intro_message
 title: 代表メッセージを掲載しました
 summary: これからの活動方針と、私たちが目指す政治のかたちについてお伝えします。
-image1: /images/1787538015507-s65ku7.png
+image1: assets/img/miyu-portrait-640.webp
 publishable: true
 whatsNew: true
 publishedAt: 2026-08-30T13:00
