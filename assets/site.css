@@ -978,3 +978,10 @@ a.cms-event-image{display:block}
   #featured .cms-featured-new{margin-bottom:10px}
   #featured .cms-featured .cms-archive-divider{margin:10px 0 14px}
 }
+
+/* V80 FIX5 revised-2: force true one-line top row */
+@media(min-width:701px){
+ #featured .featured-topline{display:flex!important;align-items:baseline!important;gap:20px!important;flex-wrap:nowrap!important;margin:0 0 12px!important;white-space:nowrap!important}
+ #featured .featured-topline .sec-title,#featured .featured-topline .lead,#featured .featured-topline .featured-pickup-label{display:block!important;margin-top:0!important;margin-bottom:0!important}
+ #featured .featured-topline .featured-pickup-label{margin-left:auto!important}
+}
