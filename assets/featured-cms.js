@@ -1,7 +1,7 @@
 (()=>{'use strict';
 const host=document.getElementById('cms-featured');if(!host)return;
 const API='https://api.github.com/repos/ebitsugu-creator/msg-cover-site/contents/content/videos?ref=main';
-const SUBS=[['featured_hakomono','ハコモノ探偵団'],['featured_closure','港区廃業'],['featured_prices','港区狂乱物価'],['featured_employment_social','雇用・社会問題を斬る'],['featured_promo','プロモ・その他']];
+const SUBS=[['featured_hakomono','ハコモノ探偵団'],['featured_closure','港区廃業'],['featured_prices','港区狂乱物価'],['featured_employment_social','雇用・社会問題を斬る'],['featured_promo','プロモーション・その他']];
 const esc=(v='')=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 function scalar(r){let v=r.trim();if(v==='true')return true;if(v==='false')return false;if(v==='null')return null;if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))v=v.slice(1,-1);return v}
 function parse(t,f){const m=t.replace(/^\uFEFF/,'').match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);if(!m)return null;const d={};m[1].split(/\r?\n/).forEach(l=>{const i=l.indexOf(':');if(i>0)d[l.slice(0,i).trim()]=scalar(l.slice(i+1))});return {...d,fileName:f}}

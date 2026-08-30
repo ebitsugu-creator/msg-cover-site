@@ -1167,3 +1167,37 @@ a.cms-event-image{display:block}
     color:#42536a!important;
   }
 }
+
+/* V80 FIX10: title/overview use the same size; title alone carries emphasis */
+@media(min-width:701px){
+  .cms-featured-categories .cms-video-body h3,
+  .cms-featured-categories .cms-featured-promo .cms-video-body h3{
+    font-size:16px!important;
+    line-height:1.5!important;
+    font-weight:800!important;
+    color:#071f47!important;
+    letter-spacing:0!important;
+  }
+  .cms-featured-categories .cms-video-note,
+  .cms-featured-categories .cms-featured-promo .cms-video-note{
+    font-size:16px!important;
+    line-height:1.5!important;
+    font-weight:400!important;
+    color:#42536a!important;
+    letter-spacing:0!important;
+  }
+}
+@media(max-width:700px){
+  .cms-featured-categories .cms-video-body h3{
+    font-size:15px!important;
+    line-height:1.5!important;
+    font-weight:800!important;
+    color:#071f47!important;
+  }
+  .cms-featured-categories .cms-video-note{
+    font-size:15px!important;
+    line-height:1.5!important;
+    font-weight:400!important;
+    color:#42536a!important;
+  }
+}
