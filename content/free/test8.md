@@ -1,6 +1,6 @@
 ---
 category: events
-subcategory: events_report
+subcategory: events_study_library
 title: 楽しかった勉強会
 subtitle: だ一回勉強会
 summary: 激論になりました。

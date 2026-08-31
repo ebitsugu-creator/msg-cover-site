@@ -1,6 +1,6 @@
 ---
 category: events
-subcategory: events_report
+subcategory: events_study_library
 title: 第1回勉強会を開催しました
 summary: 多くのご参加をいただいた勉強会の様子をご紹介します。
 image1: /images/1787538011896-4m0t1g.jpg

@@ -1,6 +1,6 @@
 ---
 category: events
-subcategory: events_report
+subcategory: events_study_library
 title: 標示委上手くいってるかな？
 summary: いよいよイベント勉強会のしあげ
 image1: /images/1787538526978-yt84ol.jpg
