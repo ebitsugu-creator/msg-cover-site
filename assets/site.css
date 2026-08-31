@@ -884,14 +884,6 @@ a.cms-event-image{display:block}
 .cms-featured-categories .cms-video-grid{display:block;margin-top:0}
 .cms-featured-categories .cms-video-card{margin-bottom:16px}
 .cms-featured-categories .cms-backnumber{margin-top:8px}
-@media(max-width:700px){
-  .cms-featured-categories{display:flex;overflow-x:auto;gap:14px;margin-left:-18px;margin-right:-18px;padding:0 18px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .cms-featured-categories::-webkit-scrollbar{display:none}
-  .cms-featured-categories .cms-featured-category{flex:0 0 82vw;max-width:360px;scroll-snap-align:start}
-  .cms-featured-categories .cms-event-group-head{min-height:0}
-  .cms-featured-categories .cms-video-card:nth-child(n+2){display:none}
-  .cms-featured-categories .cms-video-card{margin-bottom:10px}
-}
 
 /* V80 FIX3: typography hierarchy, equal category dividers, CTA colors */
 .cms-featured-categories{align-items:stretch;gap:0}
@@ -1172,72 +1164,8 @@ a.cms-event-image{display:block}
 @media(max-width:900px){.cms-backnumber-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.cms-backnumber-page{padding-top:18px}.cms-breadcrumb{margin-bottom:18px;font-size:12px}.cms-backnumber-heading{display:block;margin-bottom:16px}.cms-backnumber-kicker{margin-bottom:6px}.cms-backnumber-heading .sec-title{font-size:28px}.cms-backnumber-grid{grid-template-columns:1fr;gap:14px}.cms-backnumber-grid .cms-video-body{padding:14px 12px 16px}}
 
-/* V91 MOBILE FOUNDATION: 推しネタをスマホでは4カラム/横スワイプにしない。
-   1カテゴリ=1段、記事カード=画像＋本文の横長構造。What's New / 概要・QAへ流用する基準形。 */
-@media (max-width: 900px){
-  #featured .cms-featured-categories{
-    display:grid!important;
-    grid-template-columns:minmax(0,1fr)!important;
-    gap:0!important;
-    overflow:visible!important;
-    margin-left:0!important;
-    margin-right:0!important;
-    padding:0!important;
-    scroll-snap-type:none!important;
-  }
-  #featured .cms-featured-categories .cms-featured-category,
-  #featured .cms-featured-categories .cms-featured-category:first-child,
-  #featured .cms-featured-categories .cms-featured-category:last-child{
-    width:100%!important;
-    max-width:none!important;
-    min-width:0!important;
-    padding:20px 0 24px!important;
-    margin:0!important;
-    border-bottom:2px solid #0b2a59;
-    flex:none!important;
-    scroll-snap-align:none!important;
-  }
-  #featured .cms-featured-categories .cms-featured-category:first-child{padding-top:0!important}
-  #featured .cms-featured-categories .cms-featured-category:not(:last-child)::after{display:none!important}
-  #featured .cms-featured-categories .cms-event-group-head{
-    justify-content:flex-start!important;
-    min-height:0!important;
-    margin:0 0 12px!important;
-    padding:0 0 9px!important;
-  }
-  #featured .cms-featured-categories .cms-event-group-title{
-    text-align:left!important;
-    font-size:22px!important;
-    line-height:1.3!important;
-  }
-  #featured .cms-featured-categories .cms-video-grid{display:grid!important;gap:12px!important}
-  #featured .cms-featured-categories .cms-video-card{
-    display:grid!important;
-    grid-template-columns:minmax(120px,38%) minmax(0,1fr)!important;
-    margin:0!important;
-    width:100%!important;
-  }
-  #featured .cms-featured-categories .cms-video-card:nth-child(n+2){display:grid!important}
-  #featured .cms-featured-categories .cms-video-thumb{
-    height:100%!important;
-    min-height:150px!important;
-    aspect-ratio:auto!important;
-  }
-  #featured .cms-featured-categories .cms-video-body{padding:14px 14px 15px!important;min-width:0}
-  #featured .cms-featured-categories .cms-video-body time{font-size:13px!important;margin-bottom:6px!important}
-  #featured .cms-featured-categories .cms-video-body h3{font-size:18px!important;line-height:1.45!important;margin:0 0 10px!important}
-  #featured .cms-featured-categories .cms-video-note{font-size:11px!important;line-height:1.45!important}
-  #featured .cms-featured-categories .cms-backnumber{text-align:right!important;margin:10px 0 0!important;padding-top:0!important}
-}
-@media (max-width: 520px){
-  #featured .cms-featured-categories .cms-video-card{grid-template-columns:minmax(105px,35%) minmax(0,1fr)!important}
-  #featured .cms-featured-categories .cms-video-thumb{min-height:138px!important}
-  #featured .cms-featured-categories .cms-video-body{padding:12px!important}
-  #featured .cms-featured-categories .cms-video-body h3{font-size:17px!important}
-}
-
-/* V92 FEATURED MOBILE FINAL: category rail + full-width thumbnail.
-   Mobile baseline for later reuse in What's New / 概要・QA. */
+/* V95 FEATURED MOBILE CLEAN: single authoritative mobile layout.
+   HTML/JS decide article count (max 3); CSS never hides generated cards. */
 @media (max-width:900px){
   #featured .cms-featured-categories .cms-featured-category,
   #featured .cms-featured-categories .cms-featured-category:first-child,
@@ -1289,8 +1217,7 @@ a.cms-event-image{display:block}
     border:1px solid #d7dfeb!important;
     background:#fff!important;
   }
-  #featured .cms-featured-categories .cms-video-card:nth-child(n+2){display:block!important;margin-top:12px!important}
-  #featured .cms-featured-categories .cms-video-card:nth-child(n+4){display:none!important}
+  #featured .cms-featured-categories .cms-video-card + .cms-video-card{margin-top:12px!important}
   #featured .cms-featured-categories .cms-video-thumb{
     display:block!important;
     width:100%!important;
