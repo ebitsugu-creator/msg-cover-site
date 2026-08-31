@@ -884,6 +884,14 @@ a.cms-event-image{display:block}
 .cms-featured-categories .cms-video-grid{display:block;margin-top:0}
 .cms-featured-categories .cms-video-card{margin-bottom:16px}
 .cms-featured-categories .cms-backnumber{margin-top:8px}
+@media(max-width:700px){
+  .cms-featured-categories{display:flex;overflow-x:auto;gap:14px;margin-left:-18px;margin-right:-18px;padding:0 18px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .cms-featured-categories::-webkit-scrollbar{display:none}
+  .cms-featured-categories .cms-featured-category{flex:0 0 82vw;max-width:360px;scroll-snap-align:start}
+  .cms-featured-categories .cms-event-group-head{min-height:0}
+  .cms-featured-categories .cms-video-card:nth-child(n+2){display:none}
+  .cms-featured-categories .cms-video-card{margin-bottom:10px}
+}
 
 /* V80 FIX3: typography hierarchy, equal category dividers, CTA colors */
 .cms-featured-categories{align-items:stretch;gap:0}
@@ -1164,19 +1172,36 @@ a.cms-event-image{display:block}
 @media(max-width:900px){.cms-backnumber-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.cms-backnumber-page{padding-top:18px}.cms-breadcrumb{margin-bottom:18px;font-size:12px}.cms-backnumber-heading{display:block;margin-bottom:16px}.cms-backnumber-kicker{margin-bottom:6px}.cms-backnumber-heading .sec-title{font-size:28px}.cms-backnumber-grid{grid-template-columns:1fr;gap:14px}.cms-backnumber-grid .cms-video-body{padding:14px 12px 16px}}
 
-/* V95 FEATURED MOBILE CLEAN: single authoritative mobile layout.
-   HTML/JS decide article count (max 3); CSS never hides generated cards. */
+/* V96 FEATURED MOBILE CLEAN: desktop rules remain untouched.
+   On <=900px only, the desktop 4-column parent is dismantled into one full-width category row.
+   Each row has a vertical category rail and up to 3 full-width 16:9 article cards. */
 @media (max-width:900px){
+  #featured .cms-featured-categories{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
   #featured .cms-featured-categories .cms-featured-category,
   #featured .cms-featured-categories .cms-featured-category:first-child,
-  #featured .cms-featured-categories .cms-featured-category:last-child{
+  #featured .cms-featured-categories .cms-featured-category:last-child,
+  #featured .cms-featured-categories .cms-featured-promo{
+    position:relative!important;
     display:grid!important;
     grid-template-columns:54px minmax(0,1fr)!important;
     grid-template-rows:auto auto!important;
     column-gap:12px!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:0!important;
     padding:12px 0!important;
+    border-top:0!important;
     border-bottom:1px solid #d7dfeb!important;
   }
+  #featured .cms-featured-categories .cms-featured-category::after{display:none!important}
   #featured .cms-featured-categories .cms-event-group-head{
     grid-column:1!important;
     grid-row:1 / span 2!important;
@@ -1203,21 +1228,26 @@ a.cms-event-image{display:block}
     text-orientation:upright!important;
     white-space:normal!important;
   }
-  #featured .cms-featured-categories .cms-video-grid{
+  #featured .cms-featured-categories .cms-video-grid,
+  #featured .cms-featured-categories .cms-featured-promo .cms-video-grid{
     grid-column:2!important;
     grid-row:1!important;
     display:block!important;
+    width:100%!important;
     min-width:0!important;
     margin:0!important;
   }
-  #featured .cms-featured-categories .cms-video-card{
+  #featured .cms-featured-categories .cms-video-card,
+  #featured .cms-featured-categories .cms-featured-promo .cms-video-card{
     display:block!important;
     width:100%!important;
+    min-width:0!important;
     margin:0!important;
     border:1px solid #d7dfeb!important;
     background:#fff!important;
   }
   #featured .cms-featured-categories .cms-video-card + .cms-video-card{margin-top:12px!important}
+  #featured .cms-featured-categories .cms-video-card:nth-child(n+4){display:none!important}
   #featured .cms-featured-categories .cms-video-thumb{
     display:block!important;
     width:100%!important;
@@ -1236,13 +1266,15 @@ a.cms-event-image{display:block}
   #featured .cms-featured-categories .cms-video-body{
     display:block!important;
     width:100%!important;
+    min-width:0!important;
     padding:12px 14px 14px!important;
   }
   #featured .cms-featured-categories .cms-video-body time{font-size:13px!important;margin:0 0 6px!important}
   #featured .cms-featured-categories .cms-video-body h3{font-size:17px!important;line-height:1.42!important;margin:0 0 9px!important}
   #featured .cms-featured-categories .cms-video-note{font-size:11px!important;line-height:1.42!important}
   #featured .cms-featured-categories .cms-video-link{display:inline-block!important;margin-top:2px!important}
-  #featured .cms-featured-categories .cms-backnumber{
+  #featured .cms-featured-categories .cms-backnumber,
+  #featured .cms-featured-categories .cms-featured-promo .cms-backnumber{
     grid-column:2!important;
     grid-row:2!important;
     margin:8px 0 0!important;
@@ -1253,7 +1285,8 @@ a.cms-event-image{display:block}
 @media (max-width:520px){
   #featured .cms-featured-categories .cms-featured-category,
   #featured .cms-featured-categories .cms-featured-category:first-child,
-  #featured .cms-featured-categories .cms-featured-category:last-child{
+  #featured .cms-featured-categories .cms-featured-category:last-child,
+  #featured .cms-featured-categories .cms-featured-promo{
     grid-template-columns:46px minmax(0,1fr)!important;
     column-gap:9px!important;
   }
