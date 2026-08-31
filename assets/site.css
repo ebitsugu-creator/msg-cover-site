@@ -998,3 +998,54 @@ a.cms-event-image{display:block}
     max-width:88%;
   }
 }
+
+/* V102 EVENTS — shared visual hierarchy with Featured (vertical category rail). */
+#events .cms-event-rail-section{
+  display:grid;
+  grid-template-columns:72px minmax(0,1fr);
+  column-gap:16px;
+  width:100%;
+  margin:0;
+  padding:16px 0;
+  border-bottom:1px solid #d7dfeb;
+  min-width:0;
+}
+#events .cms-event-rail-section + .cms-event-rail-section{margin-top:0}
+#events .cms-event-rail-section>.cms-event-group-head{
+  grid-column:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:72px;
+  min-height:100%;
+  margin:0;
+  padding:14px 9px;
+  background:#0b2a59;
+  border:0;
+}
+#events .cms-event-rail-section>.cms-event-group-head .cms-event-group-title{
+  margin:0;
+  padding:0;
+  border:0;
+  color:#fff;
+  font-size:18px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:.05em;
+  text-align:center;
+  writing-mode:vertical-rl;
+  text-orientation:upright;
+  white-space:normal;
+}
+#events .cms-event-rail-body{grid-column:2;min-width:0}
+#events .cms-event-rail-body>.cms-event-group-desc{margin:0 0 10px;font-size:14px;line-height:1.65;color:#46556d}
+#events .cms-event-rail-body>.cms-event-list{margin-top:0}
+#events .cms-event-rail-body>.cms-video-content .cms-video-grid{margin-top:0}
+#events .cms-event-rail-body>.cms-events-empty{margin-top:0}
+
+@media(max-width:520px){
+  #events .cms-event-rail-section{grid-template-columns:46px minmax(0,1fr);column-gap:9px;padding:12px 0}
+  #events .cms-event-rail-section>.cms-event-group-head{width:46px;padding:10px 5px}
+  #events .cms-event-rail-section>.cms-event-group-head .cms-event-group-title{font-size:15px}
+  #events .cms-event-rail-body>.cms-event-group-desc{font-size:12px;line-height:1.55;margin-bottom:8px}
+}
