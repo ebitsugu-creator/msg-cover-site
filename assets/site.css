@@ -917,10 +917,6 @@ a.cms-event-image{display:block}
 #featured .cms-featured-category .cms-backnumber{grid-column:2;grid-row:2;margin:12px 0 0;padding:0;text-align:right}
 #featured .cms-featured-category .cms-backnumber a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:8px 16px;border-radius:999px;background:#173b6c;color:#fff!important;font-size:13px;font-weight:800;text-decoration:none}
 
-@media(max-width:900px){
-  #featured .cms-featured-category .cms-video-grid{grid-template-columns:1fr}
-  #featured .cms-featured-category .cms-video-card + .cms-video-card{margin-top:0}
-}
 @media(max-width:520px){
   #featured .featured-topline{display:block}
   #featured .featured-topline .lead{margin-top:4px}
@@ -950,33 +946,43 @@ a.cms-event-image{display:block}
 @media(max-width:900px){.cms-backnumber-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.cms-backnumber-page{padding-top:18px}.cms-breadcrumb{margin-bottom:18px;font-size:12px}.cms-backnumber-heading{display:block;margin-bottom:16px}.cms-backnumber-kicker{margin-bottom:6px}.cms-backnumber-heading .sec-title{font-size:28px}.cms-backnumber-grid{grid-template-columns:1fr;gap:14px}.cms-backnumber-grid .cms-video-body{padding:14px 12px 16px}}
 
-/* V98 FEATURED MOBILE — three articles in one horizontal rail.
-   Desktop V97 layout stays unchanged. On mobile, category rows remain full-width;
-   only the article list becomes a horizontal 3-card rail, so cards never collapse. */
+
+/* V99 FEATURED MOBILE — clean horizontal swipe rail.
+   Desktop remains the V97 three-column layout. Mobile switches only the article
+   container to flex, avoiding grid-rule collisions entirely. */
 @media(max-width:900px){
   #featured .cms-featured-category .cms-video-grid{
-    display:grid;
-    grid-auto-flow:column;
-    grid-auto-columns:minmax(78vw,78vw);
-    grid-template-columns:none;
+    display:flex;
+    flex-flow:row nowrap;
+    align-items:stretch;
     gap:12px;
     width:100%;
     max-width:100%;
+    min-width:0;
     overflow-x:auto;
     overflow-y:hidden;
-    overscroll-behavior-inline:contain;
     scroll-snap-type:x mandatory;
+    overscroll-behavior-x:contain;
     -webkit-overflow-scrolling:touch;
-    padding:0 0 5px;
+    padding:0 0 6px;
   }
   #featured .cms-featured-category .cms-video-card{
-    scroll-snap-align:start;
-    min-width:0;
+    display:block;
+    flex:0 0 82%;
+    width:82%;
+    min-width:82%;
+    max-width:82%;
     margin:0!important;
+    scroll-snap-align:start;
   }
+  #featured .cms-featured-category .cms-video-card:nth-child(n+4){display:none}
 }
 @media(max-width:520px){
-  #featured .cms-featured-category .cms-video-grid{
-    grid-auto-columns:minmax(76vw,76vw);
+  #featured .cms-featured-category .cms-video-grid{gap:10px}
+  #featured .cms-featured-category .cms-video-card{
+    flex-basis:88%;
+    width:88%;
+    min-width:88%;
+    max-width:88%;
   }
 }
