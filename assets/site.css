@@ -1235,3 +1235,102 @@ a.cms-event-image{display:block}
   #featured .cms-featured-categories .cms-video-body{padding:12px!important}
   #featured .cms-featured-categories .cms-video-body h3{font-size:17px!important}
 }
+
+/* V92 FEATURED MOBILE FINAL: category rail + full-width thumbnail.
+   Mobile baseline for later reuse in What's New / 概要・QA. */
+@media (max-width:900px){
+  #featured .cms-featured-categories .cms-featured-category,
+  #featured .cms-featured-categories .cms-featured-category:first-child,
+  #featured .cms-featured-categories .cms-featured-category:last-child{
+    display:grid!important;
+    grid-template-columns:54px minmax(0,1fr)!important;
+    grid-template-rows:auto auto!important;
+    column-gap:12px!important;
+    padding:12px 0!important;
+    border-bottom:1px solid #d7dfeb!important;
+  }
+  #featured .cms-featured-categories .cms-event-group-head{
+    grid-column:1!important;
+    grid-row:1 / span 2!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:54px!important;
+    min-height:100%!important;
+    margin:0!important;
+    padding:12px 7px!important;
+    background:#0b2a59!important;
+    border:0!important;
+  }
+  #featured .cms-featured-categories .cms-event-group-title{
+    width:auto!important;
+    margin:0!important;
+    color:#fff!important;
+    font-size:17px!important;
+    line-height:1.15!important;
+    font-weight:900!important;
+    letter-spacing:.05em!important;
+    text-align:center!important;
+    writing-mode:vertical-rl!important;
+    text-orientation:upright!important;
+    white-space:normal!important;
+  }
+  #featured .cms-featured-categories .cms-video-grid{
+    grid-column:2!important;
+    grid-row:1!important;
+    display:block!important;
+    min-width:0!important;
+    margin:0!important;
+  }
+  #featured .cms-featured-categories .cms-video-card{
+    display:block!important;
+    width:100%!important;
+    margin:0!important;
+    border:1px solid #d7dfeb!important;
+    background:#fff!important;
+  }
+  #featured .cms-featured-categories .cms-video-card:nth-child(n+2){display:none!important}
+  #featured .cms-featured-categories .cms-video-thumb{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:16/9!important;
+    overflow:hidden!important;
+    background:#edf2f8!important;
+  }
+  #featured .cms-featured-categories .cms-video-thumb img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+  }
+  #featured .cms-featured-categories .cms-video-body{
+    display:block!important;
+    width:100%!important;
+    padding:12px 14px 14px!important;
+  }
+  #featured .cms-featured-categories .cms-video-body time{font-size:13px!important;margin:0 0 6px!important}
+  #featured .cms-featured-categories .cms-video-body h3{font-size:17px!important;line-height:1.42!important;margin:0 0 9px!important}
+  #featured .cms-featured-categories .cms-video-note{font-size:11px!important;line-height:1.42!important}
+  #featured .cms-featured-categories .cms-video-link{display:inline-block!important;margin-top:2px!important}
+  #featured .cms-featured-categories .cms-backnumber{
+    grid-column:2!important;
+    grid-row:2!important;
+    margin:8px 0 0!important;
+    padding:0!important;
+    text-align:right!important;
+  }
+}
+@media (max-width:520px){
+  #featured .cms-featured-categories .cms-featured-category,
+  #featured .cms-featured-categories .cms-featured-category:first-child,
+  #featured .cms-featured-categories .cms-featured-category:last-child{
+    grid-template-columns:46px minmax(0,1fr)!important;
+    column-gap:9px!important;
+  }
+  #featured .cms-featured-categories .cms-event-group-head{width:46px!important;padding:10px 5px!important}
+  #featured .cms-featured-categories .cms-event-group-title{font-size:15px!important}
+  #featured .cms-featured-categories .cms-video-body{padding:11px 12px 13px!important}
+  #featured .cms-featured-categories .cms-video-body h3{font-size:16px!important;line-height:1.4!important}
+}
