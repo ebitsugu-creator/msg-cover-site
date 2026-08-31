@@ -1289,7 +1289,8 @@ a.cms-event-image{display:block}
     border:1px solid #d7dfeb!important;
     background:#fff!important;
   }
-  #featured .cms-featured-categories .cms-video-card:nth-child(n+2){display:none!important}
+  #featured .cms-featured-categories .cms-video-card:nth-child(n+2){display:block!important;margin-top:12px!important}
+  #featured .cms-featured-categories .cms-video-card:nth-child(n+4){display:none!important}
   #featured .cms-featured-categories .cms-video-thumb{
     display:block!important;
     width:100%!important;
