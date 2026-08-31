@@ -949,3 +949,34 @@ a.cms-event-image{display:block}
 .cms-backnumber-grid .cms-video-link{font-weight:800;color:#c54b00}
 @media(max-width:900px){.cms-backnumber-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.cms-backnumber-page{padding-top:18px}.cms-breadcrumb{margin-bottom:18px;font-size:12px}.cms-backnumber-heading{display:block;margin-bottom:16px}.cms-backnumber-kicker{margin-bottom:6px}.cms-backnumber-heading .sec-title{font-size:28px}.cms-backnumber-grid{grid-template-columns:1fr;gap:14px}.cms-backnumber-grid .cms-video-body{padding:14px 12px 16px}}
+
+/* V98 FEATURED MOBILE — three articles in one horizontal rail.
+   Desktop V97 layout stays unchanged. On mobile, category rows remain full-width;
+   only the article list becomes a horizontal 3-card rail, so cards never collapse. */
+@media(max-width:900px){
+  #featured .cms-featured-category .cms-video-grid{
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-columns:minmax(78vw,78vw);
+    grid-template-columns:none;
+    gap:12px;
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    overscroll-behavior-inline:contain;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding:0 0 5px;
+  }
+  #featured .cms-featured-category .cms-video-card{
+    scroll-snap-align:start;
+    min-width:0;
+    margin:0!important;
+  }
+}
+@media(max-width:520px){
+  #featured .cms-featured-category .cms-video-grid{
+    grid-auto-columns:minmax(76vw,76vw);
+  }
+}
