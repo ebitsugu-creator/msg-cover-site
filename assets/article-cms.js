@@ -5,9 +5,9 @@
   const params = new URLSearchParams(location.search);
   const collection = params.get('collection') || 'free';
   const file = params.get('file') || '';
-  const allowedCollections = new Set(['free','videos']);
-  const categoryLabels = { events: 'イベント・勉強会', featured: '推しネタ' };
-  const subcategoryLabels = { events_advance:'事前告知', events_notice:'事前告知', events_study:'事前告知', events_report:'開催レポート' };
+  const allowedCollections = new Set(['free','text-qa','videos']);
+  const categoryLabels = { events: 'イベント・勉強会', featured: '推しネタ', about:'私たちについて', qa:'Q&A' };
+  const subcategoryLabels = { events_advance:'事前告知', events_notice:'事前告知', events_study:'事前告知', events_report:'開催レポート', about_intro_message:'紹介・メッセージ', about_profile:'団体概要', about_people_org:'人事・組織', about_media:'広報・マスコミ登場', about_feedback:'頂いたご意見', about_other:'その他', qa_membership:'会員に関して', qa_donation:'寄付に関して', qa_events:'勉強会・イベントに関して', qa_party:'党に対して', qa_policy:'政策に対して', qa_other:'その他' };
   const esc = (v='') => String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   function scalar(raw){ const v=raw.trim(); if(v==='true')return true;if(v==='false')return false;if(v==='null')return null;if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))return v.slice(1,-1);return v; }
   function parse(text){ const m=text.replace(/^\uFEFF/,'').match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/); if(!m)return null; const d={}; m[1].split(/\r?\n/).forEach(line=>{const i=line.indexOf(':');if(i>0)d[line.slice(0,i).trim()]=scalar(line.slice(i+1));}); return {...d,body:m[2].trim()}; }
@@ -34,9 +34,10 @@
         mount.innerHTML=`<nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a><span>›</span><span>動画</span></nav><div class="cms-video-watch"><header class="cms-article-head"><div class="cms-article-labels"><span class="tag">中くらいの政府制作</span></div><h1>${esc(title)}</h1>${channel?`<p class="cms-video-watch-channel">${esc(channel)}</p>`:''}</header><div class="cms-video-player"><iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}" title="${esc(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>${extra||a.note?`<div class="cms-video-watch-meta">${extra?`<img class="cms-video-watch-extra" src="${esc(extra)}" alt="">`:''}${a.note?`<p class="cms-video-watch-note">${esc(a.note)}</p>`:''}</div>`:''}<p class="cms-article-back"><a href="${returnHref}">← ${returnLabel}へ戻る</a></p></div>`; return;
       }
       const cat=categoryLabels[a.category]||a.category||''; const sub=subcategoryLabels[a.subcategory]||a.subcategory||'';
+      const isOrg=a.category==='about'||a.category==='qa'||collection==='text-qa'; const returnHref=isOrg?'organization.html':'activity.html#events'; const returnLabel=isOrg?'概要・Q&A':'イベント・勉強会';
       const rawImage=a.image1||a.image2||''; const image=rawImage.startsWith('/images/')?`/public${rawImage}`:rawImage; document.title=`${a.title||'記事'}｜中くらいの政府`;
       mount.innerHTML=`
-        <nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="activity.html#events">イベント・勉強会</a><span>›</span><span>${esc(sub||cat)}</span></nav>
+        <nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a><span>›</span><span>${esc(sub||cat)}</span></nav>
         <header class="cms-article-head">
           <div class="cms-article-labels">${cat?`<span class="tag">${esc(cat)}</span>`:''}${sub?`<span class="cms-article-subcat">${esc(sub)}</span>`:''}</div>
           <h1>${esc(a.title||'無題')}</h1>
@@ -48,7 +49,7 @@
         <div class="cms-article-body">${markdown(a.body||'')}</div>
         ${a.videoUrl?`<p class="cms-article-video"><a href="${esc(a.videoUrl)}">動画を見る →</a></p>`:''}
         ${a.linkUrl?`<p class="cms-article-action"><a class="btn btn-primary" href="${esc(a.linkUrl)}">${esc(a.linkLabel||'詳しく見る')}</a></p>`:''}
-        <p class="cms-article-back"><a href="activity.html#events">← イベント・勉強会へ戻る</a></p>`;
+        <p class="cms-article-back"><a href="${returnHref}">← ${returnLabel}へ戻る</a></p>`;
     }catch(e){console.error('[article-cms]',e);mount.innerHTML='<div class="cms-article-error"><h1>記事を表示できませんでした</h1><p>記事が見つからないか、現在公開されていません。</p><p><a href="activity.html#events">イベント・勉強会へ戻る</a></p></div>';}
   }
   load();
