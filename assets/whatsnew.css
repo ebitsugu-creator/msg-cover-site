@@ -43,3 +43,69 @@
  .wn-compact-subcat{grid-column:2}.wn-compact-line h3{grid-column:1/-1;font-size:14px}.wn-compact-line p{grid-column:1/-1}
  .wn-older-head{display:block}.wn-older-head strong{display:block;margin-top:3px}
 }
+
+/* V105 — smartphone vertical-space optimization */
+@media(max-width:767px){
+  /* TOP5: use the space beside the thumbnail for the existing summary. */
+  .wn-main-card{
+    grid-template-columns:42% minmax(0,1fr);
+    column-gap:12px;
+    row-gap:8px;
+    padding:14px 0;
+  }
+  .wn-main-image{grid-column:1;grid-row:1;width:100%;max-width:none}
+  .wn-main-body{grid-column:1/-1;display:contents;padding:0}
+  .wn-topline{grid-column:1/-1;grid-row:2;display:flex;flex-wrap:wrap;gap:5px 9px;min-width:0}
+  .wn-topline h2{width:100%;order:3;font-size:21px}
+  .wn-event{order:4}
+  .wn-main-summary{
+    grid-column:2;grid-row:1;
+    align-self:start;
+    margin:0;
+    font-size:14px;
+    line-height:1.55;
+    color:#53657c;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:4;
+    overflow:hidden;
+  }
+  .wn-main-card--noimage{grid-template-columns:1fr}
+  .wn-main-card--noimage .wn-topline,.wn-main-card--noimage .wn-main-summary{grid-column:1}
+  .wn-main-card--noimage .wn-main-summary{grid-row:3;margin-top:0}
+  .wn-main-card--nosummary .wn-main-image{grid-column:1/-1;width:42%;max-width:180px}
+
+  /* Older 10: make category subordinate and flow summary after title. */
+  .wn-compact-line{
+    display:block;
+    padding:12px 0;
+    font-size:13px;
+    line-height:1.55;
+  }
+  .wn-compact-line>time{display:inline;margin-right:12px;font-size:13px}
+  .wn-compact-subcat{
+    display:inline;
+    font-size:12px;
+    font-weight:800;
+    white-space:normal;
+  }
+  .wn-compact-line h3{
+    display:inline;
+    margin:0;
+    font-size:14px;
+    line-height:1.65;
+    white-space:normal;
+    overflow:visible;
+  }
+  .wn-compact-line h3::before{content:"\A";white-space:pre}
+  .wn-compact-line p{
+    display:inline;
+    margin:0 0 0 .55em;
+    font-size:13px;
+    line-height:1.65;
+    color:#53657c;
+    font-weight:400;
+    white-space:normal;
+    overflow:visible;
+  }
+}
