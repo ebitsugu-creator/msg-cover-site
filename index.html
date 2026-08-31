@@ -1,19 +1,228 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ページが移動しました｜中くらいの政府</title>
-<meta name="robots" content="noindex,follow">
-<link rel="canonical" href="https://miraiwithyou-minato.sites.repaint.com">
-<meta http-equiv="refresh" content="0;url=https://miraiwithyou-minato.sites.repaint.com">
-<link rel="stylesheet" href="../assets/site.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C8G63X6QF1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-C8G63X6QF1');
+</script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F6F8FB">
+  <meta name="description" content="中くらいの政府 — 政府の大きさを変えず、成熟社会の仕組みを創る。">
+  <title>中くらいの政府 | MSG</title>
+
+  <meta property="og:title" content="中くらいの政府 | MSG">
+  <meta property="og:description" content="政府の大きさを変えず、成熟社会の仕組みを創る。">
+  <meta property="og:image" content="assets/img/ogp.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" as="image" href="assets/img/top-sky-window.webp">
+  <link rel="preload" as="audio" href="assets/audio/opening-chorus.mp3" type="audio/mpeg">
+
+  <link rel="stylesheet" href="assets/top-base.css">
+  <link rel="stylesheet" href="assets/top-2026.css">
+  <link rel="stylesheet" href="assets/msg-nav.css">
 </head>
+
 <body>
-<main id="main"><div class="wrap err">
-  <h1>ページが移動しました</h1>
-  <p>自動的に新しいページへ移動します。移動しない場合は、下のボタンを押してください。</p>
-  <p class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="https://miraiwithyou-minato.sites.repaint.com">新しいページへ進む</a></p>
-</div></main>
+  <audio id="openingAudio" src="assets/audio/opening-chorus.mp3" preload="auto" playsinline></audio>
+
+  <i id="scrollProgress" class="msg-progress" aria-hidden="true"></i>
+
+  <header id="msg-header"></header>
+
+  <main class="msg-top">
+
+    <!-- =====================================================
+         1. プロローグ（スクロールで進む冒頭の演出）
+    ====================================================== -->
+    <span id="top" aria-hidden="true"></span>
+    <section id="prologue" class="prologue" aria-label="オープニング">
+      <div class="prologue-stage">
+          <img class="pro-sky" src="assets/img/top-sky-window.webp" alt="" aria-hidden="true">
+          <div class="pro-mist" aria-hidden="true"></div>
+          <div class="pro-bloom" aria-hidden="true"></div>
+          <div class="pro-clear" aria-hidden="true"></div>
+
+          <div class="pro-halo" aria-hidden="true"></div>
+          <div class="pro-ring" aria-hidden="true"></div>
+          <span class="pro-mote pro-mote--a" aria-hidden="true"></span>
+          <span class="pro-mote pro-mote--b" aria-hidden="true"></span>
+          <span class="pro-mote pro-mote--c" aria-hidden="true"></span>
+          <span class="pro-mote pro-mote--d" aria-hidden="true"></span>
+
+          <div class="pro-scene">
+            <p class="brandline">MSG — MEDIUM SIZED GOVERNMENT</p>
+            <img class="pro-title-logo" src="assets/img/msg-logo-ja-t.png" alt="中くらいの政府">
+            <i class="pro-rule" aria-hidden="true"></i>
+            <p class="pro-lead">「増やすか、減らすか」ではない。</p>
+            <p class="pro-lead pro-lead--accent">「組み替える」という選択肢。</p>
+          </div>
+
+          <div class="pro-scene">
+            <p class="pro-sub">政府を大きくも小さくもせず、</p>
+            <strong class="pro-huge">組み替える。</strong>
+          </div>
+
+          <div class="pro-scene">
+            <p class="pro-sub">むやみに予算を削らない。</p>
+            <p class="pro-sub">ばらまきに頼らない。</p>
+            <i class="pro-rule pro-rule--sm" aria-hidden="true"></i>
+            <p class="pro-strong">政府の大きさを変えず、</p>
+            <p class="pro-strong pro-strong--gold">成熟期の体制を創る。</p>
+          </div>
+
+          <div class="pro-scene">
+            <p class="pro-sub">政府の大きさを変えず、</p>
+            <strong class="pro-mid">成熟社会の仕組みを創る。</strong>
+          </div>
+
+          <div class="pro-final">
+            <picture>
+              <source media="(max-aspect-ratio:0.9)" srcset="assets/img/top-keyvisual-full-900.webp 900w, assets/img/top-keyvisual-full.webp 1362w" sizes="155vw">
+              <img src="assets/img/top-keyvisual-wide.webp" srcset="assets/img/top-keyvisual-wide-1800.webp 1800w, assets/img/top-keyvisual-wide.webp 3650w" sizes="300vw" alt="中くらいの政府 キービジュアル — MIYU">
+            </picture>
+            <p class="pro-final-msg"><span>政府の大きさを変えず、</span><span class="accent">成熟社会の仕組みを創る。</span></p>
+            <span class="pro-final-caption" aria-hidden="true">MIYU<i></i><span class="origin"><b>mi</b>rai<span class="dim">with</span><b>you</b>.jp</span></span>
+          </div>
+
+          <div class="pro-guide" aria-hidden="true">
+            <span>SCROLL</span><i></i>
+          </div>
+
+          <a class="pro-skip" href="#explore">SKIP ↘</a>
+          <div class="pro-timeline" aria-hidden="true"><i id="proTimeline"></i></div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         3. EXPLORE — 8つの入口
+    ====================================================== -->
+    <section id="explore" class="msg-explore" aria-label="8つのコーナー">
+      <div class="inner">
+        <nav class="card-grid" aria-label="8つのコーナー">
+
+          <a class="entry-card" data-reveal="0" href="about.html">
+            <i class="sheen" aria-hidden="true"></i><i class="bar" aria-hidden="true"></i>
+            <span class="no" aria-hidden="true">01</span>
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M15 24h18M24 15v18"/><circle cx="24" cy="24" r="5"/></svg></span>
+            <span class="text">
+              <small class="en">MEDIUM SIZE</small>
+              <strong class="ja">中くらいとは？</strong>
+            </span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="entry-card" data-reveal="45" href="system.html">
+            <i class="sheen" aria-hidden="true"></i><i class="bar" aria-hidden="true"></i>
+            <span class="no" aria-hidden="true">02</span>
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 18 24 8l17 10M10 19h28M12 39h24M15 22v13M24 22v13M33 22v13"/></svg></span>
+            <span class="text">
+              <small class="en">SYSTEM</small>
+              <strong class="ja"><em>成熟期の</em><em>政治システム</em></strong>
+            </span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="entry-card" data-reveal="90" href="style.html">
+            <i class="sheen" aria-hidden="true"></i><i class="bar" aria-hidden="true"></i>
+            <span class="no" aria-hidden="true">03</span>
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="17" r="7"/><circle cx="10" cy="23" r="5"/><circle cx="38" cy="23" r="5"/><path d="M12 41c1-10 5-15 12-15s11 5 12 15M2 41c0-7 3-11 9-11M46 41c0-7-3-11-9-11"/></svg></span>
+            <span class="text">
+              <small class="en">STYLE</small>
+              <strong class="ja"><em>私たちの</em><em>スタイル</em></strong>
+            </span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="entry-card" data-reveal="135" href="https://miraiwithyou-minato.sites.repaint.com">
+            <i class="sheen" aria-hidden="true"></i><i class="bar" aria-hidden="true"></i>
+            <span class="no" aria-hidden="true">04</span>
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M39 20c0 12-15 22-15 22S9 32 9 20a15 15 0 1 1 30 0Z"/><circle cx="24" cy="20" r="6"/></svg></span>
+            <span class="text">
+              <small class="en">MINATO</small>
+              <strong class="ja"><em>港区から</em><em>はじめよう</em></strong>
+            </span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="entry-card" data-reveal="180" href="whatsnew.html">
+            <i class="sheen" aria-hidden="true"></i><i class="bar" aria-hidden="true"></i>
+            <span class="no" aria-hidden="true">05</span>
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 28V16l24-6v28L8 28Z"/><path d="M8 28l5 10M36 19v10"/></svg></span>
+            <span class="text">
+              <small class="en">UPDATES</small>
+              <strong class="ja">What's New</strong>
+            </span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="entry-card" data-reveal="225" href="featured.html">
+            <i class="sheen" aria-hidden="true"></i><i class="bar" aria-hidden="true"></i>
+            <span class="no" aria-hidden="true">06</span>
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 7l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1 5-11Z"/></svg></span>
+            <span class="text">
+              <small class="en">PICK UP</small>
+              <strong class="ja">推しネタ</strong>
+            </span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="entry-card" data-reveal="270" href="activity.html#events">
+            <i class="sheen" aria-hidden="true"></i><i class="bar" aria-hidden="true"></i>
+            <span class="no" aria-hidden="true">07</span>
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 12h32v29H8zM15 7v10M33 7v10M8 21h32"/><path d="m17 31 5 5 10-11"/></svg></span>
+            <span class="text">
+              <small class="en">EVENTS</small>
+              <strong class="ja"><em>勉強会・</em><em>イベント</em></strong>
+            </span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="entry-card" data-reveal="315" href="join.html">
+            <i class="sheen" aria-hidden="true"></i><i class="bar" aria-hidden="true"></i>
+            <span class="no" aria-hidden="true">08</span>
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M15 21c-4-6 3-13 9-7 6-6 13 1 9 7-3 5-9 10-9 10s-6-5-9-10Z"/><path d="M7 36h9l7 4 14-9c2-1 4 2 2 4L25 44l-10-4H7"/></svg></span>
+            <span class="text">
+              <small class="en">JOIN US</small>
+              <strong class="ja"><em>寄付をする・</em><em>会員になる</em></strong>
+            </span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+        </nav>
+      </div>
+    </section>
+
+
+
+    <div class="anchors" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+      <span id="support"></span><span id="medium"></span><span id="reframe"></span><span id="about"></span>
+      <span id="system"></span><span id="style"></span><span id="minato"></span><span id="whatsnew"></span>
+      <span id="progress"></span><span id="events"></span><span id="membership"></span>
+      <span id="party-name"></span><span id="platform"></span><span id="policies"></span><span id="links"></span>
+    </div>
+  </main>
+
+  <footer id="msg-footer"></footer>
+
+  <div class="msg-controls">
+    <button id="soundButton" class="msg-ctl" type="button" aria-pressed="false" aria-label="音楽を鳴らす">
+      <span class="msg-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="label">SOUND OFF</span>
+    </button>
+    <button id="replayButton" class="msg-ctl msg-ctl--replay" type="button" aria-label="冒頭の演出をもう一度見る">
+      <span class="label">もう一度</span>
+    </button>
+  </div>
+
+  <script src="assets/msg-nav.js"></script>
+  <script src="assets/top-2026.js"></script>
 </body>
 </html>
