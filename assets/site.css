@@ -811,55 +811,67 @@ a.cms-event-image{display:block}
 .cms-article-body p{margin:0 0 1.4em}.cms-article-body h2,.cms-article-body h3,.cms-article-body h4{color:var(--navy);line-height:1.5;margin:2em 0 .7em}.cms-article-body h2{font-size:25px}.cms-article-body h3{font-size:21px}.cms-article-body h4{font-size:18px}.cms-article-body ul{padding-left:1.5em;margin:0 0 1.5em}.cms-article-body mark{background:#fff2b8}.cms-article-body a{color:#174f9b}
 .cms-article-video{margin-top:30px}.cms-article-action{margin-top:24px}.cms-article-back{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);font-size:14px}.cms-article-error{padding:40px 0}
 @media(max-width:767px){.cms-article{padding-top:34px;padding-bottom:56px}.cms-article-eyecatch{margin-top:24px}.cms-article-summary{padding:17px}.cms-article-body{margin-top:30px}}
-/* v76 events */
-#events.sec{padding-top:34px;padding-bottom:54px}.cms-events{margin-top:22px}.cms-event-group{margin-top:42px}.cms-event-group-head{display:flex;align-items:baseline;gap:18px;padding-bottom:11px;border-bottom:1px solid var(--line)}.cms-event-group-title{margin:0;padding:0;border:0;white-space:nowrap;font-size:18px;font-weight:800}.cms-event-group-desc{margin:0;font-size:16px;line-height:1.7;color:#46556d}.cms-event-list{display:grid;gap:18px;margin-top:18px}.cms-event-card{display:grid;grid-template-columns:minmax(240px,31%) minmax(0,1fr);background:#fff;border:1px solid var(--line)}.cms-event-image{display:block;min-height:220px;overflow:hidden;background:var(--soft)}.cms-event-image img{display:block;width:100%;height:100%;object-fit:cover}.cms-event-main{padding:24px 28px}.cms-event-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.cms-event-meta time{font-size:15px;font-weight:800;color:var(--navy)}.cms-event-card h3{font-size:22px;line-height:1.5;margin:0}.cms-event-subtitle,.cms-event-summary{font-size:16px;line-height:1.8}.cms-event-summary{color:#46556d}.cms-events-empty{margin:16px 0 0;padding:18px;background:var(--soft);color:var(--muted)}.cms-backnumber{text-align:right;margin-top:14px}.cms-backnumber a{font-weight:800;color:var(--navy)}@media(max-width:767px){.cms-event-group-head{display:block}.cms-event-group-desc{margin-top:5px}.cms-event-card{grid-template-columns:1fr}.cms-event-image{min-height:0;aspect-ratio:16/9}.cms-event-main{padding:19px}}
-
-/* ---------- v77: event LP refinements ---------- */
-@media(min-width:768px){
-  .cms-event-group-head{display:flex;align-items:baseline;gap:18px;flex-wrap:nowrap}
-  .cms-event-group-title,.cms-event-group-desc{white-space:nowrap}
-  .cms-event-image{align-self:start;min-height:0;aspect-ratio:16/9}
-  .cms-event-image img{width:100%;height:100%;object-fit:cover;object-position:center}
-}
-
-/* ---------- v77 revised: event image + subcategory readability ---------- */
-.cms-event-group-title{font-size:23.4px}
-.cms-event-image{background:#fff}
-.cms-event-image img{width:100%;height:100%;object-fit:contain;object-position:center center;background:#fff}
-@media(min-width:768px){
-  .cms-event-image img{object-fit:contain;object-position:center center}
-}
-
-/* V78: event/study video archives */
-.cms-archive-divider{border-top:2px solid #0b2a59;margin:54px 0 34px}
-.cms-archive-heading{font-size:clamp(28px,2.4vw,42px);margin:0 0 28px;color:#071f47}
-.cms-video-section{margin:0 0 44px}
-.cms-video-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.cms-video-card{border:1px solid #d7dfeb;background:#fff;min-width:0}
-.cms-video-thumb{display:block;aspect-ratio:16/9;background:#edf2f8;overflow:hidden}
-.cms-video-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.cms-video-noimage{height:100%;display:grid;place-items:center;font-weight:700;letter-spacing:.12em;color:#53657c}
-.cms-video-body{padding:18px}
-.cms-video-body time{display:block;font-size:14px;color:#53657c;margin-bottom:8px}
-.cms-video-body h4{font-size:20px;line-height:1.45;margin:0 0 9px;color:#071f47}
-.cms-video-body p{font-size:16px;line-height:1.75;margin:0 0 16px;color:#334a66}
-.cms-video-link{font-weight:700;color:#082c63;text-decoration:none}
-.cms-video-link:hover{text-decoration:underline}
-@media(max-width:900px){.cms-video-grid{grid-template-columns:1fr}.cms-archive-divider{margin-top:38px}}
-
-/* v79: events LP — 1 line / 2 columns on desktop */
-@media (min-width: 900px){
-  #events .cms-event-list{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
-  #events .cms-event-card{grid-template-columns:1fr;height:100%}
-  #events .cms-event-image{min-height:0;aspect-ratio:16/9}
-  #events .cms-event-main{padding:22px 24px}
-  #events .cms-event-card h3{font-size:20px}
-}
-
-/* v79 fixed: event date semantics + stable two-column cards */
+/* V100 EVENTS — unified card rails for desktop and mobile.
+   Legacy v76-v79 desktop/mobile layout rules removed. */
+#events.sec{padding-top:34px;padding-bottom:54px}
+#events .cms-events{margin-top:22px}
+#events .cms-event-group{margin-top:42px}
+#events .cms-event-group:first-child{margin-top:0}
+#events .cms-event-group-head{display:flex;align-items:baseline;gap:18px;padding-bottom:11px;border-bottom:1px solid var(--line)}
+#events .cms-event-group-title{margin:0;padding:0;border:0;white-space:nowrap;font-size:23.4px;font-weight:800}
+#events .cms-event-group-desc{margin:0;font-size:16px;line-height:1.7;color:#46556d}
+#events .cms-event-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px;align-items:stretch}
+#events .cms-event-card{display:block;min-width:0;background:#fff;border:1px solid var(--line)}
+#events .cms-event-image{display:block;width:100%;min-height:0;aspect-ratio:16/9;overflow:hidden;background:#fff}
+#events .cms-event-image img{display:block;width:100%;height:100%;object-fit:contain;object-position:center center;background:#fff}
+#events .cms-event-main{padding:20px}
+#events .cms-event-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+#events .cms-event-meta time{font-size:14px;font-weight:800;color:var(--navy)}
+#events .cms-event-card h3{font-size:19px;line-height:1.5;margin:0}
+#events .cms-event-subtitle,#events .cms-event-summary{font-size:14px;line-height:1.75}
+#events .cms-event-summary{color:#46556d}
+#events .cms-events-empty{margin:16px 0 0;padding:18px;background:var(--soft);color:var(--muted)}
+#events .cms-backnumber{text-align:right;margin-top:14px}
+#events .cms-backnumber a{font-weight:800;color:var(--navy)}
 .cms-event-date-label{font-size:.78em;font-weight:800;margin-right:7px;color:#53657c}
-@media (min-width:900px){
-  #events .cms-event-list>.cms-event-card{display:grid!important;visibility:visible!important;opacity:1!important;min-width:0}
+
+/* Event video libraries use the same three-card desktop rail. */
+#events .cms-video-section{margin:0 0 44px}
+#events .cms-video-section .cms-video-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;width:100%;min-width:0}
+#events .cms-video-section .cms-video-card{display:block;min-width:0}
+
+/* Mobile: one readable card at a time; swipe horizontally for cards 2 and 3. */
+@media(max-width:900px){
+  #events .cms-event-group-head{display:block}
+  #events .cms-event-group-desc{margin-top:5px}
+  #events .cms-event-list,
+  #events .cms-video-section .cms-video-grid{
+    display:flex;
+    flex-flow:row nowrap;
+    align-items:stretch;
+    gap:12px;
+    width:100%;max-width:100%;min-width:0;
+    overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    padding:0 0 6px;
+  }
+  #events .cms-event-card,
+  #events .cms-video-section .cms-video-card{
+    display:block;
+    flex:0 0 82%;width:82%;min-width:82%;max-width:82%;
+    margin:0!important;
+    scroll-snap-align:start;
+  }
+  #events .cms-event-main{padding:17px}
+  #events .cms-event-card h3{font-size:18px}
+  #events .cms-event-list>.cms-event-card:nth-child(n+4),
+  #events .cms-video-section .cms-video-card:nth-child(n+4){display:none}
+}
+@media(max-width:520px){
+  #events .cms-event-list,#events .cms-video-section .cms-video-grid{gap:10px}
+  #events .cms-event-card,#events .cms-video-section .cms-video-card{flex-basis:88%;width:88%;min-width:88%;max-width:88%}
 }
 
 /* V79 FIX: shared video-library presentation */
