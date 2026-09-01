@@ -32,13 +32,10 @@
   function articleBodyHtml(md,image2){
     const html=markdown(md||'');
     if(!image2) return html;
+    // 画像2は「本文の外」ではなく、本文DOMの最後の子要素として置く。
+    // これにより本文最終段落の直後に続き、PC/スマホとも同じ構造になる。
     const fig=`<figure class="cms-article-image2"><img src="${esc(image2)}" alt="" loading="lazy"></figure>`;
-    const matches=[...html.matchAll(/<(p|h[1-5]|ul|blockquote)\b/g)];
-    if(!matches.length) return fig+html;
-    // 最終段落の直前へ入れ、PCでは文章を左側へ回り込ませる。
-    const lastP=[...html.matchAll(/<p\b/g)].pop();
-    const at=lastP ? lastP.index : matches[matches.length-1].index;
-    return html.slice(0,at)+fig+html.slice(at);
+    return html + fig;
   }
   function date(v){ if(!v)return ''; const d=new Date(v); if(Number.isNaN(d.getTime()))return esc(v); return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`; }
   function imagePath(v){ if(!v)return ''; v=String(v).trim().replace(/^[\"']|[\"']$/g,''); if(/^https?:\/\//i.test(v))return v; if(v.startsWith('/public/'))return v; if(v.startsWith('public/'))return '/'+v; if(v.startsWith('/images/'))return '/public'+v; if(v.startsWith('images/'))return '/public/'+v; return v; }
