@@ -36,8 +36,8 @@
       const cat=categoryLabels[a.category]||a.category||''; const sub=subcategoryLabels[a.subcategory]||a.subcategory||'';
       const isOrg=a.category==='about'||a.category==='qa'||collection==='text-qa'; const returnHref=isOrg?'organization.html':'activity.html#events'; const returnLabel=isOrg?'概要・Q&A':'イベント・勉強会';
       const image1=imagePath(a.image1||''); const image2=imagePath(a.image2||''); document.title=`${a.title||'記事'}｜中くらいの政府`;
-      const breadcrumb=`<nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a><span>›</span>${cat?`<span>${esc(cat)}</span><span>›</span>`:''}<span>${esc(sub||'記事')}</span></nav>`;
-      const head=`<header class="cms-article-head"><div class="cms-article-labels">${sub?`<span class="cms-article-subcat">${esc(sub)}</span>`:''}${a.publishedAt?`<time datetime="${esc(a.publishedAt)}">${date(a.publishedAt)}</time>`:''}</div><h1>${esc(a.title||'無題')}</h1>${a.subtitle?`<p class="cms-article-subtitle">${esc(a.subtitle)}</p>`:''}</header>`;
+      const breadcrumb=`<nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a><span>›</span>${cat?`<span>${esc(cat)}</span><span>›</span>`:''}<span>${esc(sub||'記事')}</span>${a.publishedAt?`<time datetime="${esc(a.publishedAt)}">${date(a.publishedAt)}</time>`:''}</nav>`;
+      const head=`<header class="cms-article-head"><h1>${esc(a.title||'無題')}</h1>${a.subtitle?`<p class="cms-article-subtitle">${esc(a.subtitle)}</p>`:''}</header>`;
       mount.innerHTML=`
         <section class="cms-article-hero${image1?' has-image':''}">
           ${image1?`<figure class="cms-article-image1"><img src="${esc(image1)}" alt="" loading="eager"></figure>`:''}
