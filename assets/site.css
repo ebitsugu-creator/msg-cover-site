@@ -1096,7 +1096,7 @@ a.cms-event-image{display:block}
 .cms-article-head h1{margin:0;font-family:var(--sans);font-size:28px;line-height:1.45;font-weight:900;letter-spacing:.01em;color:var(--ink)}
 .cms-article-subtitle{margin:12px 0 0;font-family:var(--sans);font-size:20px;line-height:1.65;font-weight:700;color:var(--navy)}
 .cms-article-content{width:100%;margin:0}
-.cms-article-summary{margin:0 0 30px;padding:0;background:none;font-family:var(--sans);font-size:17px;line-height:1.95;font-weight:500;color:var(--ink)}
+.cms-article-summary{margin:24px 0 0;padding:0;background:none;font-family:var(--sans);font-size:17px;line-height:1.95;font-weight:500;color:var(--ink)}
 .cms-article-body{margin:0;font-family:"Noto Serif JP","Yu Mincho","YuMincho","Hiragino Mincho ProN","Hiragino Mincho Pro",serif;font-size:16px;line-height:2.05;font-weight:400;color:var(--ink)}
 .cms-article-body p{margin:0 0 1.55em}
 .cms-article-body h1,.cms-article-body h2,.cms-article-body h3,.cms-article-body h4,.cms-article-body h5{font-family:inherit;color:var(--ink);font-weight:700;line-height:1.5;letter-spacing:.015em;margin:2.05em 0 .72em}
@@ -1118,7 +1118,10 @@ a.cms-event-image{display:block}
   .cms-article-image1{order:3;width:100%;margin-top:22px;aspect-ratio:4/3}
   .cms-article-head h1{font-size:24px;line-height:1.5}
   .cms-article-subtitle{font-size:18px;line-height:1.65;margin-top:9px}
-  .cms-article-summary{font-size:16px;line-height:1.9;margin-bottom:26px}
+  .cms-article-summary{font-size:16px;line-height:1.9;margin:18px 0 0}
+  .cms-article-image1{margin-top:22px}
   .cms-article-body{font-size:16px;line-height:2}
   .cms-article-image2{width:min(68%,360px);margin-top:30px}
 }
+
+/* V109: 概要をヘッダー右カラムへ移動。スマホではタイトル下・画像1前。 */

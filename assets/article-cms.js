@@ -15,7 +15,7 @@
   function markdown(md){
     const lines=md.split(/\r?\n/), out=[]; let list=false;
     const close=()=>{if(list){out.push('</ul>');list=false;}};
-    for(const raw of lines){ const line=raw.trim(); if(!line){close();continue;} const h=line.match(/^(#{1,6})\s+(.+)$/); if(h){close();const n=Math.min(4,Math.max(2,h[1].length));out.push(`<h${n}>${inline(h[2])}</h${n}>`);continue;} if(/^[-*]\s+/.test(line)){if(!list){out.push('<ul>');list=true;}out.push(`<li>${inline(line.replace(/^[-*]\s+/,''))}</li>`);continue;} close();out.push(`<p>${inline(line)}</p>`); } close(); return out.join('\n');
+    for(const raw of lines){ const line=raw.trim(); if(!line){close();continue;} const h=line.match(/^(#{1,6})\s+(.+)$/); if(h){close();const n=Math.min(5,Math.max(1,h[1].length));out.push(`<h${n}>${inline(h[2])}</h${n}>`);continue;} if(/^[-*]\s+/.test(line)){if(!list){out.push('<ul>');list=true;}out.push(`<li>${inline(line.replace(/^[-*]\s+/,''))}</li>`);continue;} close();out.push(`<p>${inline(line)}</p>`); } close(); return out.join('\n');
   }
   function date(v){ if(!v)return ''; const d=new Date(v); if(Number.isNaN(d.getTime()))return esc(v); return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`; }
   function imagePath(v){ if(!v)return ''; v=String(v).trim().replace(/^[\"']|[\"']$/g,''); if(/^https?:\/\//i.test(v))return v; if(v.startsWith('/public/'))return v; if(v.startsWith('public/'))return '/'+v; if(v.startsWith('/images/'))return '/public'+v; if(v.startsWith('images/'))return '/public/'+v; return v; }
@@ -41,10 +41,9 @@
       mount.innerHTML=`
         <section class="cms-article-hero${image1?' has-image':''}">
           ${image1?`<figure class="cms-article-image1"><img src="${esc(image1)}" alt="" loading="eager"></figure>`:''}
-          <div class="cms-article-hero-copy">${breadcrumb}${head}</div>
+          <div class="cms-article-hero-copy">${breadcrumb}${head}${a.summary?`<p class="cms-article-summary cms-article-summary-hero">${esc(a.summary)}</p>`:''}</div>
         </section>
         <section class="cms-article-content">
-          ${a.summary?`<p class="cms-article-summary">${esc(a.summary)}</p>`:''}
           <div class="cms-article-body">${markdown(a.body||'')}</div>
           ${image2?`<figure class="cms-article-image2"><img src="${esc(image2)}" alt="" loading="lazy"></figure>`:''}
           ${a.videoUrl?`<p class="cms-article-video"><a href="${esc(a.videoUrl)}">動画を見る →</a></p>`:''}
