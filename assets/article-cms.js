@@ -13,9 +13,21 @@
   function parse(text){ const m=text.replace(/^\uFEFF/,'').match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/); if(!m)return null; const d={}; m[1].split(/\r?\n/).forEach(line=>{const i=line.indexOf(':');if(i>0)d[line.slice(0,i).trim()]=scalar(line.slice(i+1));}); return {...d,body:m[2].trim()}; }
   function inline(s){ return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/==(.+?)==/g,'<mark>$1</mark>').replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,'<a href="$2">$1</a>'); }
   function markdown(md){
-    const lines=md.split(/\r?\n/), out=[]; let list=false;
-    const close=()=>{if(list){out.push('</ul>');list=false;}};
-    for(const raw of lines){ const line=raw.trim(); if(!line){close();continue;} const h=line.match(/^(#{1,6})\s+(.+)$/); if(h){close();const n=Math.min(5,Math.max(1,h[1].length));out.push(`<h${n}>${inline(h[2])}</h${n}>`);continue;} if(/^[-*]\s+/.test(line)){if(!list){out.push('<ul>');list=true;}out.push(`<li>${inline(line.replace(/^[-*]\s+/,''))}</li>`);continue;} close();out.push(`<p>${inline(line)}</p>`); } close(); return out.join('\n');
+    const lines=md.split(/\r?\n/), out=[]; let list=false, quote=false;
+    const closeList=()=>{if(list){out.push('</ul>');list=false;}};
+    const closeQuote=()=>{if(quote){closeList();out.push('</blockquote>');quote=false;}};
+    for(const raw of lines){
+      let line=raw.trim();
+      if(!line){closeList();closeQuote();continue;}
+      const isQuote=/^>\s?/.test(line);
+      if(isQuote){ if(!quote){closeList();out.push('<blockquote>');quote=true;} line=line.replace(/^>\s?/,'').trim(); }
+      else if(quote){ closeQuote(); }
+      const h=line.match(/^(#{1,6})\s+(.+)$/);
+      if(h){closeList();const n=Math.min(5,Math.max(1,h[1].length));out.push(`<h${n}>${inline(h[2])}</h${n}>`);continue;}
+      if(/^[-*]\s+/.test(line)){if(!list){out.push('<ul>');list=true;}out.push(`<li>${inline(line.replace(/^[-*]\s+/,''))}</li>`);continue;}
+      closeList();out.push(`<p>${inline(line)}</p>`);
+    }
+    closeList();closeQuote();return out.join('\n');
   }
   function date(v){ if(!v)return ''; const d=new Date(v); if(Number.isNaN(d.getTime()))return esc(v); return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`; }
   function imagePath(v){ if(!v)return ''; v=String(v).trim().replace(/^[\"']|[\"']$/g,''); if(/^https?:\/\//i.test(v))return v; if(v.startsWith('/public/'))return v; if(v.startsWith('public/'))return '/'+v; if(v.startsWith('/images/'))return '/public'+v; if(v.startsWith('images/'))return '/public/'+v; return v; }
@@ -44,8 +56,7 @@
           <div class="cms-article-hero-copy">${breadcrumb}${head}${a.summary?`<p class="cms-article-summary cms-article-summary-hero">${esc(a.summary)}</p>`:''}</div>
         </section>
         <section class="cms-article-content">
-          <div class="cms-article-body">${markdown(a.body||'')}</div>
-          ${image2?`<figure class="cms-article-image2"><img src="${esc(image2)}" alt="" loading="lazy"></figure>`:''}
+          <div class="cms-article-body">${markdown(a.body||'')}${image2?`<figure class="cms-article-image2"><img src="${esc(image2)}" alt="" loading="lazy"></figure>`:''}</div>
           ${a.videoUrl?`<p class="cms-article-video"><a href="${esc(a.videoUrl)}">動画を見る →</a></p>`:''}
           ${a.linkUrl?`<p class="cms-article-action"><a class="btn btn-primary" href="${esc(a.linkUrl)}">${esc(a.linkLabel||'詳しく見る')}</a></p>`:''}
         </section>
