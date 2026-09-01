@@ -1121,3 +1121,5 @@ a.cms-event-image{display:block}
 
 /* V115 — What's New 過去10本：サブカテゴリを補助情報として1Q小さく・細く */
 .wn-compact-subcat{font-size:calc(1em - 1px);font-weight:500}
+
+/* V116 — PC画像2：本文最終段落との下端揃えはarticle-cms.jsで実寸計算。スマホ指定は変更なし。 */
