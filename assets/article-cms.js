@@ -29,6 +29,17 @@
     }
     closeList();closeQuote();return out.join('\n');
   }
+  function articleBodyHtml(md,image2){
+    const html=markdown(md||'');
+    if(!image2) return html;
+    const fig=`<figure class="cms-article-image2"><img src="${esc(image2)}" alt="" loading="lazy"></figure>`;
+    const matches=[...html.matchAll(/<(p|h[1-5]|ul|blockquote)\b/g)];
+    if(!matches.length) return fig+html;
+    // 最終段落の直前へ入れ、PCでは文章を左側へ回り込ませる。
+    const lastP=[...html.matchAll(/<p\b/g)].pop();
+    const at=lastP ? lastP.index : matches[matches.length-1].index;
+    return html.slice(0,at)+fig+html.slice(at);
+  }
   function date(v){ if(!v)return ''; const d=new Date(v); if(Number.isNaN(d.getTime()))return esc(v); return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`; }
   function imagePath(v){ if(!v)return ''; v=String(v).trim().replace(/^[\"']|[\"']$/g,''); if(/^https?:\/\//i.test(v))return v; if(v.startsWith('/public/'))return v; if(v.startsWith('public/'))return '/'+v; if(v.startsWith('/images/'))return '/public'+v; if(v.startsWith('images/'))return '/public/'+v; return v; }
   function youtubeId(v){ try{const u=new URL(v);if(u.hostname==='youtu.be')return u.pathname.slice(1);if(u.hostname.includes('youtube.com')){if(u.pathname==='/watch')return u.searchParams.get('v')||'';const m=u.pathname.match(/\/(?:shorts|embed)\/([^/?]+)/);return m?m[1]:''}}catch(_){}return ''; }
@@ -56,7 +67,7 @@
           <div class="cms-article-hero-copy">${breadcrumb}${head}${a.summary?`<p class="cms-article-summary cms-article-summary-hero">${esc(a.summary)}</p>`:''}</div>
         </section>
         <section class="cms-article-content">
-          <div class="cms-article-body">${markdown(a.body||'')}${image2?`<figure class="cms-article-image2"><img src="${esc(image2)}" alt="" loading="lazy"></figure>`:''}</div>
+          <div class="cms-article-body">${articleBodyHtml(a.body||'', image2)}</div>
           ${a.videoUrl?`<p class="cms-article-video"><a href="${esc(a.videoUrl)}">動画を見る →</a></p>`:''}
           ${a.linkUrl?`<p class="cms-article-action"><a class="btn btn-primary" href="${esc(a.linkUrl)}">${esc(a.linkLabel||'詳しく見る')}</a></p>`:''}
         </section>
