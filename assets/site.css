@@ -1075,3 +1075,50 @@ a.cms-event-image{display:block}
 @media(max-width:700px){.cms-org-page{padding-top:22px}.cms-org-lead{margin-bottom:18px}.cms-org-major-nav{gap:7px}.cms-org-major{min-height:46px;padding:8px 10px;font-size:16px}.cms-org-sub-area{margin-top:18px;padding-top:16px}.cms-org-sub-nav{flex-wrap:nowrap;overflow-x:auto;gap:7px;padding:0 2px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.cms-org-sub-nav::-webkit-scrollbar{display:none}.cms-org-sub{flex:0 0 auto;min-height:36px;padding:7px 12px;font-size:13px}.cms-org-results{margin-top:20px}.cms-org-results-head h2{font-size:20px}.cms-org-card-rail{display:flex;flex-flow:row nowrap;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 2px 8px;scrollbar-width:none}.cms-org-card-rail::-webkit-scrollbar{display:none}.cms-org-card{display:block;flex:0 0 82%;width:82%;min-width:82%;max-width:82%;scroll-snap-align:start}.cms-org-card-body{padding:14px}.cms-org-card h3{font-size:17px}}
 @media(max-width:520px){.cms-org-card{flex-basis:88%;width:88%;min-width:88%;max-width:88%}}
 .cms-org-back-grid{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:700px){.cms-org-back-grid{display:grid;grid-template-columns:1fr;overflow:visible}.cms-org-back-grid .cms-org-card{width:100%;min-width:0;max-width:none}}
+
+/* =====================================================================
+   V108 — 記事詳細：フリー記事を親型にした可変レイアウト
+   PC: 画像1(4:3) 40% + パンくず/タイトル/サブ 60%
+   Mobile: パンくず/タイトル/サブ → 画像1 の縦積み
+   概要=ゴシック / 本文=明朝。空項目はDOMごと出さず自動で詰める。
+===================================================================== */
+.cms-article{max-width:1080px;padding-top:48px;padding-bottom:80px}
+.cms-article-hero{width:100%;margin:0 0 34px}
+.cms-article-hero.has-image{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:34px;align-items:start}
+.cms-article-image1{grid-column:1;margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--soft)}
+.cms-article-image1 img{width:100%;height:100%;object-fit:cover}
+.cms-article-hero-copy{grid-column:2;min-width:0;padding-top:2px}
+.cms-article-hero:not(.has-image) .cms-article-hero-copy{grid-column:1/-1;max-width:880px}
+.cms-article-breadcrumb{margin:0 0 18px;font-size:12px;line-height:1.6;flex-wrap:wrap}
+.cms-article-labels{gap:12px;margin:0 0 10px;min-height:18px}
+.cms-article-subcat{font-size:12px;font-weight:800;color:var(--navy)}
+.cms-article-head time{display:inline-block;margin:0;font-size:12px;color:var(--muted)}
+.cms-article-head h1{margin:0;font-family:var(--sans);font-size:28px;line-height:1.45;font-weight:900;letter-spacing:.01em;color:var(--ink)}
+.cms-article-subtitle{margin:12px 0 0;font-family:var(--sans);font-size:20px;line-height:1.65;font-weight:700;color:var(--navy)}
+.cms-article-content{width:100%;margin:0}
+.cms-article-summary{margin:0 0 30px;padding:0;background:none;font-family:var(--sans);font-size:17px;line-height:1.95;font-weight:500;color:var(--ink)}
+.cms-article-body{margin:0;font-family:"Noto Serif JP","Yu Mincho","YuMincho","Hiragino Mincho ProN","Hiragino Mincho Pro",serif;font-size:16px;line-height:2.05;font-weight:400;color:var(--ink)}
+.cms-article-body p{margin:0 0 1.55em}
+.cms-article-body h1,.cms-article-body h2,.cms-article-body h3,.cms-article-body h4,.cms-article-body h5{font-family:inherit;color:var(--ink);font-weight:700;line-height:1.5;letter-spacing:.015em;margin:2.05em 0 .72em}
+.cms-article-body h1{font-size:28px}
+.cms-article-body h2{font-size:25px}
+.cms-article-body h3{font-size:22px}
+.cms-article-body h4{font-size:20px}
+.cms-article-body h5{font-size:18px}
+.cms-article-image2{width:min(46%,480px);margin:38px 0 0 auto}
+.cms-article-image2 img{display:block;width:100%;height:auto;object-fit:contain}
+.cms-article-video,.cms-article-action{margin-top:30px}
+.cms-article-back{margin-top:54px}
+@media(max-width:767px){
+  .cms-article{padding-top:30px;padding-bottom:56px}
+  .cms-article-hero,.cms-article-hero.has-image{display:flex;flex-direction:column;margin-bottom:26px;gap:0}
+  .cms-article-hero-copy{display:contents}
+  .cms-article-breadcrumb{order:1;margin-bottom:15px}
+  .cms-article-head{order:2;width:100%}
+  .cms-article-image1{order:3;width:100%;margin-top:22px;aspect-ratio:4/3}
+  .cms-article-head h1{font-size:24px;line-height:1.5}
+  .cms-article-subtitle{font-size:18px;line-height:1.65;margin-top:9px}
+  .cms-article-summary{font-size:16px;line-height:1.9;margin-bottom:26px}
+  .cms-article-body{font-size:16px;line-height:2}
+  .cms-article-image2{width:min(68%,360px);margin-top:30px}
+}

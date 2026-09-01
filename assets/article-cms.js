@@ -35,20 +35,21 @@
       }
       const cat=categoryLabels[a.category]||a.category||''; const sub=subcategoryLabels[a.subcategory]||a.subcategory||'';
       const isOrg=a.category==='about'||a.category==='qa'||collection==='text-qa'; const returnHref=isOrg?'organization.html':'activity.html#events'; const returnLabel=isOrg?'概要・Q&A':'イベント・勉強会';
-      const rawImage=a.image1||a.image2||''; const image=rawImage.startsWith('/images/')?`/public${rawImage}`:rawImage; document.title=`${a.title||'記事'}｜中くらいの政府`;
+      const image1=imagePath(a.image1||''); const image2=imagePath(a.image2||''); document.title=`${a.title||'記事'}｜中くらいの政府`;
+      const breadcrumb=`<nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a><span>›</span>${cat?`<span>${esc(cat)}</span><span>›</span>`:''}<span>${esc(sub||'記事')}</span></nav>`;
+      const head=`<header class="cms-article-head"><div class="cms-article-labels">${sub?`<span class="cms-article-subcat">${esc(sub)}</span>`:''}${a.publishedAt?`<time datetime="${esc(a.publishedAt)}">${date(a.publishedAt)}</time>`:''}</div><h1>${esc(a.title||'無題')}</h1>${a.subtitle?`<p class="cms-article-subtitle">${esc(a.subtitle)}</p>`:''}</header>`;
       mount.innerHTML=`
-        <nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a><span>›</span><span>${esc(sub||cat)}</span></nav>
-        <header class="cms-article-head">
-          <div class="cms-article-labels">${cat?`<span class="tag">${esc(cat)}</span>`:''}${sub?`<span class="cms-article-subcat">${esc(sub)}</span>`:''}</div>
-          <h1>${esc(a.title||'無題')}</h1>
-          ${a.subtitle?`<p class="cms-article-subtitle">${esc(a.subtitle)}</p>`:''}
-          ${a.publishedAt?`<time datetime="${esc(a.publishedAt)}">${date(a.publishedAt)}</time>`:''}
-        </header>
-        ${image?`<figure class="cms-article-eyecatch"><img src="${esc(image)}" alt="" loading="eager"></figure>`:''}
-        ${a.summary?`<p class="cms-article-summary">${esc(a.summary)}</p>`:''}
-        <div class="cms-article-body">${markdown(a.body||'')}</div>
-        ${a.videoUrl?`<p class="cms-article-video"><a href="${esc(a.videoUrl)}">動画を見る →</a></p>`:''}
-        ${a.linkUrl?`<p class="cms-article-action"><a class="btn btn-primary" href="${esc(a.linkUrl)}">${esc(a.linkLabel||'詳しく見る')}</a></p>`:''}
+        <section class="cms-article-hero${image1?' has-image':''}">
+          ${image1?`<figure class="cms-article-image1"><img src="${esc(image1)}" alt="" loading="eager"></figure>`:''}
+          <div class="cms-article-hero-copy">${breadcrumb}${head}</div>
+        </section>
+        <section class="cms-article-content">
+          ${a.summary?`<p class="cms-article-summary">${esc(a.summary)}</p>`:''}
+          <div class="cms-article-body">${markdown(a.body||'')}</div>
+          ${image2?`<figure class="cms-article-image2"><img src="${esc(image2)}" alt="" loading="lazy"></figure>`:''}
+          ${a.videoUrl?`<p class="cms-article-video"><a href="${esc(a.videoUrl)}">動画を見る →</a></p>`:''}
+          ${a.linkUrl?`<p class="cms-article-action"><a class="btn btn-primary" href="${esc(a.linkUrl)}">${esc(a.linkLabel||'詳しく見る')}</a></p>`:''}
+        </section>
         <p class="cms-article-back"><a href="${returnHref}">← ${returnLabel}へ戻る</a></p>`;
     }catch(e){console.error('[article-cms]',e);mount.innerHTML='<div class="cms-article-error"><h1>記事を表示できませんでした</h1><p>記事が見つからないか、現在公開されていません。</p><p><a href="activity.html#events">イベント・勉強会へ戻る</a></p></div>';}
   }
