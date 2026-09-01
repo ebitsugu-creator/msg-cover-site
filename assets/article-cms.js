@@ -55,16 +55,16 @@
       }
       const cat=categoryLabels[a.category]||a.category||''; const sub=subcategoryLabels[a.subcategory]||a.subcategory||'';
       const isOrg=a.category==='about'||a.category==='qa'||collection==='text-qa'; const returnHref=isOrg?'organization.html':'activity.html#events'; const returnLabel=isOrg?'概要・Q&A':'イベント・勉強会';
-      const image1=imagePath(a.image1||''); const image2=imagePath(a.image2||''); document.title=`${a.title||'記事'}｜中くらいの政府`;
+      const image1=imagePath(a.image1||''); const image2=imagePath(a.image2||''); const isQA=a.category==='qa'||a.articleType==='qa'; const lead=isQA?(a.answerSummary||a.summary||''):(a.summary||''); const articleText=isQA?(a.answer||a.body||''):(a.content||a.body||''); document.title=`${a.title||'記事'}｜中くらいの政府`;
       const breadcrumb=`<nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a>${cat?`<span>›</span><span>${esc(cat)}</span>`:''}${a.publishedAt?`<time datetime="${esc(a.publishedAt)}">${date(a.publishedAt)}</time>`:''}</nav>`;
       const head=`<header class="cms-article-head"><h1>${esc(a.title||'無題')}</h1>${a.subtitle?`<p class="cms-article-subtitle">${esc(a.subtitle)}</p>`:''}</header>`;
       mount.innerHTML=`
         <section class="cms-article-hero${image1?' has-image':''}">
           ${image1?`<figure class="cms-article-image1"><img src="${esc(image1)}" alt="" loading="eager"></figure>`:''}
-          <div class="cms-article-hero-copy">${breadcrumb}${head}${a.summary?`<p class="cms-article-summary cms-article-summary-hero">${esc(a.summary)}</p>`:''}</div>
+          <div class="cms-article-hero-copy">${breadcrumb}${head}${lead?`<p class="cms-article-summary cms-article-summary-hero">${esc(lead)}</p>`:''}</div>
         </section>
         <section class="cms-article-content">
-          <div class="cms-article-body">${articleBodyHtml(a.body||'', image2)}</div>
+          <div class="cms-article-body">${articleBodyHtml(articleText, image2)}</div>
           ${a.videoUrl?`<p class="cms-article-video"><a href="${esc(a.videoUrl)}">動画を見る →</a></p>`:''}
           ${a.linkUrl?`<p class="cms-article-action"><a class="btn btn-primary" href="${esc(a.linkUrl)}">${esc(a.linkLabel||'詳しく見る')}</a></p>`:''}
         </section>
