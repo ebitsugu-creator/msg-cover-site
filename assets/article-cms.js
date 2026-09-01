@@ -69,6 +69,22 @@
           ${a.linkUrl?`<p class="cms-article-action"><a class="btn btn-primary" href="${esc(a.linkUrl)}">${esc(a.linkLabel||'詳しく見る')}</a></p>`:''}
         </section>
         <p class="cms-article-back"><a href="${returnHref}">← ${returnLabel}へ戻る</a></p>`;
+      // PCでは画像2を本文最終段落の直前へ移し、最終段落を左側に回り込ませる。
+      // スマホでは本文末尾へ戻し、V114で確認済みの縦積みを維持する。
+      const bodyEl=mount.querySelector('.cms-article-body');
+      const image2El=bodyEl&&bodyEl.querySelector('.cms-article-image2');
+      if(image2El){
+        const placeImage2=()=>{
+          const mobile=window.matchMedia('(max-width:767px)').matches;
+          if(mobile){ bodyEl.appendChild(image2El); return; }
+          const paras=[...bodyEl.children].filter(el=>el.tagName==='P' && el!==image2El);
+          const lastP=paras[paras.length-1];
+          if(lastP) bodyEl.insertBefore(image2El,lastP); else bodyEl.appendChild(image2El);
+        };
+        placeImage2();
+        const mq=window.matchMedia('(max-width:767px)');
+        if(mq.addEventListener) mq.addEventListener('change',placeImage2); else mq.addListener(placeImage2);
+      }
     }catch(e){console.error('[article-cms]',e);mount.innerHTML='<div class="cms-article-error"><h1>記事を表示できませんでした</h1><p>記事が見つからないか、現在公開されていません。</p><p><a href="activity.html#events">イベント・勉強会へ戻る</a></p></div>';}
   }
   load();
