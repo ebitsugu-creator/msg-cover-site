@@ -931,7 +931,7 @@ a.cms-event-image{display:block}
 
 @media(max-width:520px){
   #featured .featured-topline{display:block}
-  #featured .featured-topline .lead{margin-top:4px}
+  #featured .featured-topline .lead{margin-top:4px;font-size:13px;line-height:1.5;white-space:nowrap}
   #featured .featured-pickup-label{display:block;margin:9px 0 0}
   #featured .cms-featured-category{grid-template-columns:46px minmax(0,1fr);column-gap:9px;padding:12px 0}
   #featured .cms-featured-category .cms-event-group-head{width:46px;padding:10px 5px}
