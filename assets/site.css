@@ -1123,3 +1123,28 @@ a.cms-event-image{display:block}
 .wn-compact-subcat{font-size:calc(1em - 1px);font-weight:500}
 
 /* V116 — PC画像2：本文最終段落との下端揃えはarticle-cms.jsで実寸計算。スマホ指定は変更なし。 */
+
+/* V122: compact desktop rails. Mobile keeps the existing single-card swipe layout. */
+@media(min-width:901px){
+  #featured .cms-featured-hero-grid--3{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  #featured .cms-featured-hero-body{padding:18px}
+  #featured .cms-featured-hero-body h3{font-size:19px;line-height:1.4}
+  #featured .cms-featured-hero-body time{font-size:13px;margin-bottom:7px}
+  #featured .cms-featured-category .cms-video-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  #featured .cms-featured-category .cms-video-card:nth-child(4){display:block}
+  #featured .cms-featured-category .cms-video-card:nth-child(n+5){display:none}
+  #featured .cms-featured-category .cms-video-body{padding:10px 11px 12px}
+  #featured .cms-featured-category .cms-video-body h3{font-size:15px;line-height:1.4}
+  #events .cms-library-rail .cms-mixed-library{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  #events .cms-library-rail .cms-event-main,#events .cms-library-rail .cms-video-body{padding:14px}
+  #events .cms-library-rail .cms-event-card h3,#events .cms-library-rail .cms-video-card h3{font-size:16px;line-height:1.45}
+}
+@media(max-width:900px){
+  #featured .cms-featured-hero-grid--3{grid-template-columns:1fr}
+  #featured .cms-featured-category .cms-video-card:nth-child(4),
+  #events .cms-library-rail .cms-event-card:nth-child(4),
+  #events .cms-library-rail .cms-video-card:nth-child(4){display:block}
+  #featured .cms-featured-category .cms-video-card:nth-child(n+5),
+  #events .cms-library-rail .cms-event-card:nth-child(n+5),
+  #events .cms-library-rail .cms-video-card:nth-child(n+5){display:none}
+}
