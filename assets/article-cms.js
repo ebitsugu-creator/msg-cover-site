@@ -31,14 +31,30 @@
   }
   function articleBodyHtml(md,image2){
     const html=markdown(md||'');
-    if(!image2) return html;
-    // 画像2は「本文の外」ではなく、本文DOMの最後の子要素として置く。
-    // これにより本文最終段落の直後に続き、PC/スマホとも同じ構造になる。
-    const fig=`<figure class="cms-article-image2"><img src="${esc(image2)}" alt="" loading="lazy"></figure>`;
-    return html + fig;
+    return html;
   }
   function date(v){ if(!v)return ''; const d=new Date(v); if(Number.isNaN(d.getTime()))return esc(v); return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`; }
-  function imagePath(v){ if(!v)return ''; v=String(v).trim().replace(/^[\"']|[\"']$/g,''); if(/^https?:\/\//i.test(v))return v; if(v.startsWith('/public/'))return v; if(v.startsWith('public/'))return '/'+v; if(v.startsWith('/images/'))return '/public'+v; if(v.startsWith('images/'))return '/public/'+v; return v; }
+  function imagePath(v){
+    if(!v)return '';
+    v=String(v).trim().replace(/^[\"']|[\"']$/g,'').replace(/\\\//g,'/');
+    const blob=v.match(/^https?:\/\/github\.com\/([^/]+)\/([^/]+)\/blob\/([^/]+)\/(.+)$/i);
+    if(blob)return `https://raw.githubusercontent.com/${blob[1]}/${blob[2]}/${blob[3]}/${blob[4]}`;
+    if(/^https?:\/\//i.test(v))return v;
+    if(v.startsWith('/public/'))return v;
+    if(v.startsWith('public/'))return '/'+v;
+    if(v.startsWith('/images/'))return '/public'+v;
+    if(v.startsWith('images/'))return '/public/'+v;
+    return v.startsWith('/')?v:'/'+v;
+  }
+  function enableImageFallbacks(root){
+    root.querySelectorAll('.cms-article-image1 img,.cms-article-image2 img').forEach(img=>{
+      const src=img.getAttribute('src')||'',tries=[];
+      if(src.startsWith('/public/images/'))tries.push(src.replace('/public/images/','/images/'));
+      else if(src.startsWith('/images/'))tries.push(src.replace('/images/','/public/images/'));
+      if(src.startsWith('/public/'))tries.push(src.replace(/^\/public\//,'/'));
+      let i=0;const retry=()=>{if(i<tries.length)img.src=tries[i++];};img.addEventListener('error',retry);if(img.complete&&img.naturalWidth===0)retry();
+    });
+  }
   function youtubeId(v){ try{const u=new URL(v);if(u.hostname==='youtu.be')return u.pathname.slice(1);if(u.hostname.includes('youtube.com')){if(u.pathname==='/watch')return u.searchParams.get('v')||'';const m=u.pathname.match(/\/(?:shorts|embed)\/([^/?]+)/);return m?m[1]:''}}catch(_){}return ''; }
   async function youtubeMeta(v){ try{const r=await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(v)}&format=json`,{cache:'force-cache'});if(!r.ok)return {};return await r.json()}catch(_){return {}} }
   async function load(){
@@ -65,38 +81,12 @@
         </section>
         <section class="cms-article-content">
           <div class="cms-article-body">${articleBodyHtml(articleText, image2)}</div>
+          ${image2?`<figure class="cms-article-image2"><img src="${esc(image2)}" alt="" loading="lazy"></figure>`:''}
           ${a.videoUrl?`<p class="cms-article-video"><a href="${esc(a.videoUrl)}">動画を見る →</a></p>`:''}
           ${a.linkUrl?`<p class="cms-article-action"><a class="btn btn-primary" href="${esc(a.linkUrl)}">${esc(a.linkLabel||'詳しく見る')}</a></p>`:''}
         </section>
         <p class="cms-article-back"><a href="${returnHref}">← ${returnLabel}へ戻る</a></p>`;
-      // V116: PCでは画像2と本文最終段落の「下端」を揃える。
-      // 画像2を最終段落の直前に置き、実寸高を測って上方向へ引き上げる。
-      // スマホはV114/V115で確認済みの本文末尾・縦積みを維持する。
-      const bodyEl=mount.querySelector('.cms-article-body');
-      const image2El=bodyEl&&bodyEl.querySelector('.cms-article-image2');
-      if(image2El){
-        const placeImage2=()=>{
-          image2El.style.marginTop='';
-          const mobile=window.matchMedia('(max-width:767px)').matches;
-          if(mobile){ bodyEl.appendChild(image2El); return; }
-          const paras=[...bodyEl.children].filter(el=>el.tagName==='P');
-          const lastP=paras[paras.length-1];
-          if(!lastP){ bodyEl.appendChild(image2El); return; }
-          bodyEl.insertBefore(image2El,lastP);
-          requestAnimationFrame(()=>{
-            const imageH=image2El.getBoundingClientRect().height;
-            const textH=lastP.getBoundingClientRect().height;
-            const lift=Math.max(0,imageH-textH);
-            image2El.style.marginTop=`-${Math.round(lift)}px`;
-          });
-        };
-        placeImage2();
-        const img=image2El.querySelector('img');
-        if(img && !img.complete) img.addEventListener('load',placeImage2,{once:true});
-        const mq=window.matchMedia('(max-width:767px)');
-        if(mq.addEventListener) mq.addEventListener('change',placeImage2); else mq.addListener(placeImage2);
-        window.addEventListener('resize',placeImage2,{passive:true});
-      }
+      enableImageFallbacks(mount);
     }catch(e){console.error('[article-cms]',e);mount.innerHTML='<div class="cms-article-error"><h1>記事を表示できませんでした</h1><p>記事が見つからないか、現在公開されていません。</p><p><a href="activity.html#events">イベント・勉強会へ戻る</a></p></div>';}
   }
   load();
