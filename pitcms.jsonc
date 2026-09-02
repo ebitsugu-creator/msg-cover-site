@@ -31,8 +31,8 @@
               "label": "イベント・勉強会"
             },
             {
-              "value": "video",
-              "label": "動画"
+              "value": "featured",
+              "label": "推しネタ"
             }
           ]
         },
@@ -99,24 +99,20 @@
               "label": "【イベント・勉強会】開催レポート"
             },
             {
-              "value": "video_city_oddities",
-              "label": "【動画】都会にこんなものいる？"
+              "value": "featured_hakomono",
+              "label": "【推しネタ】ハコモノ探偵団"
             },
             {
-              "value": "video_minato_prices",
-              "label": "【動画】クレイジーな港区物価"
+              "value": "featured_prices",
+              "label": "【推しネタ】港区狂乱物価"
             },
             {
-              "value": "video_minato_closures",
-              "label": "【動画】港区廃業という闇"
+              "value": "featured_closure",
+              "label": "【推しネタ】港区廃業"
             },
             {
-              "value": "video_members",
-              "label": "【動画】メンバー紹介"
-            },
-            {
-              "value": "video_other",
-              "label": "【動画】その他"
+              "value": "featured_promo",
+              "label": "【推しネタ】プロモーション・その他"
             }
           ]
         },
