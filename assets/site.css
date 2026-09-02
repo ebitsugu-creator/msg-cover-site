@@ -1139,8 +1139,21 @@ a.cms-event-image{display:block}
   #events .cms-library-rail .cms-event-main,#events .cms-library-rail .cms-video-body{padding:14px}
   #events .cms-library-rail .cms-event-card h3,#events .cms-library-rail .cms-video-card h3{font-size:16px;line-height:1.45}
 }
+@media(min-width:601px) and (max-width:900px){
+  #featured .cms-featured-hero-grid--2,
+  #featured .cms-featured-hero-grid--3{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  #featured .cms-featured-hero-body{padding:15px}
+  #featured .cms-featured-hero-body h3{font-size:17px;line-height:1.42}
+  #featured .cms-featured-hero-body time{font-size:12px;margin-bottom:6px}
+}
+@media(max-width:600px){
+  #featured .cms-featured-hero-grid--2,
+  #featured .cms-featured-hero-grid--3{grid-template-columns:1fr;gap:14px}
+  #featured .cms-featured-hero-body{padding:15px}
+  #featured .cms-featured-hero-body h3{font-size:18px;line-height:1.45}
+  #featured .cms-featured-hero-body time{font-size:12px;margin-bottom:6px}
+}
 @media(max-width:900px){
-  #featured .cms-featured-hero-grid--3{grid-template-columns:1fr}
   #featured .cms-featured-category .cms-video-card:nth-child(4),
   #events .cms-library-rail .cms-event-card:nth-child(4),
   #events .cms-library-rail .cms-video-card:nth-child(4){display:block}
