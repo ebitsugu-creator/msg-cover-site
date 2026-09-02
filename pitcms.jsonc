@@ -125,24 +125,11 @@
           "note": "25文字以内。記事の主題を端的に入力してください。"
         },
         {
-          "name": "subtitle",
-          "type": "text",
-          "label": "サブタイトル",
-          "maxLength": 50,
-          "note": "50文字以内。タイトルの補足や興味喚起ワードを入力してください。"
-        },
-        {
           "name": "summary",
           "type": "text",
           "label": "概略",
           "maxLength": 150,
           "note": "150文字以内。一覧画面に反映されます。"
-        },
-        {
-          "name": "content",
-          "type": "richtext",
-          "label": "本文",
-          "note": "ツールで見出し・文字装飾・改行などが可能です。"
         },
         {
           "name": "image1",
@@ -229,17 +216,11 @@
           "title"
         ],
         [
-          "subtitle"
-        ],
-        [
           "summary"
         ],
         [
           "image1",
           "image2"
-        ],
-        [
-          "content"
         ],
         [
           "videoUrl"
@@ -260,7 +241,6 @@
       ],
       "pit": {
         "title": "title",
-        "body": "content",
         "createdAt": "publishedAt",
         "draft": "isDraft",
         "defaultSortField": "_createdAt",
