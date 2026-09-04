@@ -19,6 +19,7 @@
 .wn-topline h2{margin:0;font-size:clamp(20px,1.65vw,25px);line-height:1.45;color:#071f47;min-width:0}
 .wn-topline h2 a{color:inherit;text-decoration:none}
 .wn-topline h2 a:hover{text-decoration:underline;text-underline-offset:4px}
+.wn-inline-summary{font-size:13px;line-height:1.65;color:#718096;font-weight:300}
 .wn-event{padding:4px 8px;background:#fff4d8;color:#715716;font-size:12px;font-weight:800;white-space:nowrap;flex:0 0 auto}
 .wn-main-summary{margin:7px 0 0;font-size:13px;line-height:1.65;color:#718096;font-weight:300}
 
@@ -37,7 +38,7 @@
 @media(max-width:767px){
  .wn-page{padding-top:34px}.wn-head{display:block}.wn-head p{margin-top:7px;font-size:14px}
  .wn-main-card{grid-template-columns:1fr;padding:20px 0}.wn-main-image{width:42%;max-width:180px}.wn-main-body{padding:12px 0 0}.wn-main-card--noimage .wn-main-body{padding-top:0}
- .wn-topline{flex-wrap:wrap;gap:6px 9px}.wn-topline h2{width:100%;order:3;font-size:21px}.wn-event{order:4}
+ .wn-topline{flex-wrap:wrap;gap:6px 9px}.wn-topline h2{width:100%;order:3;font-size:21px}.wn-inline-summary{font-size:12px;font-weight:300}.wn-event{order:4}
  .wn-main-summary{margin-top:6px;font-size:12px;font-weight:300}
  .wn-compact-line{grid-template-columns:76px minmax(0,1fr);gap:7px;padding:13px 0}
  .wn-compact-subcat{grid-column:2}.wn-compact-line h3{grid-column:1/-1;font-size:14px}.wn-compact-line p{grid-column:1/-1}

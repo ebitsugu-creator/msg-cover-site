@@ -125,11 +125,24 @@
           "note": "25文字以内。記事の主題を端的に入力してください。"
         },
         {
+          "name": "subtitle",
+          "type": "text",
+          "label": "サブタイトル",
+          "maxLength": 50,
+          "note": "50文字以内。タイトルの補足や興味喚起ワードを入力してください。"
+        },
+        {
           "name": "summary",
           "type": "text",
           "label": "概略",
           "maxLength": 150,
           "note": "150文字以内。一覧画面に反映されます。"
+        },
+        {
+          "name": "content",
+          "type": "richtext",
+          "label": "本文",
+          "note": "ツールで見出し・文字装飾・改行などが可能です。"
         },
         {
           "name": "image1",
@@ -165,6 +178,214 @@
           "label": "開催日時",
           "includeTime": true,
           "note": "イベント・勉強会の開催日時です。告知記事では掲載終了日時が未指定の場合、この日時を終了判定に使用します。"
+        },
+        {
+          "name": "publishable",
+          "type": "boolean",
+          "label": "掲載可否",
+          "default": true
+        },
+        {
+          "name": "whatsNew",
+          "type": "boolean",
+          "label": "What's New表示",
+          "default": true,
+          "note": "ONの場合、What's Newの掲載候補になります。"
+        },
+        {
+          "name": "publishedAt",
+          "type": "date",
+          "label": "掲載日時",
+          "includeTime": true,
+          "note": "一覧・新着順の基準となる掲載日時です。"
+        },
+        {
+          "name": "publishStartAt",
+          "type": "date",
+          "label": "掲載開始日時",
+          "includeTime": true,
+          "note": "指定した場合、この日時まではサイトに表示しません。"
+        },
+        {
+          "name": "publishEndAt",
+          "type": "date",
+          "label": "掲載終了日時",
+          "includeTime": true,
+          "note": "指定した場合、この日時以降はサイトに表示しません。"
+        },
+        {
+          "name": "isDraft",
+          "type": "boolean",
+          "label": "下書き",
+          "default": true
+        }
+      ],
+      "layout": [
+        [
+          "category",
+          "subcategory"
+        ],
+        [
+          "title"
+        ],
+        [
+          "subtitle"
+        ],
+        [
+          "summary"
+        ],
+        [
+          "image1",
+          "image2"
+        ],
+        [
+          "content"
+        ],
+        [
+          "videoUrl"
+        ],
+        [
+          "linkUrl",
+          "linkLabel"
+        ],
+        [
+          "eventAt"
+        ],
+        [
+          "publishStartAt",
+          "publishEndAt"
+        ],
+        [
+          "publishable",
+          "whatsNew"
+        ]
+      ],
+      "pit": {
+        "title": "title",
+        "body": "content",
+        "createdAt": "publishedAt",
+        "draft": "isDraft",
+        "defaultSortField": "_createdAt",
+        "defaultSortOrder": "desc"
+      }
+    },
+    {
+      "name": "lpDirectLinks",
+      "label": "LP直リンク記事",
+      "description": "推しネタ・イベント等から外部LPへ直接リンクする本文なしの記事",
+      "path": "content/lp-links",
+      "extension": "md",
+      "fields": [
+        {
+          "name": "category",
+          "type": "select",
+          "label": "大カテゴリ",
+          "required": true,
+          "options": [
+            {
+              "value": "featured",
+              "label": "推しネタ"
+            },
+            {
+              "value": "events",
+              "label": "イベント・勉強会"
+            }
+          ]
+        },
+        {
+          "name": "subcategory",
+          "type": "select",
+          "label": "サブカテゴリ",
+          "required": true,
+          "options": [
+            {
+              "value": "featured_hakomono",
+              "label": "【推しネタ】ハコモノ探偵団"
+            },
+            {
+              "value": "featured_prices",
+              "label": "【推しネタ】港区狂乱物価"
+            },
+            {
+              "value": "featured_closure",
+              "label": "【推しネタ】港区廃業"
+            },
+            {
+              "value": "featured_employment_social",
+              "label": "【推しネタ】雇用・社会問題を斬る"
+            },
+            {
+              "value": "featured_promo",
+              "label": "【推しネタ】プロモーション・その他"
+            },
+            {
+              "value": "events_advance",
+              "label": "【イベント・勉強会】事前告知"
+            },
+            {
+              "value": "events_report",
+              "label": "【イベント・勉強会】開催レポート"
+            },
+            {
+              "value": "events_study_library",
+              "label": "【イベント・勉強会】スタディ・ライブラリ"
+            },
+            {
+              "value": "events_party_library",
+              "label": "【イベント・勉強会】イベント・ライブラリ"
+            }
+          ]
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "label": "タイトル",
+          "required": true,
+          "maxLength": 25,
+          "note": "25文字以内。記事の主題を端的に入力してください。"
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "label": "概略",
+          "maxLength": 150,
+          "note": "150文字以内。一覧画面に反映されます。"
+        },
+        {
+          "name": "image1",
+          "type": "image",
+          "label": "アイキャッチ画像1"
+        },
+        {
+          "name": "image2",
+          "type": "image",
+          "label": "アイキャッチ画像2"
+        },
+        {
+          "name": "videoUrl",
+          "type": "text",
+          "label": "動画URL",
+          "note": "必要な場合のみ入力します。LPの遷移先はリンク参照URLに入力してください。"
+        },
+        {
+          "name": "linkLabel",
+          "type": "text",
+          "label": "リンク表示文字",
+          "note": "リンクボタン等に表示する文字です。"
+        },
+        {
+          "name": "linkUrl",
+          "type": "text",
+          "label": "LP直リンクURL",
+          "required": true,
+          "note": "画像・タイトルのクリック先となるLPのURLです。"
+        },
+        {
+          "name": "eventAt",
+          "type": "date",
+          "label": "開催日時",
+          "includeTime": true,
+          "note": "イベント・勉強会で使用します。事前告知とライブラリの並び順の基準です。"
         },
         {
           "name": "publishable",
@@ -371,20 +592,6 @@
           "note": "25文字以内。記事の主題を端的に入力してください。"
         },
         {
-          "name": "subtitle",
-          "type": "text",
-          "label": "サブタイトル",
-          "maxLength": 50,
-          "note": "50文字以内。タイトルの補足や興味喚起ワードを入力してください。"
-        },
-        {
-          "name": "summary",
-          "type": "text",
-          "label": "概略",
-          "maxLength": 150,
-          "note": "150文字以内。一覧画面に反映されます。"
-        },
-        {
           "name": "content",
           "type": "richtext",
           "label": "本文",
@@ -406,22 +613,6 @@
           "note": "QAの回答本文です。テキスト情報記事では空欄で構いません。"
         },
         {
-          "name": "image1",
-          "type": "image",
-          "label": "アイキャッチ画像1"
-        },
-        {
-          "name": "image2",
-          "type": "image",
-          "label": "アイキャッチ画像2"
-        },
-        {
-          "name": "videoUrl",
-          "type": "text",
-          "label": "動画URL",
-          "note": "ページ内で動画として表示するURLです。リンク参照URLとは別用途です。"
-        },
-        {
           "name": "linkLabel",
           "type": "text",
           "label": "リンク表示文字",
@@ -432,13 +623,6 @@
           "type": "text",
           "label": "リンク参照URL",
           "note": "サイト内または外部サイトへの遷移先URLです。動画URLとは別用途です。"
-        },
-        {
-          "name": "eventAt",
-          "type": "date",
-          "label": "開催日時",
-          "includeTime": true,
-          "note": "イベント・勉強会の開催日時です。告知記事では掲載終了日時が未指定の場合、この日時を終了判定に使用します。"
         },
         {
           "name": "articleType",
@@ -510,16 +694,6 @@
           "title"
         ],
         [
-          "subtitle"
-        ],
-        [
-          "summary"
-        ],
-        [
-          "image1",
-          "image2"
-        ],
-        [
           "content"
         ],
         [
@@ -529,14 +703,10 @@
           "answer"
         ],
         [
-          "videoUrl"
-        ],
-        [
           "linkUrl",
           "linkLabel"
         ],
         [
-          "eventAt",
           "publishStartAt",
           "publishEndAt"
         ],

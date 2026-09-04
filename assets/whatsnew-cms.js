@@ -1,7 +1,7 @@
 (()=>{'use strict';
 const host=document.getElementById('cms-whatsnew');if(!host)return;
 const REPO='https://api.github.com/repos/ebitsugu-creator/msg-cover-site/contents/';
-const SOURCES=[['free','content/free'],['text-qa','content/text-qa'],['videos','content/videos']];
+const SOURCES=[['free','content/free'],['lp-links','content/lp-links'],['text-qa','content/text-qa'],['videos','content/videos']];
 const LABELS={
 about_intro_message:'紹介・メッセージ',about_profile:'団体概要',about_people_org:'人事・組織',about_media:'広報・マスコミ登場',about_feedback:'頂いたご意見',about_other:'その他',
 qa_membership:'会員に関して',qa_donation:'寄付に関して',qa_events:'勉強会・イベントに関して',qa_party:'党に対して',qa_policy:'政策に対して',qa_other:'その他',
@@ -26,7 +26,7 @@ function mainCard(a){
  const date=`<time datetime="${esc(a.publishStartAt||a.publishedAt||'')}">${esc(fmt(stamp(a)))}</time>`;
  const sub=`<span class="wn-subcat">${esc(LABELS[a.subcategory]||a.subcategory||'お知らせ')}</span>`;
  const event=a.subcategory==='events_advance'&&a.eventAt?`<span class="wn-event">開催 ${esc(fmt(a.eventAt,true))}</span>`:'';
- return `<article class="wn-main-card${im?'':' wn-main-card--noimage'}${parts.summary?'':' wn-main-card--nosummary'}">${im?`<a class="wn-main-image" href="${esc(h.url)}"${attrs}><img src="${esc(im)}" alt="" loading="lazy"></a>`:''}<div class="wn-main-body"><div class="wn-topline">${date}${sub}<h2><a href="${esc(h.url)}"${attrs}>${esc(parts.title)}</a></h2>${event}</div>${parts.summary?`<p class="wn-main-summary">${esc(parts.summary)}</p>`:''}</div></article>`
+ return `<article class="wn-main-card${im?'':' wn-main-card--noimage'}${parts.summary?'':' wn-main-card--nosummary'}">${im?`<a class="wn-main-image" href="${esc(h.url)}"${attrs}><img src="${esc(im)}" alt="" loading="lazy"></a>`:''}<div class="wn-main-body"><div class="wn-topline">${date}${sub}<h2><a href="${esc(h.url)}"${attrs}>${esc(parts.title)}</a>${parts.summary?`<span class="wn-inline-summary">　${esc(parts.summary)}</span>`:''}</h2>${event}</div></div></article>`
 }
 function compact(a){
  const h=href(a),attrs=h.ext?' target="_blank" rel="noopener noreferrer"':'',parts=displayParts(a);

@@ -10,8 +10,23 @@
   const subcategoryLabels = { events_advance:'事前告知', events_notice:'事前告知', events_study:'事前告知', events_report:'開催レポート', featured_hakomono:'ハコモノ探偵団', featured_prices:'港区狂乱物価', featured_closure:'港区廃業', featured_employment_social:'雇用・社会問題を斬る', featured_promo:'プロモーション・その他', about_intro_message:'紹介・メッセージ', about_profile:'団体概要', about_people_org:'人事・組織', about_media:'広報・マスコミ登場', about_feedback:'頂いたご意見', about_other:'その他', qa_membership:'会員に関して', qa_donation:'寄付に関して', qa_events:'勉強会・イベントに関して', qa_party:'党に対して', qa_policy:'政策に対して', qa_other:'その他' };
   const esc = (v='') => String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   function scalar(raw){ const v=raw.trim(); if(v==='true')return true;if(v==='false')return false;if(v==='null')return null;if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))return v.slice(1,-1);return v; }
-  function parse(text){ const m=text.replace(/^\uFEFF/,'').match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/); if(!m)return null; const d={}; m[1].split(/\r?\n/).forEach(line=>{const i=line.indexOf(':');if(i>0)d[line.slice(0,i).trim()]=scalar(line.slice(i+1));}); return {...d,body:m[2].trim()}; }
-  function inline(s){ return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/==(.+?)==/g,'<mark>$1</mark>').replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,'<a href="$2">$1</a>'); }
+  function parse(text){
+    const m=text.replace(/^\uFEFF/,'').match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);if(!m)return null;
+    const d={},lines=m[1].split(/\r?\n/);
+    for(let i=0;i<lines.length;i++){
+      const hit=lines[i].match(/^([A-Za-z_][\w-]*):(?:\s*(.*))?$/);if(!hit)continue;
+      const key=hit[1],raw=hit[2]||'';
+      if(/^[>|][+-]?$/.test(raw)){
+        const block=[];
+        for(i++;i<lines.length&&!/^[A-Za-z_][\w-]*:(?:\s|$)/.test(lines[i]);i++)block.push(lines[i]);
+        i--;
+        const indents=block.filter(x=>x.trim()).map(x=>(x.match(/^\s*/)||[''])[0].length),indent=indents.length?Math.min(...indents):0;
+        d[key]=block.map(x=>x.trim()?x.slice(indent):'').join('\n').trim();
+      }else d[key]=scalar(raw);
+    }
+    return {...d,body:m[2].trim()};
+  }
+  function inline(s){ return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/==(.+?)==/g,'<mark>$1</mark>').replace(/\[([^\]]+)\]\(((?:https?:\/\/|mailto:)[^)]+)\)/g,'<a href="$2">$1</a>'); }
   function markdown(md){
     const lines=md.split(/\r?\n/), out=[]; let list=false, quote=false;
     const closeList=()=>{if(list){out.push('</ul>');list=false;}};
