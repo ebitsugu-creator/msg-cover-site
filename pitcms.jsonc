@@ -822,9 +822,7 @@
       "pit": {
         "title": "label",
         "updatedAt": "updatedAt",
-        "order": "displayOrder",
-        "defaultSortField": "_order",
-        "defaultSortOrder": "asc"
+        "order": "displayOrder"
       }
     }
   ]
