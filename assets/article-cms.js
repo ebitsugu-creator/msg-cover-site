@@ -7,7 +7,6 @@
   const file = params.get('file') || '';
   const allowedCollections = new Set(['free','text-qa','videos']);
   const categoryLabels = { events: 'イベント・勉強会', featured: '推しネタ', about:'私たちについて', qa:'Q&A' };
-  const subcategoryLabels = { events_advance:'事前告知', events_notice:'事前告知', events_study:'事前告知', events_report:'開催レポート', featured_hakomono:'ハコモノ探偵団', featured_prices:'港区狂乱物価', featured_closure:'港区廃業', featured_employment_social:'雇用・社会問題を斬る', featured_promo:'プロモーション・その他', about_intro_message:'紹介・メッセージ', about_profile:'団体概要', about_people_org:'人事・組織', about_media:'広報・マスコミ登場', about_feedback:'頂いたご意見', about_other:'その他', qa_membership:'会員に関して', qa_donation:'寄付に関して', qa_events:'勉強会・イベントに関して', qa_party:'党に対して', qa_policy:'政策に対して', qa_other:'その他' };
   const esc = (v='') => String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   function scalar(raw){ const v=raw.trim(); if(v==='true')return true;if(v==='false')return false;if(v==='null')return null;if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))return v.slice(1,-1);return v; }
   function parse(text){
@@ -74,9 +73,10 @@
   async function youtubeMeta(v){ try{const r=await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(v)}&format=json`,{cache:'force-cache'});if(!r.ok)return {};return await r.json()}catch(_){return {}} }
   async function load(){
     try{
+      const subcategories=await window.MSGSubcategories.ready;
       if(!allowedCollections.has(collection) || !/^[^/\\]+\.md$/i.test(file)) throw new Error('invalid article');
       const url=`https://raw.githubusercontent.com/ebitsugu-creator/msg-cover-site/main/content/${encodeURIComponent(collection)}/${encodeURIComponent(file)}`;
-      const r=await fetch(url,{cache:'no-store'}); if(!r.ok)throw new Error(`GitHub ${r.status}`); const a=parse(await r.text()); if(!a || a.publishable!==true || a.isDraft===true)throw new Error('not published');
+      const r=await fetch(url,{cache:'no-store'}); if(!r.ok)throw new Error(`GitHub ${r.status}`); const a=parse(await r.text()); if(!a || a.publishable!==true || a.isDraft===true || !subcategories.isActive(a.subcategory))throw new Error('not published');
       if(collection==='videos'){
         if(a.productionType!=='original'){ if(a.videoUrl){ location.replace(a.videoUrl); return; } throw new Error('external video url missing'); }
         const id=youtubeId(a.videoUrl||''); if(!id)throw new Error('original video must be YouTube');
@@ -84,10 +84,10 @@
         const isFeatured=a.category==='featured'; const returnHref=isFeatured?'featured.html#featured':'activity.html#events'; const returnLabel=isFeatured?'推しネタ':'イベント・勉強会';
         mount.innerHTML=`<nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a><span>›</span><span>動画</span></nav><div class="cms-video-watch"><header class="cms-article-head"><div class="cms-article-labels"><span class="tag">中くらいの政府制作</span></div><h1>${esc(title)}</h1>${channel?`<p class="cms-video-watch-channel">${esc(channel)}</p>`:''}</header><div class="cms-video-player"><iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}" title="${esc(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>${extra||a.note?`<div class="cms-video-watch-meta">${extra?`<img class="cms-video-watch-extra" src="${esc(extra)}" alt="">`:''}${a.note?`<p class="cms-video-watch-note">${esc(a.note)}</p>`:''}</div>`:''}<p class="cms-article-back"><a href="${returnHref}">← ${returnLabel}へ戻る</a></p></div>`; return;
       }
-      const cat=categoryLabels[a.category]||a.category||''; const sub=subcategoryLabels[a.subcategory]||a.subcategory||'';
+      const cat=categoryLabels[a.category]||a.category||''; const sub=subcategories.label(a.subcategory)||a.subcategory||'';
       const isOrg=a.category==='about'||a.category==='qa'||collection==='text-qa',isFeatured=a.category==='featured'; const returnHref=isOrg?'organization.html':isFeatured?'featured.html#featured':'activity.html#events'; const returnLabel=isOrg?'概要・Q&A':isFeatured?'推しネタ':'イベント・勉強会';
       const image1=imagePath(a.image1||''); const image2=imagePath(a.image2||''); const isQA=a.category==='qa'||a.articleType==='qa'; const lead=isQA?(a.answerSummary||a.summary||''):(a.summary||''); const articleText=isQA?(a.answer||a.body||''):(a.content||a.body||''); document.title=`${a.title||'記事'}｜中くらいの政府`;
-      const breadcrumb=`<nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a>${cat?`<span>›</span><span>${esc(cat)}</span>`:''}${a.publishedAt?`<time datetime="${esc(a.publishedAt)}">${date(a.publishedAt)}</time>`:''}</nav>`;
+      const breadcrumb=`<nav class="cms-article-breadcrumb" aria-label="パンくず"><a href="${returnHref}">${returnLabel}</a>${cat?`<span>›</span><span>${esc(cat)}</span>`:''}${sub?`<span>›</span><span>${esc(sub)}</span>`:''}${a.publishedAt?`<time datetime="${esc(a.publishedAt)}">${date(a.publishedAt)}</time>`:''}</nav>`;
       const head=`<header class="cms-article-head"><h1>${esc(a.title||'無題')}</h1>${a.subtitle?`<p class="cms-article-subtitle">${esc(a.subtitle)}</p>`:''}</header>`;
       mount.innerHTML=`
         <section class="cms-article-hero${image1?' has-image':''}">
