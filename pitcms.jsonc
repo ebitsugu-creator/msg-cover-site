@@ -7,7 +7,7 @@
   "collections": [
     {
       "name": "freeArticles",
-      "label": "フリー記事",
+      "label": "【記事入力】フリー記事",
       "description": "フリー記事（一般記事・告知・イベント等）",
       "path": "content/free",
       "extension": "md",
@@ -38,83 +38,12 @@
         },
         {
           "name": "subcategory",
-          "type": "select",
+          "type": "relation",
           "label": "サブカテゴリ",
           "required": true,
-          "options": [
-            {
-              "value": "about_intro_message",
-              "label": "【私たちについて】紹介・メッセージ"
-            },
-            {
-              "value": "about_profile",
-              "label": "【私たちについて】団体概要"
-            },
-            {
-              "value": "about_people_org",
-              "label": "【私たちについて】人事・組織"
-            },
-            {
-              "value": "about_media",
-              "label": "【私たちについて】広報・マスコミ登場"
-            },
-            {
-              "value": "about_feedback",
-              "label": "【私たちについて】頂いたご意見"
-            },
-            {
-              "value": "about_other",
-              "label": "【私たちについて】その他"
-            },
-            {
-              "value": "qa_membership",
-              "label": "【QA】会員に関して"
-            },
-            {
-              "value": "qa_donation",
-              "label": "【QA】寄付に関して"
-            },
-            {
-              "value": "qa_events",
-              "label": "【QA】勉強会・イベントに関して"
-            },
-            {
-              "value": "qa_party",
-              "label": "【QA】党に対して"
-            },
-            {
-              "value": "qa_policy",
-              "label": "【QA】政策に対して"
-            },
-            {
-              "value": "qa_other",
-              "label": "【QA】その他"
-            },
-            {
-              "value": "events_advance",
-              "label": "【イベント・勉強会】事前告知"
-            },
-            {
-              "value": "events_report",
-              "label": "【イベント・勉強会】開催レポート"
-            },
-            {
-              "value": "featured_hakomono",
-              "label": "【推しネタ】ハコモノ探偵団"
-            },
-            {
-              "value": "featured_prices",
-              "label": "【推しネタ】港区狂乱物価"
-            },
-            {
-              "value": "featured_closure",
-              "label": "【推しネタ】港区廃業"
-            },
-            {
-              "value": "featured_promo",
-              "label": "【推しネタ】プロモーション・その他"
-            }
-          ]
+          "collection": "subcategoryManagement",
+          "displayField": "label",
+          "note": "大カテゴリと同じ【カテゴリ名】のサブカテゴリを選択してください。"
         },
         {
           "name": "title",
@@ -278,7 +207,7 @@
     },
     {
       "name": "lpDirectLinks",
-      "label": "LP直リンク記事",
+      "label": "【記事入力】LP直リンク記事",
       "description": "推しネタ・イベント等から外部LPへ直接リンクする本文なしの記事",
       "path": "content/lp-links",
       "extension": "md",
@@ -301,47 +230,12 @@
         },
         {
           "name": "subcategory",
-          "type": "select",
+          "type": "relation",
           "label": "サブカテゴリ",
           "required": true,
-          "options": [
-            {
-              "value": "featured_hakomono",
-              "label": "【推しネタ】ハコモノ探偵団"
-            },
-            {
-              "value": "featured_prices",
-              "label": "【推しネタ】港区狂乱物価"
-            },
-            {
-              "value": "featured_closure",
-              "label": "【推しネタ】港区廃業"
-            },
-            {
-              "value": "featured_employment_social",
-              "label": "【推しネタ】雇用・社会問題を斬る"
-            },
-            {
-              "value": "featured_promo",
-              "label": "【推しネタ】プロモーション・その他"
-            },
-            {
-              "value": "events_advance",
-              "label": "【イベント・勉強会】事前告知"
-            },
-            {
-              "value": "events_report",
-              "label": "【イベント・勉強会】開催レポート"
-            },
-            {
-              "value": "events_study_library",
-              "label": "【イベント・勉強会】スタディ・ライブラリ"
-            },
-            {
-              "value": "events_party_library",
-              "label": "【イベント・勉強会】イベント・ライブラリ"
-            }
-          ]
+          "collection": "subcategoryManagement",
+          "displayField": "label",
+          "note": "大カテゴリと同じ【カテゴリ名】のサブカテゴリを選択してください。"
         },
         {
           "name": "title",
@@ -484,7 +378,7 @@
     },
     {
       "name": "textQaArticles",
-      "label": "テキスト・QA",
+      "label": "【記事入力】テキスト・QA",
       "description": "テキスト情報・QA記事",
       "path": "content/text-qa",
       "extension": "md",
@@ -515,87 +409,12 @@
         },
         {
           "name": "subcategory",
-          "type": "select",
+          "type": "relation",
           "label": "サブカテゴリ",
           "required": true,
-          "options": [
-            {
-              "value": "about_intro_message",
-              "label": "【私たちについて】紹介・メッセージ"
-            },
-            {
-              "value": "about_profile",
-              "label": "【私たちについて】団体概要"
-            },
-            {
-              "value": "about_people_org",
-              "label": "【私たちについて】人事・組織"
-            },
-            {
-              "value": "about_media",
-              "label": "【私たちについて】広報・マスコミ登場"
-            },
-            {
-              "value": "about_feedback",
-              "label": "【私たちについて】頂いたご意見"
-            },
-            {
-              "value": "about_other",
-              "label": "【私たちについて】その他"
-            },
-            {
-              "value": "qa_membership",
-              "label": "【QA】会員に関して"
-            },
-            {
-              "value": "qa_donation",
-              "label": "【QA】寄付に関して"
-            },
-            {
-              "value": "qa_events",
-              "label": "【QA】勉強会・イベントに関して"
-            },
-            {
-              "value": "qa_party",
-              "label": "【QA】党に対して"
-            },
-            {
-              "value": "qa_policy",
-              "label": "【QA】政策に対して"
-            },
-            {
-              "value": "qa_other",
-              "label": "【QA】その他"
-            },
-            {
-              "value": "events_advance",
-              "label": "【イベント・勉強会】事前告知"
-            },
-            {
-              "value": "events_report",
-              "label": "【イベント・勉強会】開催レポート"
-            },
-            {
-              "value": "video_city_oddities",
-              "label": "【動画】都会にこんなものいる？"
-            },
-            {
-              "value": "video_minato_prices",
-              "label": "【動画】クレイジーな港区物価"
-            },
-            {
-              "value": "video_minato_closures",
-              "label": "【動画】港区廃業という闇"
-            },
-            {
-              "value": "video_members",
-              "label": "【動画】メンバー紹介"
-            },
-            {
-              "value": "video_other",
-              "label": "【動画】その他"
-            }
-          ]
+          "collection": "subcategoryManagement",
+          "displayField": "label",
+          "note": "大カテゴリと同じ【カテゴリ名】のサブカテゴリを選択してください。"
         },
         {
           "name": "title",
@@ -747,7 +566,7 @@
     },
     {
       "name": "videoArticles",
-      "label": "動画メイン記事",
+      "label": "【記事入力】動画メイン記事",
       "description": "動画を主役にする記事",
       "path": "content/videos",
       "extension": "md",
@@ -770,56 +589,12 @@
         },
         {
           "name": "subcategory",
-          "type": "select",
+          "type": "relation",
           "label": "サブカテゴリ",
           "required": true,
-          "options": [
-            {
-              "value": "featured_hakomono",
-              "label": "【推しネタ】ハコモノ探偵団"
-            },
-            {
-              "value": "featured_closure",
-              "label": "【推しネタ】港区廃業"
-            },
-            {
-              "value": "featured_prices",
-              "label": "【推しネタ】港区狂乱物価"
-            },
-            {
-              "value": "featured_employment_social",
-              "label": "【推しネタ】雇用・社会問題を斬る"
-            },
-            {
-              "value": "featured_promo",
-              "label": "【推しネタ】プロモーション・その他"
-            },
-            {
-              "value": "events_party_library",
-              "label": "【イベント・勉強会】パーティライブラリ"
-            },
-            {
-              "value": "events_study_library",
-              "label": "【イベント・勉強会】スタディライブラリ"
-            }
-          ]
-        },
-        {
-          "name": "productionType",
-          "type": "select",
-          "label": "動画区分",
-          "required": true,
-          "options": [
-            {
-              "value": "original",
-              "label": "中くらいの政府制作"
-            },
-            {
-              "value": "external",
-              "label": "外部制作"
-            }
-          ],
-          "note": "中くらいの政府制作はサイト内の視聴ページへ、外部制作は配信元へ直接リンクします。"
+          "collection": "subcategoryManagement",
+          "displayField": "label",
+          "note": "大カテゴリと同じ【カテゴリ名】のサブカテゴリを選択してください。"
         },
         {
           "name": "title",
@@ -932,6 +707,127 @@
         "draft": "isDraft",
         "defaultSortField": "_createdAt",
         "defaultSortOrder": "desc"
+      }
+    },
+    {
+      "name": "subcategoryManagement",
+      "label": "【付加機能】サブカテゴリ管理",
+      "description": "サブカテゴリの追加・名称変更・利用停止・統合を管理します。削除せず、利用停止または統合を使用してください。",
+      "path": "content/subcategories",
+      "extension": "json",
+      "generateFilename": true,
+      "fields": [
+        {
+          "name": "category",
+          "type": "select",
+          "label": "大カテゴリ",
+          "required": true,
+          "options": [
+            {
+              "value": "about",
+              "label": "私たちについて"
+            },
+            {
+              "value": "qa",
+              "label": "QA"
+            },
+            {
+              "value": "events",
+              "label": "イベント・勉強会"
+            },
+            {
+              "value": "featured",
+              "label": "推しネタ"
+            }
+          ]
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "label": "管理・表示名",
+          "required": true,
+          "note": "例：【推しネタ】ハコモノ探偵団。名称変更はこの欄だけを変更します。"
+        },
+        {
+          "name": "status",
+          "type": "select",
+          "label": "状態",
+          "required": true,
+          "default": "active",
+          "options": [
+            {
+              "value": "active",
+              "label": "使用中"
+            },
+            {
+              "value": "inactive",
+              "label": "利用停止"
+            },
+            {
+              "value": "merged",
+              "label": "統合済み"
+            }
+          ]
+        },
+        {
+          "name": "mergeInto",
+          "type": "relation",
+          "label": "統合先",
+          "collection": "subcategoryManagement",
+          "displayField": "label",
+          "note": "状態を「統合済み」にした場合だけ指定します。統合先は使用中のサブカテゴリを選んでください。"
+        },
+        {
+          "name": "description",
+          "type": "textarea",
+          "label": "説明文",
+          "note": "サブカテゴリ見出しに説明を出す場合に入力します。空欄でも構いません。"
+        },
+        {
+          "name": "displayOrder",
+          "type": "number",
+          "label": "表示順",
+          "min": 0,
+          "note": "小さい数字から順に表示します。一覧画面のドラッグ操作でも変更できます。"
+        },
+        {
+          "name": "showBackNumber",
+          "type": "boolean",
+          "label": "Back Numberを表示",
+          "default": true
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "label": "更新日時",
+          "includeTime": true
+        }
+      ],
+      "layout": [
+        [
+          "category",
+          "status"
+        ],
+        [
+          "label"
+        ],
+        [
+          "mergeInto"
+        ],
+        [
+          "description"
+        ],
+        [
+          "displayOrder",
+          "showBackNumber"
+        ]
+      ],
+      "pit": {
+        "title": "label",
+        "updatedAt": "updatedAt",
+        "order": "displayOrder",
+        "defaultSortField": "_order",
+        "defaultSortOrder": "asc"
       }
     }
   ]
