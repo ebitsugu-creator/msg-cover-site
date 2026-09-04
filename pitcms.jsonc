@@ -214,6 +214,12 @@
           "note": "指定した場合、この日時以降はサイトに表示しません。"
         },
         {
+          "name": "updatedAt",
+          "type": "date",
+          "label": "更新日時",
+          "includeTime": true
+        },
+        {
           "name": "isDraft",
           "type": "boolean",
           "label": "下書き",
@@ -264,6 +270,7 @@
         "title": "title",
         "body": "content",
         "createdAt": "publishedAt",
+        "updatedAt": "updatedAt",
         "draft": "isDraft",
         "defaultSortField": "_createdAt",
         "defaultSortOrder": "desc"
@@ -422,6 +429,12 @@
           "note": "指定した場合、この日時以降はサイトに表示しません。"
         },
         {
+          "name": "updatedAt",
+          "type": "date",
+          "label": "更新日時",
+          "includeTime": true
+        },
+        {
           "name": "isDraft",
           "type": "boolean",
           "label": "下書き",
@@ -463,6 +476,7 @@
       "pit": {
         "title": "title",
         "createdAt": "publishedAt",
+        "updatedAt": "updatedAt",
         "draft": "isDraft",
         "defaultSortField": "_createdAt",
         "defaultSortOrder": "desc"
@@ -676,6 +690,12 @@
           "note": "指定した場合、この日時以降はサイトに表示しません。"
         },
         {
+          "name": "updatedAt",
+          "type": "date",
+          "label": "更新日時",
+          "includeTime": true
+        },
+        {
           "name": "isDraft",
           "type": "boolean",
           "label": "下書き",
@@ -719,6 +739,7 @@
         "title": "title",
         "body": "content",
         "createdAt": "publishedAt",
+        "updatedAt": "updatedAt",
         "draft": "isDraft",
         "defaultSortField": "_createdAt",
         "defaultSortOrder": "desc"
@@ -861,6 +882,12 @@
           "note": "指定した場合、この日時以降はサイトに表示しません。"
         },
         {
+          "name": "updatedAt",
+          "type": "date",
+          "label": "更新日時",
+          "includeTime": true
+        },
+        {
           "name": "isDraft",
           "type": "boolean",
           "label": "下書き",
@@ -901,6 +928,7 @@
       "pit": {
         "title": "title",
         "createdAt": "publishedAt",
+        "updatedAt": "updatedAt",
         "draft": "isDraft",
         "defaultSortField": "_createdAt",
         "defaultSortOrder": "desc"
