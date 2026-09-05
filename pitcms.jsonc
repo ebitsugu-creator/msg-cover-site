@@ -1044,6 +1044,12 @@
           "note": "指定した場合、この日時以降は表示対象から外れます。"
         },
         {
+          "name": "createdAt",
+          "type": "date",
+          "label": "登録日時",
+          "includeTime": true
+        },
+        {
           "name": "updatedAt",
           "type": "date",
           "label": "更新日時",
@@ -1073,6 +1079,7 @@
         ]
       ],
       "pit": {
+        "createdAt": "createdAt",
         "updatedAt": "updatedAt",
         "defaultSortField": "_createdAt",
         "defaultSortOrder": "desc"
