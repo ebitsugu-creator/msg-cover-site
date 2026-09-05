@@ -1,0 +1,36 @@
+(()=>{'use strict';
+const host=document.getElementById('cms-top-whatsnew');if(!host)return;
+const SOURCES=[['free','content/free'],['lp-links','content/lp-links'],['text-qa','content/text-qa'],['videos','content/videos']];
+const CATEGORY={about:'私たちについて',qa:'Q&A',events:'イベント・勉強会',featured:'推しネタ'};
+const FALLBACK_LABELS={
+about_intro_message:'紹介・メッセージ',about_profile:'団体概要',about_people_org:'人事・組織',about_media:'広報・マスコミ登場',about_feedback:'頂いたご意見',about_other:'その他',
+qa_membership:'会員に関して',qa_donation:'寄付に関して',qa_events:'勉強会・イベントに関して',qa_party:'党に対して',qa_policy:'政策に対して',qa_other:'その他',
+events_advance:'事前告知',events_study_library:'スタディ・ライブラリ',events_party_library:'イベント・ライブラリ',
+featured_hakomono:'ハコモノ探偵団',featured_closure:'港区廃業',featured_prices:'港区狂乱物価',featured_employment_social:'雇用・社会問題を斬る',featured_promo:'プロモーション・その他'};
+let subs=null;
+const esc=(v='')=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+function scalar(raw){let v=String(raw||'').trim();if(v==='true')return true;if(v==='false')return false;if(v==='null')return null;if((v.startsWith('"')&&v.endsWith('"'))||(v.startsWith("'")&&v.endsWith("'")))v=v.slice(1,-1);return v}
+function parse(text,fileName,collection){const m=String(text||'').replace(/^\uFEFF/,'').match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);if(!m)return null;const data={};m[1].split(/\r?\n/).forEach(line=>{const i=line.indexOf(':');if(i>0)data[line.slice(0,i).trim()]=scalar(line.slice(i+1))});return {...data,fileName,collection}}
+function dt(v){if(!v)return null;const d=new Date(v);return Number.isNaN(d.getTime())?null:d}
+function stamp(a){return dt(a.publishStartAt)||dt(a.publishedAt)}
+function fmt(v){const d=v instanceof Date?v:dt(v);if(!d)return '';return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`}
+function image(v){if(!v)return '';v=String(v).trim();if(/^https?:\/\//i.test(v))return v;if(v.startsWith('/public/'))return v;if(v.startsWith('public/'))return '/'+v;if(v.startsWith('/images/'))return '/public'+v;if(v.startsWith('images/'))return '/public/'+v;return v}
+function yt(v){try{const u=new URL(String(v||'').trim().replace(/^["']|["']$/g,''));const h=u.hostname.replace(/^www\./,'');if(h==='youtu.be')return u.pathname.split('/').filter(Boolean)[0]||'';if(['youtube.com','m.youtube.com','music.youtube.com','youtube-nocookie.com'].includes(h)){const q=u.searchParams.get('v');if(q)return q;const m=u.pathname.match(/\/(?:shorts|embed|live|v)\/([^/?]+)/);return m?m[1]:''}}catch(_){}return ''}
+function thumb(a){const id=yt(a.videoUrl||''),manual=image(a.image1||a.image2||'');if(a.collection==='videos'&&id)return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;if(manual)return manual;return id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:''}
+async function youtubeMeta(a){if(a.collection!=='videos'||!yt(a.videoUrl||''))return a;try{const r=await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(a.videoUrl)}&format=json`,{cache:'force-cache'});if(!r.ok)return a;const m=await r.json();return {...a,ytTitle:m.title||'',ytThumb:m.thumbnail_url||''}}catch(_){return a}}
+function displayTitle(a){return a.collection==='videos'?(a.ytTitle||a.title||'動画'):(a.title||'無題')}
+function summary(a){return String(a.summary||a.subtitle||a.note||'').trim()}
+function short20(v){const a=Array.from(String(v||'').replace(/\s+/g,' ').trim());return a.length>20?a.slice(0,20).join('')+'…':a.join('')}
+function categoryLabel(a){return CATEGORY[a.category]||'お知らせ'}
+function subLabel(a){return (subs&&subs.label(a.subcategory))||FALLBACK_LABELS[a.subcategory]||a.subcategory||''}
+function crumb(a){const c=categoryLabel(a),s=subLabel(a);return s?`${c} ＞ ${s}`:c}
+function isAdvance(a){return subs&&subs.matches?subs.matches(a.subcategory,'events_advance'):a.subcategory==='events_advance'}
+function visible(a,now){if(a.publishable!==true||a.whatsNew!==true||a.isDraft===true)return false;if(subs&&subs.isActive&&!subs.isActive(a.subcategory))return false;const s=dt(a.publishStartAt),e=dt(a.publishEndAt);if(s&&now<s)return false;if(e&&now>e)return false;if(isAdvance(a)){const ev=dt(a.eventAt);if(ev&&now>=ev)return false}const st=stamp(a);if(!st)return false;const limit=new Date(now);limit.setMonth(limit.getMonth()-3);return st>=limit}
+function href(a){if(a.collection==='videos'){if(a.productionType==='external'&&a.videoUrl)return {url:a.videoUrl,ext:true};return {url:`article.html?collection=videos&file=${encodeURIComponent(a.fileName)}`,ext:false}}if(a.linkUrl)return {url:a.linkUrl,ext:/^https?:\/\//i.test(a.linkUrl)};return {url:`article.html?collection=${a.collection}&file=${encodeURIComponent(a.fileName)}`,ext:false}}
+function attrs(h){return h.ext?' target="_blank" rel="noopener noreferrer"':''}
+function featured(a){const h=href(a),im=thumb(a),title=displayTitle(a),sum=short20(summary(a));const media=im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="top-wn-image-placeholder">NEWS</span>`;return `<article class="top-wn-featured"><a class="top-wn-featured-image" href="${esc(h.url)}"${attrs(h)}>${media}</a><div class="top-wn-featured-copy"><span class="top-wn-crumb">${esc(crumb(a))}</span><h3><a href="${esc(h.url)}"${attrs(h)}>${esc(title)}</a></h3><p class="top-wn-summary">${esc(sum||'　')}</p></div></article>`}
+function compact(a){const h=href(a),title=displayTitle(a);return `<article class="top-wn-text"><time datetime="${esc(a.publishStartAt||a.publishedAt||'')}">${esc(fmt(stamp(a)))}</time><div class="top-wn-text-main"><span class="top-wn-text-crumb">${esc(crumb(a))}</span><h3><a href="${esc(h.url)}"${attrs(h)}>${esc(title)}</a></h3></div></article>`}
+async function source([collection,path]){const repo=window.MSGRepo;if(!repo||!repo.list||!repo.text)throw new Error('repository reader unavailable');const paths=await repo.list(path,'.md');return (await Promise.all(paths.map(async file=>{try{return parse(await repo.text(file),file.split('/').pop(),collection)}catch(_){return null}}))).filter(Boolean)}
+async function load(){try{subs=window.MSGSubcategories?await window.MSGSubcategories.ready:null;const settled=await Promise.allSettled(SOURCES.map(source));if(!settled.some(x=>x.status==='fulfilled'))throw new Error('all sources failed');let items=settled.flatMap(x=>x.status==='fulfilled'?x.value:[]).filter(a=>visible(a,new Date())).sort((a,b)=>stamp(b)-stamp(a));items=await Promise.all(items.slice(0,24).map(youtubeMeta));const withImage=items.filter(a=>thumb(a));let hero=withImage.slice(0,3);if(hero.length<3){const used=new Set(hero);hero=hero.concat(items.filter(a=>!used.has(a)).slice(0,3-hero.length))}const chosen=new Set(hero);const text=items.filter(a=>!chosen.has(a)).slice(0,5);if(!hero.length&&!text.length){host.innerHTML='<p class="top-wn-status">現在、掲載中の新着情報はありません。</p>';return}host.innerHTML=`${hero.length?`<div class="top-wn-featured-list">${hero.map(featured).join('')}</div>`:''}${text.length?`<div class="top-wn-text-list">${text.map(compact).join('')}</div>`:''}`;host.closest('.top-whatsnew')?.classList.toggle('top-whatsnew--short',hero.length<3||text.length<5)}catch(err){console.error('[top whatsnew]',err);host.innerHTML='<p class="top-wn-status">新着情報を読み込めませんでした。</p>'}}
+load();
+})();

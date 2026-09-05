@@ -136,7 +136,7 @@
   /* TOP と Music Video は画面右下の丸ボタン(全ページ共通) */
   var FLOAT_BUTTONS = [
     { label: "MV",  title: "Music Video", href: "mv.html" },
-    { label: "TOP", title: "TOP（8つの入口）へ", href: MENU_URL, top: true }
+    { label: "TOP", title: "TOP（表紙）へ", href: MENU_URL, top: true }
   ];
 
   /* お知らせ：固定2件（ここを書き換えてください） */

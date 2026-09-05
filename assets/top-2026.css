@@ -590,3 +590,232 @@ body a:hover{color:var(--sky-700)}
   [data-reveal]{opacity:1;transform:none}
   .pro-guide,.pro-skip,.pro-timeline{display:none}
 }
+
+/* =========================================================
+   V147 — 表紙ダッシュボード
+   左：キービジュアル / 右：What's New（完全等幅）
+========================================================= */
+.pro-dashboard-image{display:none}
+.top-whatsnew{display:none}
+
+.top-live-grid.is-dashboard{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+  width:100%;
+  max-width:1240px;
+  margin:0 auto;
+  padding:18px 24px 0;
+  align-items:stretch;
+}
+.top-live-grid.is-dashboard .prologue.is-finished{
+  height:auto;
+  min-height:0;
+  aspect-ratio:1362/913;
+  border:1px solid rgba(22,41,74,.14);
+  border-radius:16px;
+  overflow:hidden;
+  background:var(--sky-100);
+}
+.top-live-grid.is-dashboard .prologue-stage{border-radius:inherit}
+.top-live-grid.is-dashboard .pro-final picture{display:none}
+.top-live-grid.is-dashboard .pro-dashboard-image{
+  display:block;
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center;
+  transform:none;
+  -webkit-mask-image:none;
+  mask-image:none;
+}
+.top-live-grid.is-dashboard .pro-final-msg{
+  left:14px;right:14px;top:14px;
+  text-align:center;
+  font-size:clamp(13px,1.45vw,18px);
+  line-height:1.55;
+  letter-spacing:.04em;
+}
+.top-live-grid.is-dashboard .pro-final-caption{
+  left:20px;bottom:18px;
+  gap:9px;
+  font-size:9.5px;
+  letter-spacing:.38em;
+}
+.top-live-grid.is-dashboard .pro-final-caption i{width:44px}
+.top-live-grid.is-dashboard .pro-final-caption .origin{font-size:9.5px}
+.top-live-grid.is-dashboard .pro-guide{right:10px;bottom:14px;gap:7px}
+.top-live-grid.is-dashboard .pro-guide span{font-size:8px}
+.top-live-grid.is-dashboard .pro-guide i{height:44px}
+
+/* ---- 表紙 What's New ---- */
+.top-live-grid.is-dashboard .top-whatsnew{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  height:100%;
+  overflow:hidden;
+  border:1px solid rgba(22,41,74,.16);
+  border-radius:16px;
+  background:rgba(255,255,255,.97);
+  box-shadow:0 14px 38px rgba(11,30,60,.055),inset 0 1px 0 #fff;
+  padding:12px 14px 10px;
+}
+.top-wn-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  flex:0 0 auto;
+  padding:0 1px 8px;
+  border-bottom:1px solid rgba(22,41,74,.12);
+}
+.top-wn-head h2{
+  margin:0;
+  font-family:var(--serif,serif);
+  color:var(--navy-900,#0D2347);
+  font-size:clamp(21px,2.25vw,29px);
+  font-weight:650;
+  line-height:1;
+  letter-spacing:.015em;
+}
+.top-wn-more{
+  display:inline-flex;align-items:center;gap:7px;
+  flex:0 0 auto;
+  color:var(--navy-700,#1C3A66);
+  font-size:10px;font-weight:800;letter-spacing:.08em;
+  white-space:nowrap;
+}
+.top-wn-more span{font-size:15px;line-height:1}
+.top-wn-more:hover{color:var(--gold-700,#8A6D1E)}
+.top-wn-body{display:flex;flex:1 1 auto;min-height:0;flex-direction:column}
+.top-wn-status{margin:auto;color:var(--muted,#6E7A8E);font-size:13px}
+.top-wn-featured-list{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));flex:1 1 auto;min-height:0}
+.top-wn-featured{
+  min-width:0;
+  display:grid;
+  grid-template-columns:clamp(78px,8.3vw,104px) minmax(0,1fr);
+  gap:10px;
+  align-items:center;
+  padding:6px 0;
+  border-bottom:1px solid rgba(22,41,74,.10);
+}
+.top-wn-featured-image{
+  display:block;
+  width:100%;aspect-ratio:16/9;
+  overflow:hidden;border-radius:5px;
+  background:var(--sky-100);
+  border:1px solid rgba(22,41,74,.09);
+}
+.top-wn-featured-image img{display:block;width:100%;height:100%;object-fit:cover}
+.top-wn-featured-copy{min-width:0}
+.top-wn-crumb{
+  display:block;
+  margin:0 0 3px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:var(--sky-600);
+  font-size:9px;font-weight:700;line-height:1.15;
+}
+.top-wn-featured h3{
+  margin:0;
+  font-size:clamp(11.5px,1.05vw,13.5px);
+  line-height:1.35;font-weight:750;
+  color:var(--navy-900,#0D2347);
+  overflow:hidden;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+}
+.top-wn-featured h3 a{color:inherit}
+.top-wn-featured h3 a:hover{color:var(--sky-600)}
+.top-wn-summary{
+  margin:3px 0 0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:var(--muted,#6E7A8E);
+  font-size:9.5px;line-height:1.3;
+}
+.top-wn-text-list{flex:0 0 auto;padding-top:3px}
+.top-wn-text{
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr);
+  gap:8px;align-items:center;
+  min-height:23px;
+  border-bottom:1px solid rgba(22,41,74,.085);
+  font-size:9.5px;
+}
+.top-wn-text:last-child{border-bottom:0}
+.top-wn-text time{color:var(--muted,#6E7A8E);font-variant-numeric:tabular-nums;white-space:nowrap}
+.top-wn-text-main{min-width:0;display:flex;align-items:center;gap:7px}
+.top-wn-text-crumb{color:var(--sky-600);font-weight:700;white-space:nowrap;max-width:42%;overflow:hidden;text-overflow:ellipsis}
+.top-wn-text h3{min-width:0;margin:0;font-size:10px;line-height:1.25;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top-wn-text h3 a{color:var(--navy-900,#0D2347)}
+.top-wn-text h3 a:hover{color:var(--sky-600)}
+
+/* ---- 入口：左右2列、各列は縦積み。05 は What's New 本体へ置換 ---- */
+.msg-explore{
+  min-height:0;
+  display:block;
+  padding:12px 24px 28px;
+  background:var(--porcelain,#F6F8FB);
+}
+.card-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+}
+.entry-column{display:flex;flex-direction:column;gap:10px;min-width:0}
+.entry-card,
+.entry-card:nth-child(even){
+  min-height:72px;
+  grid-template-columns:42px minmax(0,1fr);
+  gap:11px;
+  padding:10px 44px 9px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.94);
+}
+.entry-card .no{top:7px;left:12px;font-size:8.5px}
+.entry-card .icon{width:42px;height:42px}
+.entry-card .icon svg{width:27px;height:27px}
+.entry-card .text{gap:2px}
+.entry-card .en{font-size:7.5px;letter-spacing:.14em}
+.entry-card .ja{
+  font-size:clamp(13px,1.08vw,16px);
+  line-height:1.25;
+  white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+}
+.entry-card .ja em{display:inline;font-style:normal;white-space:inherit}
+.entry-card .arrow{right:10px;bottom:50%;transform:translateY(50%);width:30px;height:30px}
+.entry-card:hover .arrow,.entry-card:focus-visible .arrow{transform:translate(4px,50%)}
+
+/* 同幅2列を維持できない幅だけ、素直に縦積みへ。途中で巨大カード化しない。 */
+@media (max-width:900px){
+  .top-live-grid.is-dashboard{grid-template-columns:1fr;padding:14px 18px 0;gap:10px}
+  .top-live-grid.is-dashboard .prologue.is-finished{aspect-ratio:16/9}
+  .top-live-grid.is-dashboard .pro-dashboard-image{object-fit:cover;object-position:center 42%}
+  .top-live-grid.is-dashboard .top-whatsnew{min-height:390px}
+  .msg-explore{padding:10px 18px 24px}
+  .card-grid{grid-template-columns:1fr;gap:10px}
+  .entry-column{gap:8px}
+  .entry-card{min-height:64px}
+}
+@media (max-width:480px){
+  .top-live-grid.is-dashboard{padding:10px 10px 0}
+  .top-live-grid.is-dashboard .prologue.is-finished{aspect-ratio:4/3}
+  .top-live-grid.is-dashboard .top-whatsnew{min-height:385px;padding:10px 10px 8px;border-radius:12px}
+  .top-wn-featured{grid-template-columns:84px minmax(0,1fr);gap:8px}
+  .top-wn-featured h3{font-size:11.5px}
+  .top-wn-text{grid-template-columns:54px minmax(0,1fr)}
+  .top-wn-text-main{gap:5px}
+  .msg-explore{padding:8px 10px 20px}
+  .entry-card,.entry-card:nth-child(even){
+    grid-template-columns:38px minmax(0,1fr);
+    min-height:58px;
+    padding:8px 38px 8px 10px;
+    border-radius:12px;
+    align-items:center;
+  }
+  .entry-card .icon{width:38px;height:38px}
+  .entry-card .icon svg{width:24px;height:24px}
+  .entry-card .no{top:5px;left:8px;font-size:8px}
+  .entry-card .en{display:none}
+  .entry-card .ja{padding-top:0;font-size:12.5px;line-height:1.2}
+  .entry-card .arrow{right:8px;bottom:50%;width:24px;height:24px}
+}
+.top-wn-image-placeholder{display:grid;place-items:center;width:100%;height:100%;font-size:9px;font-weight:800;letter-spacing:.16em;color:var(--muted,#6E7A8E);background:linear-gradient(145deg,#fff,var(--sky-100))}

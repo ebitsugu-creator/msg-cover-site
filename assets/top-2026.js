@@ -115,6 +115,8 @@
       if (timer) { window.clearInterval(timer); timer = 0; }
       render(1);
       root.classList.add("is-finished");
+      var liveGrid = root.closest(".top-live-grid");
+      if (liveGrid) liveGrid.classList.add("is-dashboard");
       document.body.classList.remove("prologue-running");
       document.dispatchEvent(new Event("MSGPrologueFinished"));
       /* 演出が終わったら、少し余韻を置いて8つの入口(メニュー画面)へ */
@@ -126,6 +128,8 @@
       offset = 0;
       startAt = performance.now();
       root.classList.remove("is-finished");
+      var liveGrid = root.closest(".top-live-grid");
+      if (liveGrid) liveGrid.classList.remove("is-dashboard");
       document.body.classList.add("prologue-running");
       if (raf) window.cancelAnimationFrame(raf);
       if (timer) window.clearInterval(timer);
