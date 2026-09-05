@@ -397,12 +397,11 @@
   }
   function bannerYoutubeTitle(a) {
     if (a.collection !== "videos") return Promise.resolve(a.title || "");
-    if (a.title) return Promise.resolve(a.title);
-    if (!bannerYoutubeId(a.videoUrl)) return Promise.resolve("動画");
+    if (!bannerYoutubeId(a.videoUrl)) return Promise.resolve(a.title || "動画");
     return fetch("https://www.youtube.com/oembed?url=" + encodeURIComponent(a.videoUrl) + "&format=json", { cache: "force-cache" })
       .then(function (r) { if (!r.ok) throw new Error("oembed " + r.status); return r.json(); })
-      .then(function (m) { return m && m.title ? m.title : "動画"; })
-      .catch(function () { return "動画"; });
+      .then(function (m) { return m && m.title ? m.title : (a.title || "動画"); })
+      .catch(function () { return a.title || "動画"; });
   }
   function topArticleVisible(a, now) {
     if (!a || a.publishable !== true || a.whatsNew !== true || a.isDraft === true) return false;

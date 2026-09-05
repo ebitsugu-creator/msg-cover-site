@@ -867,3 +867,40 @@ body a:hover{color:var(--sky-700)}
   min-width:0;
   max-width:100%;
 }
+
+
+/* =========================================================
+   V153 — TOP readability tuning
+   - Entry labels: +2Q equivalent (about +2px on screen)
+   - What's New titles: +2Q equivalent
+   - Compact dates: MM/DD, right-aligned in the existing date lane
+========================================================= */
+.entry-card .ja{
+  font-size:clamp(15px,1.22vw,18px);
+}
+.top-wn-featured h3{
+  font-size:clamp(13.5px,1.20vw,15.5px);
+  line-height:1.32;
+}
+.top-wn-text{
+  font-size:10.5px;
+}
+.top-wn-text time{
+  text-align:right;
+  padding-right:2px;
+}
+.top-wn-text h3{
+  font-size:12px;
+  line-height:1.22;
+  font-weight:700;
+}
+@media (max-width:700px) and (min-width:561px){
+  .entry-card .ja{font-size:14px}
+  .top-wn-featured h3{font-size:13px}
+  .top-wn-text h3{font-size:11.5px}
+}
+@media (max-width:480px){
+  .entry-card .ja{font-size:14.5px}
+  .top-wn-featured h3{font-size:13px}
+  .top-wn-text h3{font-size:11.5px}
+}
