@@ -214,7 +214,7 @@
     }).join("");
 
     return '' +
-      '<div class="mn-inner' + (pageBar ? ' has-page' : '') + '">' +
+      '<div class="mn-inner' + (pageBar ? ' has-page' : '') + (isTop() ? ' mn-inner--top-banner' : '') + '">' +
         '<a class="mn-brand" href="' + esc(MENU_URL) + '" aria-label="中くらいの政府 メニューへ">' +
           '<img src="assets/img/msg-logo-ja.png" alt="中くらいの政府" width="300" height="66">' +
           '<span class="mn-brand-en" aria-hidden="true">MSG — MEDIUM SIZED GOVERNMENT</span>' +
@@ -222,17 +222,26 @@
         pageBar +
         '<nav class="mn-nav" aria-label="メインメニュー">' + groups + '</nav>' +
         '<div class="mn-tools">' +
-          '<div class="mn-notice">' +
-            '<button class="mn-notice-btn" type="button" aria-expanded="false" aria-controls="mn-notice-panel">お知らせ</button>' +
-            '<div class="mn-notice-panel" id="mn-notice-panel" role="region" aria-label="お知らせ">' +
-              '<p class="mn-notice-head">お知らせ</p>' +
-              '<ul class="mn-notice-fixed"></ul>' +
-              '<p class="mn-notice-sub">新着</p>' +
-              '<ul class="mn-notice-new"><li class="mn-notice-loading">読み込み中…</li></ul>' +
-              '<a class="mn-notice-more" href="activity.html#news">すべて見る →</a>' +
+          (isTop() ?
+            '<div class="mn-top-banner-shell">' +
+              '<a class="mn-top-banner" href="whatsnew.html" aria-label="What\'s Newを見る">' +
+                '<span class="mn-top-banner-text">新着情報を読み込み中…</span>' +
+                '<span class="mn-top-banner-arrow" aria-hidden="true">→</span>' +
+              '</a>' +
+            '</div>'
+          :
+            '<div class="mn-notice">' +
+              '<button class="mn-notice-btn" type="button" aria-expanded="false" aria-controls="mn-notice-panel">お知らせ</button>' +
+              '<div class="mn-notice-panel" id="mn-notice-panel" role="region" aria-label="お知らせ">' +
+                '<p class="mn-notice-head">お知らせ</p>' +
+                '<ul class="mn-notice-fixed"></ul>' +
+                '<p class="mn-notice-sub">新着</p>' +
+                '<ul class="mn-notice-new"><li class="mn-notice-loading">読み込み中…</li></ul>' +
+                '<a class="mn-notice-more" href="activity.html#news">すべて見る →</a>' +
+              '</div>' +
             '</div>' +
-          '</div>' +
-          '<a class="mn-cta" href="join.html">参加する</a>' +
+            '<a class="mn-cta" href="join.html">参加する</a>'
+          ) +
           '<button class="mn-menu-btn" type="button" aria-expanded="false" aria-controls="mn-drawer" aria-label="メニューを開く"><span></span><span></span><span></span></button>' +
         '</div>' +
       '</div>' +
@@ -329,6 +338,197 @@
       }
     }).catch(function (e) { console.warn("[MV button] CMS setting could not be loaded", e); });
   }
+  /* ---------- TOPテキストバナー（表紙のみ：固定2 + What's New最新3） ---------- */
+  var TOP_BANNER_INTERVAL = 5000;
+  var TOP_BANNER_FIXED_COUNT = 2;
+  var TOP_BANNER_FRESH_COUNT = 3;
+  var topBannerSubs = null;
+  var TOP_BANNER_SOURCES = [
+    { collection: "free", path: "content/free" },
+    { collection: "lp-links", path: "content/lp-links" },
+    { collection: "text-qa", path: "content/text-qa" },
+    { collection: "videos", path: "content/videos" }
+  ];
+
+  function bannerScalar(raw) {
+    var v = String(raw == null ? "" : raw).trim();
+    if (v === "true") return true;
+    if (v === "false") return false;
+    if (v === "null") return null;
+    if ((v.charAt(0) === '"' && v.charAt(v.length - 1) === '"') || (v.charAt(0) === "'" && v.charAt(v.length - 1) === "'")) v = v.slice(1, -1);
+    return v;
+  }
+  function parseBannerFrontmatter(text, fileName, collection) {
+    var m = String(text || "").replace(/^\uFEFF/, "").match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
+    if (!m) return null;
+    var data = {};
+    m[1].split(/\r?\n/).forEach(function (line) {
+      var i = line.indexOf(":");
+      if (i > 0) data[line.slice(0, i).trim()] = bannerScalar(line.slice(i + 1));
+    });
+    data.fileName = fileName;
+    data.collection = collection;
+    return data;
+  }
+  function bannerDate(v) {
+    if (!v) return null;
+    var d = new Date(v);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function bannerStamp(a) { return bannerDate(a.publishStartAt) || bannerDate(a.publishedAt); }
+  function bannerClip24(v) {
+    var chars = Array.from(String(v || "").replace(/\s+/g, " ").trim());
+    if (chars.length <= 24) return chars.join("");
+    return chars.slice(0, 23).join("") + "…";
+  }
+  function bannerYoutubeId(v) {
+    try {
+      var u = new URL(String(v || "").trim().replace(/^["']|["']$/g, ""));
+      var h = u.hostname.replace(/^www\./, "");
+      if (h === "youtu.be") return u.pathname.split("/").filter(Boolean)[0] || "";
+      if (["youtube.com","m.youtube.com","music.youtube.com","youtube-nocookie.com"].indexOf(h) >= 0) {
+        var q = u.searchParams.get("v");
+        if (q) return q;
+        var m = u.pathname.match(/\/(?:shorts|embed|live|v)\/([^/?]+)/);
+        return m ? m[1] : "";
+      }
+    } catch (_) {}
+    return "";
+  }
+  function bannerYoutubeTitle(a) {
+    if (a.collection !== "videos") return Promise.resolve(a.title || "");
+    if (a.title) return Promise.resolve(a.title);
+    if (!bannerYoutubeId(a.videoUrl)) return Promise.resolve("動画");
+    return fetch("https://www.youtube.com/oembed?url=" + encodeURIComponent(a.videoUrl) + "&format=json", { cache: "force-cache" })
+      .then(function (r) { if (!r.ok) throw new Error("oembed " + r.status); return r.json(); })
+      .then(function (m) { return m && m.title ? m.title : "動画"; })
+      .catch(function () { return "動画"; });
+  }
+  function topArticleVisible(a, now) {
+    if (!a || a.publishable !== true || a.whatsNew !== true || a.isDraft === true) return false;
+    var mgr = topBannerSubs;
+    if (mgr && mgr.isActive && !mgr.isActive(a.subcategory)) return false;
+    var start = bannerDate(a.publishStartAt), end = bannerDate(a.publishEndAt);
+    if (start && now < start) return false;
+    if (end && now > end) return false;
+    var isAdvance = mgr && mgr.matches ? mgr.matches(a.subcategory, "events_advance") : a.subcategory === "events_advance";
+    if (isAdvance) {
+      var ev = bannerDate(a.eventAt);
+      if (ev && now >= ev) return false;
+    }
+    var st = bannerStamp(a);
+    if (!st) return false;
+    var limit = new Date(now);
+    limit.setMonth(limit.getMonth() - 3);
+    return st >= limit;
+  }
+  function topArticleHref(a) {
+    if (a.collection === "videos") {
+      if (a.productionType === "external" && a.videoUrl) return a.videoUrl;
+      return "article.html?collection=videos&file=" + encodeURIComponent(a.fileName);
+    }
+    if (a.linkUrl) return a.linkUrl;
+    return "article.html?collection=" + encodeURIComponent(a.collection) + "&file=" + encodeURIComponent(a.fileName);
+  }
+  function loadTopBannerFixed() {
+    var repo = window.MSGRepo;
+    if (!repo || !repo.list || !repo.text) return Promise.resolve([]);
+    return repo.list("content/auxiliary-display", ".json").then(function (paths) {
+      return Promise.all(paths.map(function (path) {
+        return repo.text(path).then(function (text) {
+          try { var data = JSON.parse(text); data.__path = path; return data; } catch (_) { return null; }
+        }).catch(function () { return null; });
+      }));
+    }).then(function (items) {
+      return items.filter(function (x) {
+        return activeAuxiliary(x, "top_text_banner") && String(x.topBannerText || "").trim();
+      }).sort(function (a, b) {
+        return auxiliaryStamp(b) - auxiliaryStamp(a) || String(b.__path).localeCompare(String(a.__path));
+      }).slice(0, TOP_BANNER_FIXED_COUNT).map(function (x) {
+        return { text: bannerClip24(x.topBannerText), href: String(x.linkUrl || "whatsnew.html").trim() || "whatsnew.html", kind: "fixed" };
+      });
+    }).catch(function () { return []; });
+  }
+  function loadTopBannerFresh() {
+    var repo = window.MSGRepo;
+    if (!repo || !repo.list || !repo.text) return Promise.resolve([]);
+    var ready = window.MSGSubcategories && window.MSGSubcategories.ready ? window.MSGSubcategories.ready.catch(function () { return null; }) : Promise.resolve(null);
+    return ready.then(function (manager) {
+      topBannerSubs = manager || null;
+      return Promise.all(TOP_BANNER_SOURCES.map(function (src) {
+        return repo.list(src.path, ".md").then(function (paths) {
+          return Promise.all(paths.map(function (path) {
+            return repo.text(path).then(function (text) {
+              return parseBannerFrontmatter(text, path.split("/").pop(), src.collection);
+            }).catch(function () { return null; });
+          }));
+        }).then(function (items) { return items.filter(Boolean); }).catch(function () { return []; });
+      }));
+    }).then(function (groups) {
+      var now = new Date();
+      var all = [].concat.apply([], groups).filter(function (a) { return topArticleVisible(a, now); });
+      all.sort(function (a, b) { return bannerStamp(b) - bannerStamp(a); });
+      all = all.slice(0, TOP_BANNER_FRESH_COUNT);
+      return Promise.all(all.map(function (a) {
+        return bannerYoutubeTitle(a).then(function (title) {
+          return { text: bannerClip24(title || a.title || "新着情報"), href: topArticleHref(a), kind: "fresh" };
+        });
+      }));
+    }).catch(function () { return []; });
+  }
+  function setTopBannerLink(link, item) {
+    var text = link.querySelector(".mn-top-banner-text");
+    if (!text || !item) return;
+    text.textContent = item.text || "What's Newを見る";
+    link.setAttribute("href", item.href || "whatsnew.html");
+    link.setAttribute("aria-label", item.text || "What's Newを見る");
+    link.setAttribute("title", item.text || "What's Newを見る");
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+    try {
+      var u = new URL(item.href || "whatsnew.html", location.href);
+      if (/^https?:$/.test(u.protocol) && u.origin !== location.origin) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+      }
+    } catch (_) {}
+  }
+  function mountTopBanner(root) {
+    var link = root && root.querySelector ? root.querySelector(".mn-top-banner") : null;
+    if (!link) return;
+    Promise.all([loadTopBannerFixed(), loadTopBannerFresh()]).then(function (parts) {
+      var items = parts[0].concat(parts[1]).slice(0, TOP_BANNER_FIXED_COUNT + TOP_BANNER_FRESH_COUNT);
+      if (!items.length) items = [{ text: "What's Newを見る", href: "whatsnew.html", kind: "fallback" }];
+      var index = 0, timer = null, changing = false;
+      setTopBannerLink(link, items[0]);
+      function show(next) {
+        if (changing || items.length < 2) return;
+        changing = true;
+        link.classList.add("is-changing");
+        setTimeout(function () {
+          index = (next + items.length) % items.length;
+          setTopBannerLink(link, items[index]);
+          link.classList.remove("is-changing");
+          changing = false;
+        }, 150);
+      }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function start() {
+        stop();
+        if (items.length < 2) return;
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        timer = setInterval(function () { show(index + 1); }, TOP_BANNER_INTERVAL);
+      }
+      link.addEventListener("mouseenter", stop);
+      link.addEventListener("mouseleave", start);
+      link.addEventListener("focus", stop);
+      link.addEventListener("blur", start);
+      start();
+    }).catch(function () {
+      setTopBannerLink(link, { text: "What's Newを見る", href: "whatsnew.html" });
+    });
+  }
+
   function mountFloat() {
     if (document.querySelector(".mn-float")) return;
     var box = document.createElement("div");
@@ -427,6 +627,7 @@
       head.className = "mn";
       head.innerHTML = headerHTML();
       fillNotice(head);
+      mountTopBanner(head);
 
       /* 現在地(ヘッダーの3分類ナビ／ドロワー)。#が変わっても追従 */
       markCurrent(head);
@@ -439,10 +640,10 @@
 
       var nb = head.querySelector(".mn-notice-btn"), np = head.querySelector(".mn-notice-panel");
       var mb = head.querySelector(".mn-menu-btn"), dr = head.querySelector(".mn-drawer");
-      function setNotice(o) { np.classList.toggle("is-open", o); nb.setAttribute("aria-expanded", o ? "true" : "false"); }
-      function setDrawer(o) { dr.classList.toggle("is-open", o); mb.setAttribute("aria-expanded", o ? "true" : "false"); mb.setAttribute("aria-label", o ? "メニューを閉じる" : "メニューを開く"); document.body.classList.toggle("mn-drawer-open", o); }
-      nb.addEventListener("click", function () { setNotice(!np.classList.contains("is-open")); setDrawer(false); });
-      mb.addEventListener("click", function () { setDrawer(!dr.classList.contains("is-open")); setNotice(false); });
+      function setNotice(o) { if (!np || !nb) return; np.classList.toggle("is-open", o); nb.setAttribute("aria-expanded", o ? "true" : "false"); }
+      function setDrawer(o) { if (!dr || !mb) return; dr.classList.toggle("is-open", o); mb.setAttribute("aria-expanded", o ? "true" : "false"); mb.setAttribute("aria-label", o ? "メニューを閉じる" : "メニューを開く"); document.body.classList.toggle("mn-drawer-open", o); }
+      if (nb && np) nb.addEventListener("click", function () { setNotice(!np.classList.contains("is-open")); setDrawer(false); });
+      if (mb && dr) mb.addEventListener("click", function () { setDrawer(!dr.classList.contains("is-open")); setNotice(false); });
       document.addEventListener("click", function (e) {
         if (!e.target.closest(".mn-notice")) setNotice(false);
       });

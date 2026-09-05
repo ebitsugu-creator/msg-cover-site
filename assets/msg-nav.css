@@ -314,3 +314,63 @@ body.mn-drawer-open{overflow:hidden}
 }
 .mn-float-btn--cms.mn-float-btn--capsule.mn-float-btn--two-line{font-size:8px;gap:1px}
 .mn-float-btn--capsule .mn-float-line{max-width:46px;overflow:hidden}
+
+/* ===== V150: TOP text banner (cover page only) ===== */
+.mn-top-banner-shell{
+  display:flex;align-items:center;justify-content:flex-end;
+  min-width:0;flex:0 1 auto;
+}
+.mn-top-banner{
+  position:relative;display:flex;align-items:center;
+  width:350px;height:38px;min-width:0;
+  padding:0 34px 0 28px;border:1px solid var(--mn-line);border-radius:999px;
+  background:#fff;color:var(--mn-navy);text-decoration:none;
+  font-family:var(--mn-sans);font-size:12px;font-weight:800;letter-spacing:.02em;line-height:1.25;
+  overflow:hidden;transition:border-color .2s,background .2s,color .2s;
+}
+.mn-top-banner::before{
+  content:"";position:absolute;left:12px;top:50%;width:7px;height:7px;border-radius:50%;
+  transform:translateY(-50%);background:var(--mn-gold);box-shadow:0 0 0 3px rgba(169,138,51,.18);
+}
+.mn-top-banner:hover{border-color:var(--mn-gold);background:#fff}
+.mn-top-banner-text{
+  display:block;width:100%;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:clip;
+  opacity:1;transform:translateY(0);transition:opacity .15s ease,transform .15s ease;
+}
+.mn-top-banner-arrow{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  font-size:15px;font-weight:900;line-height:1;color:var(--mn-navy);
+}
+.mn-top-banner.is-changing .mn-top-banner-text{opacity:0;transform:translateY(3px)}
+
+/* 狭いブラウザ：24文字を2行で受ける。高さは固定してローテーション時のガタつきを防ぐ。 */
+@media (max-width:1100px){
+  .mn-top-banner{width:210px;height:42px;padding:5px 30px 5px 26px;font-size:11.5px;line-height:1.25}
+  .mn-top-banner-text{
+    white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    max-height:2.5em;overflow:hidden;
+  }
+}
+
+/* スマホ：最初から2行前提。24文字≒12文字×2行を収める。 */
+@media (max-width:700px){
+  .mn-top-banner-shell{flex:0 1 auto}
+  .mn-top-banner{
+    width:clamp(150px,45vw,174px);height:40px;padding:4px 9px;
+    border-radius:12px;font-size:10.8px;line-height:1.22;letter-spacing:0;
+  }
+  .mn-top-banner::before,.mn-top-banner-arrow{display:none}
+  .mn-top-banner-text{
+    text-align:left;white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+    max-height:2.44em;overflow:hidden;
+  }
+}
+@media (max-width:374px){
+  .mn-top-banner{width:142px;font-size:10px;padding-left:7px;padding-right:7px}
+}
+
+/* 表紙はテキストバナーの24文字幅を優先し、3分類ナビはドロワーへ。 */
+.mn-inner--top-banner .mn-nav{display:none}
+.mn-inner--top-banner .mn-menu-btn{display:flex}
+.mn-inner--top-banner .mn-tools{margin-left:auto}
+.mn-inner--top-banner .mn-top-banner{max-width:100%}
