@@ -974,3 +974,29 @@ body a:hover{color:var(--sky-700)}
   padding-right:0;
   justify-self:start;
 }
+
+
+/* =========================================================
+   V159 — TOP What's New inline title + variable summary
+   Title and summary flow continuously. Summary stays 2Q smaller/lighter.
+========================================================= */
+.top-wn-featured h3{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.top-wn-summary-inline{
+  font-size:clamp(11.5px,1.03vw,13.5px);
+  line-height:inherit;
+  font-weight:400;
+  letter-spacing:0;
+  color:rgba(110,122,142,.94);
+}
+@media (max-width:700px){
+  .top-wn-summary-inline{font-size:11px;font-weight:400}
+}
+@media (max-width:480px){
+  .top-wn-summary-inline{font-size:10.5px}
+}

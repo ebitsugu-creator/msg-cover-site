@@ -28,7 +28,17 @@ function displayParts(a){
 }
 function displayTitle(a){return displayParts(a).title}
 function summary(a){return displayParts(a).summary}
-function short20(v){const a=Array.from(String(v||'').replace(/\s+/g,' ').trim());return a.length>20?a.slice(0,20).join('')+'…':a.join('')}
+function cleanText(v){return Array.from(String(v||'').replace(/\s+/g,' ').trim())}
+function summaryLimit(title){
+  const w=window.innerWidth||1200;
+  const t=Array.from(String(title||'')).length;
+  let base=28,ratio=1.15,min=8,max=44;
+  if(w<560){base=20;ratio=1.0;min=6;max=32}
+  else if(w<900){base=25;ratio=1.08;min=7;max=38}
+  const n=Math.round(base+(24-t)*ratio);
+  return Math.max(min,Math.min(max,n));
+}
+function summaryClip(v,title){const a=cleanText(v),n=summaryLimit(title);return a.length>n?a.slice(0,n).join('')+'…':a.join('')}
 function categoryLabel(a){return CATEGORY[a.category]||'お知らせ'}
 function subLabel(a){return (subs&&subs.label(a.subcategory))||FALLBACK_LABELS[a.subcategory]||a.subcategory||''}
 function crumb(a){const c=categoryLabel(a),s=subLabel(a);return s?`${c} ＞ ${s}`:c}
@@ -36,9 +46,12 @@ function isAdvance(a){return subs&&subs.matches?subs.matches(a.subcategory,'even
 function visible(a,now){if(a.publishable!==true||a.whatsNew!==true||a.isDraft===true)return false;if(subs&&subs.isActive&&!subs.isActive(a.subcategory))return false;const s=dt(a.publishStartAt),e=dt(a.publishEndAt);if(s&&now<s)return false;if(e&&now>e)return false;if(isAdvance(a)){const ev=dt(a.eventAt);if(ev&&now>=ev)return false}const st=stamp(a);if(!st)return false;const limit=new Date(now);limit.setMonth(limit.getMonth()-3);return st>=limit}
 function href(a){if(a.collection==='videos'){if(a.productionType==='external'&&a.videoUrl)return {url:a.videoUrl,ext:true};return {url:`article.html?collection=videos&file=${encodeURIComponent(a.fileName)}`,ext:false}}if(a.linkUrl)return {url:a.linkUrl,ext:/^https?:\/\//i.test(a.linkUrl)};return {url:`article.html?collection=${a.collection}&file=${encodeURIComponent(a.fileName)}`,ext:false}}
 function attrs(h){return h.ext?' target="_blank" rel="noopener noreferrer"':''}
-function featured(a){const h=href(a),im=thumb(a),title=displayTitle(a),sum=short20(summary(a));const media=im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="top-wn-image-placeholder">NEWS</span>`;return `<article class="top-wn-featured"><a class="top-wn-featured-image" href="${esc(h.url)}"${attrs(h)}>${media}</a><div class="top-wn-featured-copy"><span class="top-wn-crumb">${esc(crumb(a))}</span><h3><a href="${esc(h.url)}"${attrs(h)}>${esc(title)}</a></h3><p class="top-wn-summary">${esc(sum||'　')}</p></div></article>`}
+function featured(a){const h=href(a),im=thumb(a),title=displayTitle(a),sum=summaryClip(summary(a),title);const media=im?`<img src="${esc(im)}" alt="" loading="lazy">`:`<span class="top-wn-image-placeholder">NEWS</span>`;return `<article class="top-wn-featured"><a class="top-wn-featured-image" href="${esc(h.url)}"${attrs(h)}>${media}</a><div class="top-wn-featured-copy"><span class="top-wn-crumb">${esc(crumb(a))}</span><h3><a href="${esc(h.url)}"${attrs(h)}>${esc(title)}</a>${sum?`<span class="top-wn-summary-inline">　${esc(sum)}</span>`:''}</h3></div></article>`}
 function compact(a){const h=href(a),title=displayTitle(a);return `<article class="top-wn-text"><time datetime="${esc(a.publishStartAt||a.publishedAt||'')}">${esc(fmt(stamp(a)))}</time><div class="top-wn-text-main"><span class="top-wn-text-crumb">${esc(crumb(a))}</span><h3><a href="${esc(h.url)}"${attrs(h)}>${esc(title)}</a></h3></div></article>`}
 async function source([collection,path]){const repo=window.MSGRepo;if(!repo||!repo.list||!repo.text)throw new Error('repository reader unavailable');const paths=await repo.list(path,'.md');return (await Promise.all(paths.map(async file=>{try{return parse(await repo.text(file),file.split('/').pop(),collection)}catch(_){return null}}))).filter(Boolean)}
-async function load(){try{subs=window.MSGSubcategories?await window.MSGSubcategories.ready:null;const settled=await Promise.allSettled(SOURCES.map(source));if(!settled.some(x=>x.status==='fulfilled'))throw new Error('all sources failed');let items=settled.flatMap(x=>x.status==='fulfilled'?x.value:[]).filter(a=>visible(a,new Date())).sort((a,b)=>stamp(b)-stamp(a));items=await Promise.all(items.slice(0,24).map(youtubeMeta));const withImage=items.filter(a=>thumb(a));let hero=withImage.slice(0,3);if(hero.length<3){const used=new Set(hero);hero=hero.concat(items.filter(a=>!used.has(a)).slice(0,3-hero.length))}const chosen=new Set(hero);const text=items.filter(a=>!chosen.has(a)).slice(0,5);if(!hero.length&&!text.length){host.innerHTML='<p class="top-wn-status">現在、掲載中の新着情報はありません。</p>';return}host.innerHTML=`${hero.length?`<div class="top-wn-featured-list">${hero.map(featured).join('')}</div>`:''}${text.length?`<div class="top-wn-text-list">${text.map(compact).join('')}</div>`:''}`;host.closest('.top-whatsnew')?.classList.toggle('top-whatsnew--short',hero.length<3||text.length<5)}catch(err){console.error('[top whatsnew]',err);host.innerHTML='<p class="top-wn-status">新着情報を読み込めませんでした。</p>'}}
+let currentHero=[],currentText=[];
+function render(){if(!currentHero.length&&!currentText.length)return;host.innerHTML=`${currentHero.length?`<div class="top-wn-featured-list">${currentHero.map(featured).join('')}</div>`:''}${currentText.length?`<div class="top-wn-text-list">${currentText.map(compact).join('')}</div>`:''}`;host.closest('.top-whatsnew')?.classList.toggle('top-whatsnew--short',currentHero.length<3||currentText.length<5)}
+async function load(){try{subs=window.MSGSubcategories?await window.MSGSubcategories.ready:null;const settled=await Promise.allSettled(SOURCES.map(source));if(!settled.some(x=>x.status==='fulfilled'))throw new Error('all sources failed');let items=settled.flatMap(x=>x.status==='fulfilled'?x.value:[]).filter(a=>visible(a,new Date())).sort((a,b)=>stamp(b)-stamp(a));items=await Promise.all(items.slice(0,24).map(youtubeMeta));const withImage=items.filter(a=>thumb(a));let hero=withImage.slice(0,3);if(hero.length<3){const used=new Set(hero);hero=hero.concat(items.filter(a=>!used.has(a)).slice(0,3-hero.length))}const chosen=new Set(hero);const text=items.filter(a=>!chosen.has(a)).slice(0,5);if(!hero.length&&!text.length){host.innerHTML='<p class="top-wn-status">現在、掲載中の新着情報はありません。</p>';return}currentHero=hero;currentText=text;render()}catch(err){console.error('[top whatsnew]',err);host.innerHTML='<p class="top-wn-status">新着情報を読み込めませんでした。</p>'}}
+let rt=0;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(render,120)},{passive:true});
 load();
 })();
