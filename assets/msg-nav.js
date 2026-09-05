@@ -504,13 +504,20 @@
       function show(next) {
         if (changing || items.length < 2) return;
         changing = true;
+        link.classList.remove("is-entering");
         link.classList.add("is-changing");
         setTimeout(function () {
           index = (next + items.length) % items.length;
           setTopBannerLink(link, items[index]);
           link.classList.remove("is-changing");
-          changing = false;
-        }, 150);
+          link.classList.add("is-entering");
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              link.classList.remove("is-entering");
+              setTimeout(function () { changing = false; }, 190);
+            });
+          });
+        }, 180);
       }
       function stop() { if (timer) { clearInterval(timer); timer = null; } }
       function start() {
