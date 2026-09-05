@@ -247,6 +247,9 @@ body.mn-drawer-open{overflow:hidden}
   transition:background .2s,color .2s,transform .25s,opacity .25s,visibility .25s;
 }
 .mn-float-btn:hover{background:var(--mn-navy);color:#fff}
+.mn-float-btn--cms{box-sizing:border-box;padding:5px 3px;font-size:9px;line-height:1.08;letter-spacing:0;text-align:center;white-space:nowrap}
+.mn-float-btn--cms.mn-float-btn--two-line{font-size:8px}
+.mn-float-line{display:block;max-width:46px;overflow:hidden;text-overflow:clip}
 .mn-float-btn--top{opacity:0;visibility:hidden;transform:translateY(8px)}
 .mn-float-btn--top.is-visible{opacity:1;visibility:visible;transform:none}
 

@@ -18,6 +18,93 @@
 (function () {
   "use strict";
 
+  /* ---------- CMSリポジトリ読込（API呼出しを1回に集約） ---------- */
+  var REPO_OWNER = "ebitsugu-creator";
+  var REPO_NAME = "msg-cover-site";
+  var REPO_BRANCH = "main";
+  var TREE_CACHE_KEY = "msgRepoTreeV143";
+  var TREE_CACHE_MS = 60 * 1000;
+  var treePromise = null;
+
+  function readTreeCache() {
+    try {
+      var raw = sessionStorage.getItem(TREE_CACHE_KEY) || localStorage.getItem(TREE_CACHE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      return data && Array.isArray(data.paths) ? data : null;
+    } catch (_) { return null; }
+  }
+  function saveTreeCache(paths) {
+    var raw = JSON.stringify({ at: Date.now(), paths: paths });
+    try { sessionStorage.setItem(TREE_CACHE_KEY, raw); } catch (_) {}
+    try { localStorage.setItem(TREE_CACHE_KEY, raw); } catch (_) {}
+  }
+  function repoTree() {
+    if (treePromise) return treePromise;
+    var cached = readTreeCache();
+    if (cached && Date.now() - Number(cached.at || 0) < TREE_CACHE_MS) {
+      treePromise = Promise.resolve(cached.paths);
+      return treePromise;
+    }
+    var url = "https://api.github.com/repos/" + REPO_OWNER + "/" + REPO_NAME + "/git/trees/" + REPO_BRANCH + "?recursive=1&_=" + Date.now();
+    function jsDelivrTree() {
+      var urls = [
+        "https://data.jsdelivr.com/v1/packages/gh/" + REPO_OWNER + "/" + REPO_NAME + "@" + REPO_BRANCH + "?structure=flat",
+        "https://data.jsdelivr.com/v1/package/gh/" + REPO_OWNER + "/" + REPO_NAME + "@" + REPO_BRANCH + "/flat"
+      ];
+      function attempt(i) {
+        if (i >= urls.length) return Promise.reject(new Error("jsDelivr tree unavailable"));
+        return fetch(urls[i], { cache: "no-store" }).then(function (r) {
+          if (!r.ok) throw new Error("jsDelivr tree " + r.status);
+          return r.json();
+        }).then(function (data) {
+          if (!data || !Array.isArray(data.files)) throw new Error("jsDelivr tree invalid");
+          return data.files.map(function (x) { return String(x.name || "").replace(/^\//, ""); }).filter(Boolean);
+        }).catch(function () { return attempt(i + 1); });
+      }
+      return attempt(0);
+    }
+    treePromise = fetch(url, { cache: "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error("repo tree " + r.status);
+      return r.json();
+    }).then(function (data) {
+      if (!data || !Array.isArray(data.tree)) throw new Error("repo tree invalid");
+      return data.tree.filter(function (x) { return x && x.type === "blob" && x.path; }).map(function (x) { return x.path; });
+    }).catch(function () {
+      /* GitHub API制限時はレート制限のないファイル一覧APIへ退避 */
+      return jsDelivrTree();
+    }).then(function (paths) {
+      if (!paths || !paths.length) throw new Error("repo tree empty");
+      saveTreeCache(paths);
+      return paths;
+    }).catch(function (err) {
+      /* 両方が一時的に失敗した場合は、以前取得した一覧があればそれを使う */
+      if (cached && cached.paths && cached.paths.length) return cached.paths;
+      treePromise = null;
+      throw err;
+    });
+    return treePromise;
+  }
+  function repoList(dir, extension) {
+    var prefix = String(dir || "").replace(/^\/+|\/+$/g, "") + "/";
+    return repoTree().then(function (paths) {
+      return paths.filter(function (path) {
+        if (path.indexOf(prefix) !== 0) return false;
+        var rest = path.slice(prefix.length);
+        if (!rest || rest.indexOf("/") >= 0) return false;
+        return !extension || String(path).toLowerCase().endsWith(String(extension).toLowerCase());
+      });
+    });
+  }
+  function repoText(path) {
+    var url = "https://raw.githubusercontent.com/" + REPO_OWNER + "/" + REPO_NAME + "/" + REPO_BRANCH + "/" + String(path).replace(/^\//, "") + "?_=" + Date.now();
+    return fetch(url, { cache: "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error(path + " " + r.status);
+      return r.text();
+    });
+  }
+  window.MSGRepo = window.MSGRepo || { tree: repoTree, list: repoList, text: repoText };
+
   /* ---------- 定義 ---------- */
   var MENU_URL = "index.html#explore";   /* 「TOP」＝8つの入口(メニュー画面) */
 
@@ -184,6 +271,62 @@
   }
 
   /* ---------- 右下の丸ボタン（MV / TOP） ---------- */
+  function activeAuxiliary(item, type) {
+    if (!item || item.featureType !== type || item.publishable === false) return false;
+    var now = Date.now();
+    var start = item.publishStartAt ? Date.parse(item.publishStartAt) : NaN;
+    var end = item.publishEndAt ? Date.parse(item.publishEndAt) : NaN;
+    if (!isNaN(start) && now < start) return false;
+    if (!isNaN(end) && now > end) return false;
+    return true;
+  }
+  function auxiliaryStamp(item) {
+    var d = Date.parse(item.updatedAt || item.publishStartAt || "");
+    return isNaN(d) ? 0 : d;
+  }
+  function applyMVConfig(box) {
+    var repo = window.MSGRepo;
+    if (!repo || !repo.list || !repo.text) return;
+    repo.list("content/auxiliary-display", ".json").then(function (paths) {
+      return Promise.all(paths.map(function (path) {
+        return repo.text(path).then(function (text) {
+          try { var data = JSON.parse(text); data.__path = path; return data; } catch (_) { return null; }
+        }).catch(function () { return null; });
+      }));
+    }).then(function (items) {
+      var list = items.filter(function (x) { return activeAuxiliary(x, "mv_button"); });
+      if (!list.length) return;
+      list.sort(function (a, b) { return auxiliaryStamp(b) - auxiliaryStamp(a) || String(b.__path).localeCompare(String(a.__path)); });
+      var item = list[0];
+      var mv = box.querySelector(".mn-float-btn:not(.mn-float-btn--top)");
+      if (!mv) return;
+      var line1 = String(item.mvLine1 || "").trim();
+      var line2 = String(item.mvLine2 || "").trim();
+      if (!line1 && line2) { line1 = line2; line2 = ""; }
+      if (line1) {
+        mv.innerHTML = '<span class="mn-float-line">' + esc(line1) + '</span>' + (line2 ? '<span class="mn-float-line">' + esc(line2) + '</span>' : '');
+        mv.classList.add("mn-float-btn--cms");
+        if (line2) mv.classList.add("mn-float-btn--two-line");
+        var label = line1 + (line2 ? " " + line2 : "");
+        mv.setAttribute("title", label);
+        mv.setAttribute("aria-label", label);
+      }
+      if (item.linkUrl) {
+        var href = String(item.linkUrl).trim();
+        mv.setAttribute("href", href);
+        try {
+          var u = new URL(href, location.href);
+          if (/^https?:$/.test(u.protocol) && u.origin !== location.origin) {
+            mv.setAttribute("target", "_blank");
+            mv.setAttribute("rel", "noopener noreferrer");
+          } else {
+            mv.removeAttribute("target");
+            mv.removeAttribute("rel");
+          }
+        } catch (_) {}
+      }
+    }).catch(function (e) { console.warn("[MV button] CMS setting could not be loaded", e); });
+  }
   function mountFloat() {
     if (document.querySelector(".mn-float")) return;
     var box = document.createElement("div");
@@ -192,6 +335,7 @@
       return '<a class="mn-float-btn' + (b.top ? ' mn-float-btn--top' : '') + '" href="' + esc(b.href) + '" title="' + esc(b.title) + '" aria-label="' + esc(b.title) + '">' + esc(b.label) + '</a>';
     }).join("");
     document.body.appendChild(box);
+    applyMVConfig(box);
     var topBtn = box.querySelector(".mn-float-btn--top");
     function sync() {
       var show = window.scrollY > 240 || document.body.getAttribute("data-page-title");
