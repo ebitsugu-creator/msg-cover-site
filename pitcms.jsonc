@@ -969,6 +969,114 @@
         "updatedAt": "updatedAt",
         "order": "displayOrder"
       }
+    },
+    {
+      "name": "auxiliaryDisplay",
+      "label": "【付加機能】MVボタン・TOPテキストバナー",
+      "description": "【入力ルール】機能選択でどちらかを選び、該当する文字欄だけ入力してください。MVボタンは1行6文字×2行まで、TOPテキストバナーは25文字以内です。",
+      "path": "content/auxiliary-display",
+      "extension": "json",
+      "generateFilename": true,
+      "fields": [
+        {
+          "name": "featureType",
+          "type": "select",
+          "label": "機能選択",
+          "required": true,
+          "options": [
+            {
+              "value": "mv_button",
+              "label": "MVボタン"
+            },
+            {
+              "value": "top_text_banner",
+              "label": "TOPテキストバナー"
+            }
+          ],
+          "note": "【重要】選んだ機能に対応する文字欄だけ入力してください。使わない側は空欄で構いません。"
+        },
+        {
+          "name": "mvLine1",
+          "type": "text",
+          "label": "MVボタン 1行目",
+          "maxLength": 6,
+          "note": "MVボタンを選んだ場合のみ入力。6文字以内。"
+        },
+        {
+          "name": "mvLine2",
+          "type": "text",
+          "label": "MVボタン 2行目",
+          "maxLength": 6,
+          "note": "MVボタンを選んだ場合のみ入力。6文字以内。空欄なら1行表示として扱えます。"
+        },
+        {
+          "name": "topBannerText",
+          "type": "text",
+          "label": "TOPテキストバナー文言",
+          "maxLength": 25,
+          "note": "TOPテキストバナーを選んだ場合のみ入力。25文字以内。"
+        },
+        {
+          "name": "linkUrl",
+          "type": "text",
+          "label": "リンク先URL",
+          "required": true,
+          "note": "クリック時の遷移先URLを入力します。サイト内・外部URLのどちらも指定できます。"
+        },
+        {
+          "name": "publishable",
+          "type": "boolean",
+          "label": "掲載可否",
+          "default": true
+        },
+        {
+          "name": "publishStartAt",
+          "type": "date",
+          "label": "掲載開始日時",
+          "includeTime": true,
+          "note": "指定した場合、この日時から表示対象になります。"
+        },
+        {
+          "name": "publishEndAt",
+          "type": "date",
+          "label": "掲載終了日時",
+          "includeTime": true,
+          "note": "指定した場合、この日時以降は表示対象から外れます。"
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "label": "更新日時",
+          "includeTime": true
+        }
+      ],
+      "layout": [
+        [
+          "featureType"
+        ],
+        [
+          "mvLine1",
+          "mvLine2"
+        ],
+        [
+          "topBannerText"
+        ],
+        [
+          "linkUrl"
+        ],
+        [
+          "publishStartAt",
+          "publishEndAt"
+        ],
+        [
+          "publishable"
+        ]
+      ],
+      "pit": {
+        "updatedAt": "updatedAt",
+        "defaultSortField": "_createdAt",
+        "defaultSortOrder": "desc"
+      }
     }
   ]
 }
