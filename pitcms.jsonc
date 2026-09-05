@@ -234,10 +234,10 @@
       }
     },
     {
-      "name": "lpDirectLinks",
-      "label": "【記事入力】LP直リンク記事",
-      "description": "推しネタ・イベント等から外部LPへ直接リンクする本文なしの記事",
-      "path": "content/lp-links",
+      "name": "videoArticles",
+      "label": "【記事入力】動画メイン記事",
+      "description": "動画を主役にする記事",
+      "path": "content/videos",
       "extension": "md",
       "fields": [
         {
@@ -247,16 +247,12 @@
           "required": true,
           "options": [
             {
-              "value": "about",
-              "label": "私たちについて"
+              "value": "featured",
+              "label": "推しネタ"
             },
             {
               "value": "events",
               "label": "イベント・勉強会"
-            },
-            {
-              "value": "featured",
-              "label": "推しネタ"
             }
           ]
         },
@@ -266,42 +262,6 @@
           "label": "サブカテゴリ",
           "required": true,
           "options": [
-            {
-              "value": "about_intro_message",
-              "label": "【私たちについて】紹介・メッセージ"
-            },
-            {
-              "value": "about_profile",
-              "label": "【私たちについて】団体概要"
-            },
-            {
-              "value": "about_people_org",
-              "label": "【私たちについて】人事・組織"
-            },
-            {
-              "value": "about_media",
-              "label": "【私たちについて】広報・マスコミ登場"
-            },
-            {
-              "value": "about_feedback",
-              "label": "【私たちについて】頂いたご意見"
-            },
-            {
-              "value": "about_other",
-              "label": "【私たちについて】その他"
-            },
-            {
-              "value": "events_advance",
-              "label": "【イベント・勉強会】事前告知"
-            },
-            {
-              "value": "events_study_library",
-              "label": "【イベント・勉強会】スタディ・ライブラリ"
-            },
-            {
-              "value": "events_party_library",
-              "label": "【イベント・勉強会】イベント・ライブラリ"
-            },
             {
               "value": "featured_hakomono",
               "label": "【推しネタ】ハコモノ探偵団"
@@ -321,6 +281,18 @@
             {
               "value": "featured_promo",
               "label": "【推しネタ】プロモーション・その他"
+            },
+            {
+              "value": "events_advance",
+              "label": "【イベント・勉強会】事前告知"
+            },
+            {
+              "value": "events_study_library",
+              "label": "【イベント・勉強会】スタディ・ライブラリ"
+            },
+            {
+              "value": "events_party_library",
+              "label": "【イベント・勉強会】イベント・ライブラリ"
             }
           ],
           "note": "この入力コレクションで使用するサブカテゴリだけを固定表示します。"
@@ -328,53 +300,28 @@
         {
           "name": "title",
           "type": "text",
-          "label": "タイトル",
-          "required": true,
+          "label": "タイトル（任意）",
           "maxLength": 25,
-          "note": "25文字以内。記事の主題を端的に入力してください。"
-        },
-        {
-          "name": "summary",
-          "type": "text",
-          "label": "概略",
-          "maxLength": 150,
-          "note": "150文字以内。一覧画面に反映されます。"
+          "note": "YouTube動画は原則YouTube側のタイトルを使用。非YouTube等で必要な場合のみ入力します。"
         },
         {
           "name": "image1",
           "type": "image",
-          "label": "アイキャッチ画像1"
+          "label": "画像①（任意）",
+          "note": "固定された小スペースに表示する自由画像。外部動画の指定ロゴ、オリジナル動画のQR等に使用できます。"
         },
         {
-          "name": "image2",
-          "type": "image",
-          "label": "アイキャッチ画像2"
+          "name": "note",
+          "type": "textarea",
+          "label": "備考",
+          "note": "外部動画のクレジット・出典・指定表記、オリジナル動画の案内文など自由に入力できます。サイト上では「備考」という見出しは表示しません。"
         },
         {
           "name": "videoUrl",
           "type": "text",
           "label": "動画URL",
-          "note": "必要な場合のみ入力します。LPの遷移先はリンク参照URLに入力してください。"
-        },
-        {
-          "name": "linkLabel",
-          "type": "text",
-          "label": "リンク表示文字",
-          "note": "リンクボタン等に表示する文字です。"
-        },
-        {
-          "name": "linkUrl",
-          "type": "text",
-          "label": "LP直リンクURL",
           "required": true,
-          "note": "画像・タイトルのクリック先となるLPのURLです。"
-        },
-        {
-          "name": "eventAt",
-          "type": "date",
-          "label": "開催日時",
-          "includeTime": true,
-          "note": "イベント・勉強会で使用します。事前告知とライブラリの並び順の基準です。"
+          "note": "YouTube等の動画URLを入力してください。"
         },
         {
           "name": "publishable",
@@ -386,15 +333,15 @@
           "name": "whatsNew",
           "type": "boolean",
           "label": "What's New表示",
-          "default": true,
+          "default": false,
           "note": "ONの場合、What's Newの掲載候補になります。"
         },
         {
           "name": "publishedAt",
           "type": "date",
-          "label": "掲載日時",
+          "label": "公開日",
           "includeTime": true,
-          "note": "一覧・新着順の基準となる掲載日時です。"
+          "note": "動画LPに表示する公開日です。"
         },
         {
           "name": "publishStartAt",
@@ -429,30 +376,26 @@
           "subcategory"
         ],
         [
-          "title"
-        ],
-        [
-          "summary"
-        ],
-        [
-          "image1",
-          "image2"
-        ],
-        [
           "videoUrl"
         ],
         [
-          "linkUrl",
-          "linkLabel"
+          "title"
         ],
         [
-          "eventAt",
+          "image1",
+          "note"
+        ],
+        [
+          "publishedAt"
+        ],
+        [
           "publishStartAt",
           "publishEndAt"
         ],
         [
           "publishable",
-          "whatsNew"
+          "whatsNew",
+          "isDraft"
         ]
       ],
       "pit": {
@@ -693,10 +636,10 @@
       }
     },
     {
-      "name": "videoArticles",
-      "label": "【記事入力】動画メイン記事",
-      "description": "動画を主役にする記事",
-      "path": "content/videos",
+      "name": "lpDirectLinks",
+      "label": "【記事入力】LP直リンク記事",
+      "description": "推しネタ・イベント等から外部LPへ直接リンクする本文なしの記事",
+      "path": "content/lp-links",
       "extension": "md",
       "fields": [
         {
@@ -706,12 +649,16 @@
           "required": true,
           "options": [
             {
-              "value": "featured",
-              "label": "推しネタ"
+              "value": "about",
+              "label": "私たちについて"
             },
             {
               "value": "events",
               "label": "イベント・勉強会"
+            },
+            {
+              "value": "featured",
+              "label": "推しネタ"
             }
           ]
         },
@@ -721,6 +668,42 @@
           "label": "サブカテゴリ",
           "required": true,
           "options": [
+            {
+              "value": "about_intro_message",
+              "label": "【私たちについて】紹介・メッセージ"
+            },
+            {
+              "value": "about_profile",
+              "label": "【私たちについて】団体概要"
+            },
+            {
+              "value": "about_people_org",
+              "label": "【私たちについて】人事・組織"
+            },
+            {
+              "value": "about_media",
+              "label": "【私たちについて】広報・マスコミ登場"
+            },
+            {
+              "value": "about_feedback",
+              "label": "【私たちについて】頂いたご意見"
+            },
+            {
+              "value": "about_other",
+              "label": "【私たちについて】その他"
+            },
+            {
+              "value": "events_advance",
+              "label": "【イベント・勉強会】事前告知"
+            },
+            {
+              "value": "events_study_library",
+              "label": "【イベント・勉強会】スタディ・ライブラリ"
+            },
+            {
+              "value": "events_party_library",
+              "label": "【イベント・勉強会】イベント・ライブラリ"
+            },
             {
               "value": "featured_hakomono",
               "label": "【推しネタ】ハコモノ探偵団"
@@ -740,18 +723,6 @@
             {
               "value": "featured_promo",
               "label": "【推しネタ】プロモーション・その他"
-            },
-            {
-              "value": "events_advance",
-              "label": "【イベント・勉強会】事前告知"
-            },
-            {
-              "value": "events_study_library",
-              "label": "【イベント・勉強会】スタディ・ライブラリ"
-            },
-            {
-              "value": "events_party_library",
-              "label": "【イベント・勉強会】イベント・ライブラリ"
             }
           ],
           "note": "この入力コレクションで使用するサブカテゴリだけを固定表示します。"
@@ -759,28 +730,53 @@
         {
           "name": "title",
           "type": "text",
-          "label": "タイトル（任意）",
+          "label": "タイトル",
+          "required": true,
           "maxLength": 25,
-          "note": "YouTube動画は原則YouTube側のタイトルを使用。非YouTube等で必要な場合のみ入力します。"
+          "note": "25文字以内。記事の主題を端的に入力してください。"
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "label": "概略",
+          "maxLength": 150,
+          "note": "150文字以内。一覧画面に反映されます。"
         },
         {
           "name": "image1",
           "type": "image",
-          "label": "画像①（任意）",
-          "note": "固定された小スペースに表示する自由画像。外部動画の指定ロゴ、オリジナル動画のQR等に使用できます。"
+          "label": "アイキャッチ画像1"
         },
         {
-          "name": "note",
-          "type": "textarea",
-          "label": "備考",
-          "note": "外部動画のクレジット・出典・指定表記、オリジナル動画の案内文など自由に入力できます。サイト上では「備考」という見出しは表示しません。"
+          "name": "image2",
+          "type": "image",
+          "label": "アイキャッチ画像2"
         },
         {
           "name": "videoUrl",
           "type": "text",
           "label": "動画URL",
+          "note": "必要な場合のみ入力します。LPの遷移先はリンク参照URLに入力してください。"
+        },
+        {
+          "name": "linkLabel",
+          "type": "text",
+          "label": "リンク表示文字",
+          "note": "リンクボタン等に表示する文字です。"
+        },
+        {
+          "name": "linkUrl",
+          "type": "text",
+          "label": "LP直リンクURL",
           "required": true,
-          "note": "YouTube等の動画URLを入力してください。"
+          "note": "画像・タイトルのクリック先となるLPのURLです。"
+        },
+        {
+          "name": "eventAt",
+          "type": "date",
+          "label": "開催日時",
+          "includeTime": true,
+          "note": "イベント・勉強会で使用します。事前告知とライブラリの並び順の基準です。"
         },
         {
           "name": "publishable",
@@ -792,15 +788,15 @@
           "name": "whatsNew",
           "type": "boolean",
           "label": "What's New表示",
-          "default": false,
+          "default": true,
           "note": "ONの場合、What's Newの掲載候補になります。"
         },
         {
           "name": "publishedAt",
           "type": "date",
-          "label": "公開日",
+          "label": "掲載日時",
           "includeTime": true,
-          "note": "動画LPに表示する公開日です。"
+          "note": "一覧・新着順の基準となる掲載日時です。"
         },
         {
           "name": "publishStartAt",
@@ -835,26 +831,30 @@
           "subcategory"
         ],
         [
-          "videoUrl"
-        ],
-        [
           "title"
         ],
         [
+          "summary"
+        ],
+        [
           "image1",
-          "note"
+          "image2"
         ],
         [
-          "publishedAt"
+          "videoUrl"
         ],
         [
+          "linkUrl",
+          "linkLabel"
+        ],
+        [
+          "eventAt",
           "publishStartAt",
           "publishEndAt"
         ],
         [
           "publishable",
-          "whatsNew",
-          "isDraft"
+          "whatsNew"
         ]
       ],
       "pit": {
