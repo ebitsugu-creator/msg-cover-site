@@ -21,14 +21,6 @@ const FALLBACK=[
 ['featured_closure','featured','【推しネタ】港区廃業','active',30,true],
 ['featured_employment_social','featured','【推しネタ】雇用・社会問題を斬る','active',40,true],
 ['featured_promo','featured','【推しネタ】プロモーション・その他','active',50,true],
-['events_notice','events','【統合済】事前告知（旧）','merged',90,false,'events_advance'],
-['events_study','events','【統合済】事前告知（旧・勉強会）','merged',91,false,'events_advance'],
-['events_report','events','【統合済】開催レポート','merged',92,false,'events_study_library'],
-['video_city_oddities','featured','【統合済】都会にこんなものいる？','merged',90,false,'featured_hakomono'],
-['video_minato_prices','featured','【統合済】クレイジーな港区物価','merged',91,false,'featured_prices'],
-['video_minato_closures','featured','【統合済】港区廃業という闇','merged',92,false,'featured_closure'],
-['video_members','featured','【統合済】メンバー紹介','merged',93,false,'featured_promo'],
-['video_other','featured','【統合済】その他','merged',94,false,'featured_promo']
 ].map(([id,category,label,status,displayOrder,showBackNumber,mergeInto='',description=''])=>({id,category,label,status,displayOrder,showBackNumber,mergeInto,description}));
 const cleanLabel=v=>String(v||'').replace(/^【[^】]+】\s*/,'').trim();
 function createManager(rows){
