@@ -249,7 +249,10 @@ body.mn-drawer-open{overflow:hidden}
 .mn-float-btn:hover{background:var(--mn-navy);color:#fff}
 .mn-float-btn--cms{box-sizing:border-box;padding:5px 3px;font-size:9px;line-height:1.08;letter-spacing:0;text-align:center;white-space:nowrap}
 .mn-float-btn--cms.mn-float-btn--two-line{font-size:8px}
+.mn-float-btn--cms.mn-float-btn--capsule{width:auto;min-width:86px;height:52px;padding:7px 14px;border-radius:999px;font-size:11px;line-height:1.18;letter-spacing:0}
+.mn-float-btn--cms.mn-float-btn--capsule.mn-float-btn--two-line{font-size:10px}
 .mn-float-line{display:block;max-width:46px;overflow:hidden;text-overflow:clip}
+.mn-float-btn--capsule .mn-float-line{max-width:none;overflow:visible}
 .mn-float-btn--top{opacity:0;visibility:hidden;transform:translateY(8px)}
 .mn-float-btn--top.is-visible{opacity:1;visibility:visible;transform:none}
 

@@ -22,7 +22,7 @@
   var REPO_OWNER = "ebitsugu-creator";
   var REPO_NAME = "msg-cover-site";
   var REPO_BRANCH = "main";
-  var TREE_CACHE_KEY = "msgRepoTreeV143";
+  var TREE_CACHE_KEY = "msgRepoTreeV144";
   var TREE_CACHE_MS = 60 * 1000;
   var treePromise = null;
 
@@ -307,6 +307,9 @@
         mv.innerHTML = '<span class="mn-float-line">' + esc(line1) + '</span>' + (line2 ? '<span class="mn-float-line">' + esc(line2) + '</span>' : '');
         mv.classList.add("mn-float-btn--cms");
         if (line2) mv.classList.add("mn-float-btn--two-line");
+        var maxChars = Math.max(Array.from(line1).length, Array.from(line2).length);
+        var totalChars = Array.from(line1 + line2).length;
+        mv.classList.toggle("mn-float-btn--capsule", maxChars > 3 || totalChars > 5);
         var label = line1 + (line2 ? " " + line2 : "");
         mv.setAttribute("title", label);
         mv.setAttribute("aria-label", label);

@@ -42,9 +42,15 @@ function createManager(rows){
 }
 async function load(){
  try{
-  const r=await fetch(`${API}?ref=main&_=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw new Error(`subcategory list ${r.status}`);
-  const files=(await r.json()).filter(x=>x.type==='file'&&/\.json$/i.test(x.name));
-  const rows=(await Promise.all(files.map(async f=>{try{const q=await fetch(`${f.download_url}${f.download_url.includes('?')?'&':'?'}_=${Date.now()}`,{cache:'no-store'});if(!q.ok)return null;return {...await q.json(),id:f.name.replace(/\.json$/i,'')}}catch(_){return null}}))).filter(Boolean);
+  let rows=[];
+  if(window.MSGRepo&&window.MSGRepo.list&&window.MSGRepo.text){
+   const paths=await window.MSGRepo.list('content/subcategories','.json');
+   rows=(await Promise.all(paths.map(async path=>{try{return {...JSON.parse(await window.MSGRepo.text(path)),id:path.split('/').pop().replace(/\.json$/i,'')}}catch(_){return null}}))).filter(Boolean);
+  }else{
+   const r=await fetch(`${API}?ref=main&_=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw new Error(`subcategory list ${r.status}`);
+   const files=(await r.json()).filter(x=>x.type==='file'&&/\.json$/i.test(x.name));
+   rows=(await Promise.all(files.map(async f=>{try{const q=await fetch(`${f.download_url}${f.download_url.includes('?')?'&':'?'}_=${Date.now()}`,{cache:'no-store'});if(!q.ok)return null;return {...await q.json(),id:f.name.replace(/\.json$/i,'')}}catch(_){return null}}))).filter(Boolean);
+  }
   if(!rows.length)throw new Error('subcategory master is empty');return createManager(rows);
  }catch(e){console.warn('[subcategory-manager] fallback master used',e);return createManager(FALLBACK)}
 }
