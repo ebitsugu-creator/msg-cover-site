@@ -839,3 +839,31 @@ body a:hover{color:var(--sky-700)}
   .entry-card .arrow{right:8px;bottom:50%;width:24px;height:24px}
 }
 .top-wn-image-placeholder{display:grid;place-items:center;width:100%;height:100%;font-size:9px;font-weight:800;letter-spacing:.16em;color:var(--muted,#6E7A8E);background:linear-gradient(145deg,#fff,var(--sky-100))}
+
+/* =========================================================
+   V149 — TOP main visual containment fix
+   Equal 50/50 tracks must also constrain the prologue grid item itself.
+   Prevent the finished key visual from retaining an intrinsic minimum width
+   and painting across the What's New column at intermediate viewport widths.
+========================================================= */
+.top-live-grid.is-dashboard > .prologue,
+.top-live-grid.is-dashboard > .top-whatsnew{
+  min-width:0;
+  width:100%;
+  max-width:100%;
+}
+.top-live-grid.is-dashboard > .prologue{
+  overflow:hidden;
+  contain:paint;
+}
+.top-live-grid.is-dashboard .prologue-stage,
+.top-live-grid.is-dashboard .pro-final{
+  min-width:0;
+  width:100%;
+  max-width:100%;
+  overflow:hidden;
+}
+.top-live-grid.is-dashboard .pro-dashboard-image{
+  min-width:0;
+  max-width:100%;
+}
