@@ -78,8 +78,8 @@
           "type": "text",
           "label": "タイトル",
           "required": true,
-          "maxLength": 25,
-          "note": "25文字以内。記事の主題を端的に入力してください。"
+          "maxLength": 24,
+          "note": "24文字以内。記事の主題を端的に入力してください。"
         },
         {
           "name": "subtitle",
@@ -301,8 +301,8 @@
           "name": "title",
           "type": "text",
           "label": "タイトル（任意）",
-          "maxLength": 25,
-          "note": "YouTube動画は原則YouTube側のタイトルを使用。非YouTube等で必要な場合のみ入力します。"
+          "maxLength": 24,
+          "note": "24文字以内。YouTube動画は原則YouTube側のタイトルを使用。非YouTube等で必要な場合のみ入力します。"
         },
         {
           "name": "image1",
@@ -492,8 +492,8 @@
           "type": "text",
           "label": "タイトル",
           "required": true,
-          "maxLength": 25,
-          "note": "25文字以内。記事の主題を端的に入力してください。"
+          "maxLength": 24,
+          "note": "24文字以内。記事の主題を端的に入力してください。"
         },
         {
           "name": "content",
@@ -732,8 +732,8 @@
           "type": "text",
           "label": "タイトル",
           "required": true,
-          "maxLength": 25,
-          "note": "25文字以内。記事の主題を端的に入力してください。"
+          "maxLength": 24,
+          "note": "24文字以内。記事の主題を端的に入力してください。"
         },
         {
           "name": "summary",
@@ -973,7 +973,7 @@
     {
       "name": "auxiliaryDisplay",
       "label": "【付加機能】MVボタン・TOPテキストバナー",
-      "description": "【入力ルール】機能選択でどちらかを選び、該当する文字欄だけ入力してください。MVボタンは1行6文字×2行まで、TOPテキストバナーは25文字以内です。",
+      "description": "【入力ルール】機能選択でどちらかを選び、該当する文字欄だけ入力してください。MVボタンは1行6文字×2行まで、TOPテキストバナーは24文字以内です。TOPテキストバナーは有効な登録のうち新しい2件を固定枠として使用します。",
       "path": "content/auxiliary-display",
       "extension": "json",
       "generateFilename": true,
@@ -1013,8 +1013,8 @@
           "name": "topBannerText",
           "type": "text",
           "label": "TOPテキストバナー文言",
-          "maxLength": 25,
-          "note": "TOPテキストバナーを選んだ場合のみ入力。25文字以内。"
+          "maxLength": 24,
+          "note": "TOPテキストバナーを選んだ場合のみ入力。24文字以内。スマホでは原則2行表示です。"
         },
         {
           "name": "linkUrl",
