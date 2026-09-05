@@ -247,14 +247,19 @@ body.mn-drawer-open{overflow:hidden}
   transition:background .2s,color .2s,transform .25s,opacity .25s,visibility .25s;
 }
 .mn-float-btn:hover{background:var(--mn-navy);color:#fff}
-.mn-float-btn--cms{box-sizing:border-box;padding:5px 3px;font-size:9px;line-height:1.08;letter-spacing:0;text-align:center;white-space:nowrap}
-.mn-float-btn--cms.mn-float-btn--two-line{font-size:8px}
-.mn-float-btn--cms.mn-float-btn--capsule{width:auto;min-width:86px;height:52px;padding:7px 14px;border-radius:999px;font-size:11px;line-height:1.18;letter-spacing:0}
-.mn-float-btn--cms.mn-float-btn--capsule.mn-float-btn--two-line{font-size:10px}
-.mn-float-line{display:block;max-width:46px;overflow:hidden;text-overflow:clip}
-.mn-float-btn--capsule .mn-float-line{max-width:none;overflow:visible}
+.mn-float-btn--cms{
+  box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:52px;min-width:52px;max-width:52px;height:52px;min-height:52px;
+  padding:4px 3px;border-radius:50%;font-size:9px;line-height:1;letter-spacing:0;
+  text-align:center;white-space:nowrap;
+}
+.mn-float-btn--cms.mn-float-btn--two-line{gap:1px;font-size:8px;line-height:1}
+.mn-float-line{display:block;max-width:46px;line-height:1;margin:0;overflow:hidden;text-overflow:clip}
 .mn-float-btn--top{opacity:0;visibility:hidden;transform:translateY(8px)}
 .mn-float-btn--top.is-visible{opacity:1;visibility:visible;transform:none}
+@media (max-width:700px){
+  .mn-float{right:10px;bottom:12px;gap:8px}
+}
 
 /* ---------- ご意見・ご相談 ---------- */
 .mn-contact{
@@ -278,44 +283,8 @@ body.mn-drawer-open{overflow:hidden}
 .mn-contact-copy:hover{background:var(--mn-navy);color:#fff}
 
 
-/* ===== V145: MV CMS button — circular, compact 2-line centering ===== */
-.mn-float-btn--cms{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  width:52px;
-  min-width:52px;
-  max-width:52px;
-  height:52px;
-  min-height:52px;
-  padding:4px 3px;
-  border-radius:50%;
-  line-height:1;
-  text-align:center;
-}
-.mn-float-btn--cms.mn-float-btn--two-line{
-  gap:1px;
-  font-size:8px;
-  line-height:1;
-}
-.mn-float-btn--cms .mn-float-line{
-  display:block;
-  max-width:46px;
-  line-height:1;
-  margin:0;
-  overflow:hidden;
-  text-overflow:clip;
-}
-/* Defensive override in case an old cached class remains on the element. */
-.mn-float-btn--cms.mn-float-btn--capsule{
-  width:52px;min-width:52px;max-width:52px;height:52px;
-  padding:4px 3px;border-radius:50%;font-size:9px;line-height:1;
-}
-.mn-float-btn--cms.mn-float-btn--capsule.mn-float-btn--two-line{font-size:8px;gap:1px}
-.mn-float-btn--capsule .mn-float-line{max-width:46px;overflow:hidden}
 
-/* ===== V151: TOP text ticker (cover page only) =====
+/* ===== TOP text ticker (cover page only) =====
    枠を持たないニュース表示。表示中は静止し、切替時だけ横スライドする。 */
 .mn-top-banner-shell{
   display:flex;align-items:center;justify-content:flex-end;
@@ -384,7 +353,7 @@ body.mn-drawer-open{overflow:hidden}
 .mn-inner--top-banner .mn-top-banner{max-width:100%}
 
 /* =========================================================
-   V154 — TOP ticker: intrinsic 2-line wrapping
+   TOP ticker: intrinsic 2-line wrapping
    Wrap by the banner's actual available width, not only by viewport breakpoint.
    This prevents a 24-character headline from painting outside the mobile header.
 ========================================================= */

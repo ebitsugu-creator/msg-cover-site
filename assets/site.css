@@ -874,7 +874,7 @@ a.cms-event-image{display:block}
   #events .cms-event-card,#events .cms-video-section .cms-video-card{flex-basis:88%;width:88%;min-width:88%;max-width:88%}
 }
 
-/* V79 FIX: shared video-library presentation */
+/* Shared video-library presentation */
 .cms-video-title{color:inherit;text-decoration:none}.cms-video-title:hover{text-decoration:underline;text-underline-offset:4px}
 .cms-video-channel{margin:-2px 0 12px!important;font-size:14px!important;font-weight:700;color:#53657c!important}
 .cms-video-extra{display:flex;align-items:flex-start;gap:12px;margin:12px 0 14px}.cms-video-extra:empty{display:none}
@@ -1165,7 +1165,7 @@ a.cms-event-image{display:block}
 }
 
 
-/* ===== V145: Events / Featured library rails — independent responsive control =====
+/* ===== Events / Featured library rails — independent responsive control =====
    601–900px stays a compact 2-column grid.
    This prevents the TOP/PICKUP mobile one-card rail rules from enlarging library cards. */
 @media (min-width:601px) and (max-width:900px){
@@ -1217,7 +1217,7 @@ a.cms-event-image{display:block}
   }
 }
 
-/* ===== V146: isolate TOP/PICKUP responsive rules from subcategory libraries =====
+/* ===== Isolate TOP/PICKUP responsive rules from subcategory libraries =====
    The one-card / 82%-width responsive behavior belongs ONLY to TOP/PICKUP.
    Subcategory libraries keep their own compact grid at every viewport. */
 @media (min-width:601px){

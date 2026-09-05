@@ -494,8 +494,12 @@ body a:hover{color:var(--sky-700)}
    6. 操作ボタン（音・もう一度）
 ========================================================= */
 .msg-controls{
-  position:fixed;left:clamp(14px,3vw,30px);bottom:clamp(16px,4vh,32px);
+  position:fixed;
+  left:clamp(14px,3vw,30px);
+  top:calc(var(--mn-h,64px) + 12px);
+  bottom:auto;
   z-index:8800;display:flex;align-items:center;gap:10px;
+  transform:none !important;
 }
 .msg-ctl{
   display:inline-flex;align-items:center;gap:10px;
@@ -553,7 +557,7 @@ body a:hover{color:var(--sky-700)}
 @media (max-width:700px){
   .pro-guide{bottom:96px;right:14px}
   .pro-skip{right:14px}
-  .msg-controls{left:12px;bottom:12px;gap:8px}
+  .msg-controls{left:10px;top:calc(var(--mn-h,56px) + 8px);bottom:auto;gap:8px}
   .msg-ctl{padding:9px 14px;font-size:10px;letter-spacing:.18em}
   .msg-ctl--replay .label{display:none}
   .msg-message,.msg-explore,.msg-start,.msg-updates{padding-left:18px;padding-right:18px}
@@ -592,7 +596,7 @@ body a:hover{color:var(--sky-700)}
 }
 
 /* =========================================================
-   V147 — 表紙ダッシュボード
+   表紙ダッシュボード
    左：キービジュアル / 右：What's New（完全等幅）
 ========================================================= */
 .pro-dashboard-image{display:none}
@@ -604,18 +608,35 @@ body a:hover{color:var(--sky-700)}
   gap:12px;
   width:100%;
   max-width:1240px;
+  min-width:0;
   margin:0 auto;
   padding:18px 24px 0;
   align-items:stretch;
 }
+.top-live-grid.is-dashboard > .prologue,
+.top-live-grid.is-dashboard > .top-whatsnew{
+  min-width:0;
+  width:100%;
+  max-width:100%;
+}
 .top-live-grid.is-dashboard .prologue.is-finished{
   height:auto;
   min-height:0;
+  width:100%;
+  max-width:100%;
   aspect-ratio:1362/913;
   border:1px solid rgba(22,41,74,.14);
   border-radius:16px;
   overflow:hidden;
+  contain:paint;
   background:var(--sky-100);
+}
+.top-live-grid.is-dashboard .prologue-stage,
+.top-live-grid.is-dashboard .pro-final{
+  min-width:0;
+  width:100%;
+  max-width:100%;
+  overflow:hidden;
 }
 .top-live-grid.is-dashboard .prologue-stage{border-radius:inherit}
 .top-live-grid.is-dashboard .pro-final picture{display:none}
@@ -624,6 +645,7 @@ body a:hover{color:var(--sky-700)}
   position:absolute;
   inset:0;
   width:100%;height:100%;
+  min-width:0;max-width:100%;
   object-fit:cover;
   object-position:center;
   transform:none;
@@ -716,34 +738,28 @@ body a:hover{color:var(--sky-700)}
 }
 .top-wn-featured h3{
   margin:0;
-  font-size:clamp(11.5px,1.05vw,13.5px);
-  line-height:1.35;font-weight:750;
+  font-size:clamp(13.5px,1.20vw,15.5px);
+  line-height:1.32;font-weight:750;
   color:var(--navy-900,#0D2347);
   overflow:hidden;
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
 }
 .top-wn-featured h3 a{color:inherit}
 .top-wn-featured h3 a:hover{color:var(--sky-600)}
-.top-wn-summary{
-  margin:3px 0 0;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  color:var(--muted,#6E7A8E);
-  font-size:9.5px;line-height:1.3;
-}
 .top-wn-text-list{flex:0 0 auto;padding-top:3px}
 .top-wn-text{
   display:grid;
-  grid-template-columns:58px minmax(0,1fr);
-  gap:8px;align-items:center;
+  grid-template-columns:42px minmax(0,1fr);
+  gap:5px;align-items:center;
   min-height:23px;
   border-bottom:1px solid rgba(22,41,74,.085);
-  font-size:9.5px;
+  font-size:10.5px;
 }
 .top-wn-text:last-child{border-bottom:0}
-.top-wn-text time{color:var(--muted,#6E7A8E);font-variant-numeric:tabular-nums;white-space:nowrap}
+.top-wn-text time{color:var(--muted,#6E7A8E);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:left;padding-right:0;justify-self:start}
 .top-wn-text-main{min-width:0;display:flex;align-items:center;gap:7px}
 .top-wn-text-crumb{color:var(--sky-600);font-weight:700;white-space:nowrap;max-width:42%;overflow:hidden;text-overflow:ellipsis}
-.top-wn-text h3{min-width:0;margin:0;font-size:10px;line-height:1.25;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top-wn-text h3{min-width:0;margin:0;font-size:12px;line-height:1.22;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .top-wn-text h3 a{color:var(--navy-900,#0D2347)}
 .top-wn-text h3 a:hover{color:var(--sky-600)}
 
@@ -775,7 +791,7 @@ body a:hover{color:var(--sky-700)}
 .entry-card .text{gap:2px}
 .entry-card .en{font-size:7.5px;letter-spacing:.14em}
 .entry-card .ja{
-  font-size:clamp(13px,1.08vw,16px);
+  font-size:clamp(15px,1.22vw,18px);
   line-height:1.25;
   white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis;
@@ -808,7 +824,9 @@ body a:hover{color:var(--sky-700)}
   .entry-card .icon svg{width:23px;height:23px}
   .entry-card .no{top:5px;left:8px;font-size:8px}
   .entry-card .en{font-size:7px}
-  .entry-card .ja{font-size:12px}
+  .entry-card .ja{font-size:14px}
+  .top-wn-featured h3{font-size:13px}
+  .top-wn-text h3{font-size:11.5px}
   .entry-card .arrow{right:7px;width:24px;height:24px}
 }
 @media (max-width:560px){
@@ -820,9 +838,9 @@ body a:hover{color:var(--sky-700)}
   .top-live-grid.is-dashboard .prologue.is-finished{aspect-ratio:4/3}
   .top-live-grid.is-dashboard .top-whatsnew{min-height:385px;padding:10px 10px 8px;border-radius:12px}
   .top-wn-featured{grid-template-columns:84px minmax(0,1fr);gap:8px}
-  .top-wn-featured h3{font-size:11.5px}
-  .top-wn-text{grid-template-columns:54px minmax(0,1fr)}
+  .top-wn-featured h3{font-size:13px}
   .top-wn-text-main{gap:5px}
+  .top-wn-text h3{font-size:11.5px}
   .msg-explore{padding:8px 10px 20px}
   .entry-card,.entry-card:nth-child(even){
     grid-template-columns:38px minmax(0,1fr);
@@ -835,158 +853,12 @@ body a:hover{color:var(--sky-700)}
   .entry-card .icon svg{width:24px;height:24px}
   .entry-card .no{top:5px;left:8px;font-size:8px}
   .entry-card .en{display:none}
-  .entry-card .ja{padding-top:0;font-size:12.5px;line-height:1.2}
+  .entry-card .ja{padding-top:0;font-size:14.5px;line-height:1.2}
   .entry-card .arrow{right:8px;bottom:50%;width:24px;height:24px}
 }
 .top-wn-image-placeholder{display:grid;place-items:center;width:100%;height:100%;font-size:9px;font-weight:800;letter-spacing:.16em;color:var(--muted,#6E7A8E);background:linear-gradient(145deg,#fff,var(--sky-100))}
 
-/* =========================================================
-   V149 — TOP main visual containment fix
-   Equal 50/50 tracks must also constrain the prologue grid item itself.
-   Prevent the finished key visual from retaining an intrinsic minimum width
-   and painting across the What's New column at intermediate viewport widths.
-========================================================= */
-.top-live-grid.is-dashboard > .prologue,
-.top-live-grid.is-dashboard > .top-whatsnew{
-  min-width:0;
-  width:100%;
-  max-width:100%;
-}
-.top-live-grid.is-dashboard > .prologue{
-  overflow:hidden;
-  contain:paint;
-}
-.top-live-grid.is-dashboard .prologue-stage,
-.top-live-grid.is-dashboard .pro-final{
-  min-width:0;
-  width:100%;
-  max-width:100%;
-  overflow:hidden;
-}
-.top-live-grid.is-dashboard .pro-dashboard-image{
-  min-width:0;
-  max-width:100%;
-}
-
-
-/* =========================================================
-   V153 — TOP readability tuning
-   - Entry labels: +2Q equivalent (about +2px on screen)
-   - What's New titles: +2Q equivalent
-   - Compact dates: MM/DD, right-aligned in the existing date lane
-========================================================= */
-.entry-card .ja{
-  font-size:clamp(15px,1.22vw,18px);
-}
-.top-wn-featured h3{
-  font-size:clamp(13.5px,1.20vw,15.5px);
-  line-height:1.32;
-}
-.top-wn-text{
-  font-size:10.5px;
-}
-.top-wn-text time{
-  text-align:right;
-  padding-right:2px;
-}
-.top-wn-text h3{
-  font-size:12px;
-  line-height:1.22;
-  font-weight:700;
-}
-@media (max-width:700px) and (min-width:561px){
-  .entry-card .ja{font-size:14px}
-  .top-wn-featured h3{font-size:13px}
-  .top-wn-text h3{font-size:11.5px}
-}
-@media (max-width:480px){
-  .entry-card .ja{font-size:14.5px}
-  .top-wn-featured h3{font-size:13px}
-  .top-wn-text h3{font-size:11.5px}
-}
-
-/* =========================================================
-   V154 — TOP What's New summary hierarchy
-   Keep article titles as-is; make the 20-character summary clearly secondary.
-========================================================= */
-.top-wn-summary{
-  margin-top:3px;
-  font-size:clamp(11.5px,1.03vw,13.5px);
-  line-height:1.38;
-  font-weight:400;
-  letter-spacing:0;
-  color:rgba(110,122,142,.94);
-}
-@media (max-width:700px){
-  .top-wn-summary{font-size:11px;line-height:1.34;font-weight:400}
-}
-@media (max-width:480px){
-  .top-wn-summary{font-size:10.5px;line-height:1.32}
-}
-
-/* =========================================================
-   V155 — floating controls: move away from lower entry cards
-   Cover page only. Keep the controls fixed at the upper-left,
-   accepting overlap with the main visual at the initial view.
-========================================================= */
-.msg-controls{
-  left:clamp(14px,3vw,30px);
-  top:calc(var(--mn-h,64px) + 12px);
-  bottom:auto;
-  transform:none !important;
-}
-/* MV/TOP は従来どおり右下。SOUND/もう一度だけ左上に置く。 */
-.mn-float{
-  left:auto;
-  right:clamp(14px,3vw,30px);
-  top:auto;
-  bottom:clamp(16px,4vh,32px);
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
-}
-@media (max-width:700px){
-  .msg-controls{
-    left:10px;
-    top:calc(var(--mn-h,56px) + 8px);
-  }
-  .mn-float{
-    left:auto;
-    right:10px;
-    top:auto;
-    bottom:12px;
-    flex-direction:column;
-    gap:8px;
-  }
-}
-
-/* =========================================================
-   V157 — TOP What's New compact five-item rows
-   Pull the compact date lane fully left and return the saved
-   horizontal space to breadcrumb/title text.
-========================================================= */
-.top-wn-text{
-  grid-template-columns:42px minmax(0,1fr);
-  gap:5px;
-}
-.top-wn-text time{
-  text-align:left;
-  padding-right:0;
-  justify-self:start;
-}
-
-
-/* =========================================================
-   V159 — TOP What's New inline title + variable summary
-   Title and summary flow continuously. Summary stays 2Q smaller/lighter.
-========================================================= */
-.top-wn-featured h3{
-  display:-webkit-box;
-  -webkit-box-orient:vertical;
-  -webkit-line-clamp:2;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
+/* TOP What's New: title + adaptive summary share the same two-line flow. */
 .top-wn-summary-inline{
   font-size:clamp(11.5px,1.03vw,13.5px);
   line-height:inherit;
@@ -995,7 +867,7 @@ body a:hover{color:var(--sky-700)}
   color:rgba(110,122,142,.94);
 }
 @media (max-width:700px){
-  .top-wn-summary-inline{font-size:11px;font-weight:400}
+  .top-wn-summary-inline{font-size:11px}
 }
 @media (max-width:480px){
   .top-wn-summary-inline{font-size:10.5px}
