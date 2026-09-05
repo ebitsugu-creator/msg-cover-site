@@ -276,3 +276,41 @@ body.mn-drawer-open{overflow:hidden}
   padding:9px 18px;border-radius:999px;font-family:var(--mn-sans);font-size:13px;font-weight:700;cursor:pointer;
 }
 .mn-contact-copy:hover{background:var(--mn-navy);color:#fff}
+
+
+/* ===== V145: MV CMS button — circular, compact 2-line centering ===== */
+.mn-float-btn--cms{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:52px;
+  min-width:52px;
+  max-width:52px;
+  height:52px;
+  min-height:52px;
+  padding:4px 3px;
+  border-radius:50%;
+  line-height:1;
+  text-align:center;
+}
+.mn-float-btn--cms.mn-float-btn--two-line{
+  gap:1px;
+  font-size:8px;
+  line-height:1;
+}
+.mn-float-btn--cms .mn-float-line{
+  display:block;
+  max-width:46px;
+  line-height:1;
+  margin:0;
+  overflow:hidden;
+  text-overflow:clip;
+}
+/* Defensive override in case an old cached class remains on the element. */
+.mn-float-btn--cms.mn-float-btn--capsule{
+  width:52px;min-width:52px;max-width:52px;height:52px;
+  padding:4px 3px;border-radius:50%;font-size:9px;line-height:1;
+}
+.mn-float-btn--cms.mn-float-btn--capsule.mn-float-btn--two-line{font-size:8px;gap:1px}
+.mn-float-btn--capsule .mn-float-line{max-width:46px;overflow:hidden}

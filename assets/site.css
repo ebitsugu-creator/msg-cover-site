@@ -1163,3 +1163,56 @@ a.cms-event-image{display:block}
   #events .cms-library-rail .cms-event-card:nth-child(n+5),
   #events .cms-library-rail .cms-video-card:nth-child(n+5){display:none}
 }
+
+
+/* ===== V145: Events / Featured library rails — independent responsive control =====
+   601–900px stays a compact 2-column grid.
+   This prevents the TOP/PICKUP mobile one-card rail rules from enlarging library cards. */
+@media (min-width:601px) and (max-width:900px){
+  #events .cms-mixed-library,
+  #events .cms-event-list,
+  #events .cms-video-section .cms-video-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    overflow:visible;
+    padding:0;
+    scroll-snap-type:none;
+  }
+  #events .cms-mixed-library>.cms-event-card,
+  #events .cms-mixed-library>.cms-video-card,
+  #events .cms-event-list>.cms-event-card,
+  #events .cms-video-section .cms-video-card{
+    display:block;
+    flex:none;
+    width:100%;
+    min-width:0;
+    max-width:none;
+    margin:0!important;
+    scroll-snap-align:none;
+  }
+
+  #featured .cms-featured-category .cms-video-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    overflow:visible;
+    padding:0;
+    scroll-snap-type:none;
+  }
+  #featured .cms-featured-category .cms-video-card{
+    display:block;
+    flex:none;
+    width:100%;
+    min-width:0;
+    max-width:none;
+    margin:0!important;
+    scroll-snap-align:none;
+  }
+}
