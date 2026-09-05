@@ -904,3 +904,56 @@ body a:hover{color:var(--sky-700)}
   .top-wn-featured h3{font-size:13px}
   .top-wn-text h3{font-size:11.5px}
 }
+
+/* =========================================================
+   V154 — TOP What's New summary hierarchy
+   Keep article titles as-is; make the 20-character summary clearly secondary.
+========================================================= */
+.top-wn-summary{
+  margin-top:2px;
+  font-size:8.3px;
+  line-height:1.28;
+  font-weight:400;
+  letter-spacing:0;
+  color:rgba(110,122,142,.92);
+}
+@media (max-width:700px){
+  .top-wn-summary{font-size:8px;line-height:1.25;font-weight:400}
+}
+
+/* =========================================================
+   V155 — floating controls: move away from lower entry cards
+   Cover page only. Keep the controls fixed at the upper-left,
+   accepting overlap with the main visual at the initial view.
+========================================================= */
+.msg-controls{
+  left:clamp(14px,3vw,30px);
+  top:calc(var(--mn-h,64px) + 12px);
+  bottom:auto;
+  transform:none !important;
+}
+/* On the cover, move the shared MV/TOP floating group to the
+   same upper-left zone so the lower category cards stay tappable. */
+.mn-float{
+  left:clamp(14px,3vw,30px);
+  right:auto;
+  top:calc(var(--mn-h,64px) + 66px);
+  bottom:auto;
+  flex-direction:row;
+  align-items:center;
+  gap:8px;
+}
+@media (max-width:700px){
+  .msg-controls{
+    left:10px;
+    top:calc(var(--mn-h,56px) + 8px);
+  }
+  .mn-float{
+    left:10px;
+    right:auto;
+    top:calc(var(--mn-h,56px) + 56px);
+    bottom:auto;
+    flex-direction:row;
+    gap:7px;
+  }
+}

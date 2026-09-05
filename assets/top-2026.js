@@ -273,25 +273,13 @@
 
 
   /* =========================================================
-     左下のボタン(SOUND/もう一度)がフッターと重ならないように、
-     フッターが見えてきたらその分だけ上へ逃がす
+     V155: SOUND/もう一度 は画面左上固定。
+     下部カードを塞がないため、フッター回避の上下移動は行わない。
   ========================================================= */
   function initControlsClearFooter() {
     var box = document.querySelector(".msg-controls");
-    var foot = document.getElementById("msg-footer");
-    if (!box || !foot) return;
-    var tick = false;
-    function sync() {
-      tick = false;
-      var r = foot.getBoundingClientRect();
-      var overlap = window.innerHeight - r.top;
-      box.style.transform = overlap > 0 ? "translateY(" + (-overlap - 10) + "px)" : "";
-    }
-    window.addEventListener("scroll", function () {
-      if (!tick) { tick = true; window.requestAnimationFrame(sync); }
-    }, { passive: true });
-    window.addEventListener("resize", sync);
-    sync();
+    if (!box) return;
+    box.style.transform = "";
   }
 
   /* =========================================================
