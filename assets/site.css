@@ -1216,3 +1216,96 @@ a.cms-event-image{display:block}
     scroll-snap-align:none;
   }
 }
+
+/* ===== V146: isolate TOP/PICKUP responsive rules from subcategory libraries =====
+   The one-card / 82%-width responsive behavior belongs ONLY to TOP/PICKUP.
+   Subcategory libraries keep their own compact grid at every viewport. */
+@media (min-width:601px){
+  #featured .cms-featured-category .cms-video-grid{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:12px!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow:visible!important;
+    padding:0!important;
+    scroll-snap-type:none!important;
+  }
+  #featured .cms-featured-category .cms-video-card{
+    display:block!important;
+    flex:none!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    scroll-snap-align:none!important;
+  }
+
+  #events .cms-library-rail .cms-mixed-library{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:12px!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow:visible!important;
+    padding:0!important;
+    scroll-snap-type:none!important;
+  }
+  #events .cms-library-rail .cms-mixed-library>.cms-event-card,
+  #events .cms-library-rail .cms-mixed-library>.cms-video-card{
+    display:block!important;
+    flex:none!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    scroll-snap-align:none!important;
+  }
+}
+
+@media (max-width:600px){
+  #featured .cms-featured-category .cms-video-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow:visible!important;
+    padding:0!important;
+    scroll-snap-type:none!important;
+  }
+  #featured .cms-featured-category .cms-video-card{
+    display:block!important;
+    flex:none!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    scroll-snap-align:none!important;
+  }
+
+  #events .cms-library-rail .cms-mixed-library{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow:visible!important;
+    padding:0!important;
+    scroll-snap-type:none!important;
+  }
+  #events .cms-library-rail .cms-mixed-library>.cms-event-card,
+  #events .cms-library-rail .cms-mixed-library>.cms-video-card{
+    display:block!important;
+    flex:none!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    scroll-snap-align:none!important;
+  }
+}
