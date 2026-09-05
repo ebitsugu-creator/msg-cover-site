@@ -468,11 +468,10 @@
       var all = [].concat.apply([], groups).filter(function (a) { return topArticleVisible(a, now); });
       all.sort(function (a, b) { return bannerStamp(b) - bannerStamp(a); });
       all = all.slice(0, TOP_BANNER_FRESH_COUNT);
-      return Promise.all(all.map(function (a) {
-        return bannerYoutubeTitle(a).then(function (title) {
-          return { text: bannerClip24(title || a.title || "新着情報"), href: topArticleHref(a), kind: "fresh" };
-        });
-      }));
+      return all.map(function (a) {
+        /* TOPバナーは24文字制御を優先し、動画も入力フォームのタイトルを使う。 */
+        return { text: bannerClip24(a.title || "新着情報"), href: topArticleHref(a), kind: "fresh" };
+      });
     }).catch(function () { return []; });
   }
   function setTopBannerLink(link, item) {

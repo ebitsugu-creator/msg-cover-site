@@ -932,16 +932,15 @@ body a:hover{color:var(--sky-700)}
   bottom:auto;
   transform:none !important;
 }
-/* On the cover, move the shared MV/TOP floating group to the
-   same upper-left zone so the lower category cards stay tappable. */
+/* MV/TOP は従来どおり右下。SOUND/もう一度だけ左上に置く。 */
 .mn-float{
-  left:clamp(14px,3vw,30px);
-  right:auto;
-  top:calc(var(--mn-h,64px) + 66px);
-  bottom:auto;
-  flex-direction:row;
+  left:auto;
+  right:clamp(14px,3vw,30px);
+  top:auto;
+  bottom:clamp(16px,4vh,32px);
+  flex-direction:column;
   align-items:center;
-  gap:8px;
+  gap:10px;
 }
 @media (max-width:700px){
   .msg-controls{
@@ -949,11 +948,26 @@ body a:hover{color:var(--sky-700)}
     top:calc(var(--mn-h,56px) + 8px);
   }
   .mn-float{
-    left:10px;
-    right:auto;
-    top:calc(var(--mn-h,56px) + 56px);
-    bottom:auto;
-    flex-direction:row;
-    gap:7px;
+    left:auto;
+    right:10px;
+    top:auto;
+    bottom:12px;
+    flex-direction:column;
+    gap:8px;
   }
+}
+
+/* =========================================================
+   V157 — TOP What's New compact five-item rows
+   Pull the compact date lane fully left and return the saved
+   horizontal space to breadcrumb/title text.
+========================================================= */
+.top-wn-text{
+  grid-template-columns:42px minmax(0,1fr);
+  gap:5px;
+}
+.top-wn-text time{
+  text-align:left;
+  padding-right:0;
+  justify-self:start;
 }

@@ -18,8 +18,16 @@ function image(v){if(!v)return '';v=String(v).trim();if(/^https?:\/\//i.test(v))
 function yt(v){try{const u=new URL(String(v||'').trim().replace(/^["']|["']$/g,''));const h=u.hostname.replace(/^www\./,'');if(h==='youtu.be')return u.pathname.split('/').filter(Boolean)[0]||'';if(['youtube.com','m.youtube.com','music.youtube.com','youtube-nocookie.com'].includes(h)){const q=u.searchParams.get('v');if(q)return q;const m=u.pathname.match(/\/(?:shorts|embed|live|v)\/([^/?]+)/);return m?m[1]:''}}catch(_){}return ''}
 function thumb(a){const id=yt(a.videoUrl||''),manual=image(a.image1||a.image2||'');if(a.collection==='videos'&&id)return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;if(manual)return manual;return id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:''}
 async function youtubeMeta(a){if(a.collection!=='videos'||!yt(a.videoUrl||''))return a;try{const r=await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(a.videoUrl)}&format=json`,{cache:'force-cache'});if(!r.ok)return a;const m=await r.json();return {...a,ytTitle:m.title||'',ytThumb:m.thumbnail_url||''}}catch(_){return a}}
-function displayTitle(a){return a.collection==='videos'?(a.ytTitle||a.title||'動画'):(a.title||'無題')}
-function summary(a){return String(a.summary||a.subtitle||a.note||'').trim()}
+function displayParts(a){
+  if(a.collection!=='videos')return {title:a.title||'無題',summary:String(a.summary||a.subtitle||a.note||'').trim()};
+  const full=String(a.ytTitle||a.title||'動画').trim();
+  const parts=full.split(/\s*[\/／∕⁄]\s*/).filter(Boolean);
+  const title=parts.shift()||'動画';
+  const sum=parts.length?parts.join('／'):String(a.note||a.summary||'').trim();
+  return {title,summary:sum};
+}
+function displayTitle(a){return displayParts(a).title}
+function summary(a){return displayParts(a).summary}
 function short20(v){const a=Array.from(String(v||'').replace(/\s+/g,' ').trim());return a.length>20?a.slice(0,20).join('')+'…':a.join('')}
 function categoryLabel(a){return CATEGORY[a.category]||'お知らせ'}
 function subLabel(a){return (subs&&subs.label(a.subcategory))||FALLBACK_LABELS[a.subcategory]||a.subcategory||''}
