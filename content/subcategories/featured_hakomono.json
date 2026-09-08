@@ -1,8 +1,1 @@
-{
-	"category": "featured",
-	"label": "【推しネタ】ハコモノ探偵団",
-	"status": "inactive",
-	"displayOrder": 10,
-	"showBackNumber": true,
-	"updatedAt": "2026-09-07T10:42:42.563Z"
-}
+{"category":"featured","label":"【推しネタ】ハコモノ探偵団","status":"active","displayOrder":10,"showBackNumber":true}
