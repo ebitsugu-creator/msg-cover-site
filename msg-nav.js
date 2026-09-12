@@ -18,6 +18,93 @@
 (function () {
   "use strict";
 
+  /* ---------- CMSリポジトリ読込（API呼出しを1回に集約） ---------- */
+  var REPO_OWNER = "ebitsugu-creator";
+  var REPO_NAME = "msg-cover-site";
+  var REPO_BRANCH = "main";
+  var TREE_CACHE_KEY = "msgRepoTreeV159Final";
+  var TREE_CACHE_MS = 60 * 1000;
+  var treePromise = null;
+
+  function readTreeCache() {
+    try {
+      var raw = sessionStorage.getItem(TREE_CACHE_KEY) || localStorage.getItem(TREE_CACHE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      return data && Array.isArray(data.paths) ? data : null;
+    } catch (_) { return null; }
+  }
+  function saveTreeCache(paths) {
+    var raw = JSON.stringify({ at: Date.now(), paths: paths });
+    try { sessionStorage.setItem(TREE_CACHE_KEY, raw); } catch (_) {}
+    try { localStorage.setItem(TREE_CACHE_KEY, raw); } catch (_) {}
+  }
+  function repoTree() {
+    if (treePromise) return treePromise;
+    var cached = readTreeCache();
+    if (cached && Date.now() - Number(cached.at || 0) < TREE_CACHE_MS) {
+      treePromise = Promise.resolve(cached.paths);
+      return treePromise;
+    }
+    var url = "https://api.github.com/repos/" + REPO_OWNER + "/" + REPO_NAME + "/git/trees/" + REPO_BRANCH + "?recursive=1&_=" + Date.now();
+    function jsDelivrTree() {
+      var urls = [
+        "https://data.jsdelivr.com/v1/packages/gh/" + REPO_OWNER + "/" + REPO_NAME + "@" + REPO_BRANCH + "?structure=flat",
+        "https://data.jsdelivr.com/v1/package/gh/" + REPO_OWNER + "/" + REPO_NAME + "@" + REPO_BRANCH + "/flat"
+      ];
+      function attempt(i) {
+        if (i >= urls.length) return Promise.reject(new Error("jsDelivr tree unavailable"));
+        return fetch(urls[i], { cache: "no-store" }).then(function (r) {
+          if (!r.ok) throw new Error("jsDelivr tree " + r.status);
+          return r.json();
+        }).then(function (data) {
+          if (!data || !Array.isArray(data.files)) throw new Error("jsDelivr tree invalid");
+          return data.files.map(function (x) { return String(x.name || "").replace(/^\//, ""); }).filter(Boolean);
+        }).catch(function () { return attempt(i + 1); });
+      }
+      return attempt(0);
+    }
+    treePromise = fetch(url, { cache: "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error("repo tree " + r.status);
+      return r.json();
+    }).then(function (data) {
+      if (!data || !Array.isArray(data.tree)) throw new Error("repo tree invalid");
+      return data.tree.filter(function (x) { return x && x.type === "blob" && x.path; }).map(function (x) { return x.path; });
+    }).catch(function () {
+      /* GitHub API制限時はレート制限のないファイル一覧APIへ退避 */
+      return jsDelivrTree();
+    }).then(function (paths) {
+      if (!paths || !paths.length) throw new Error("repo tree empty");
+      saveTreeCache(paths);
+      return paths;
+    }).catch(function (err) {
+      /* 両方が一時的に失敗した場合は、以前取得した一覧があればそれを使う */
+      if (cached && cached.paths && cached.paths.length) return cached.paths;
+      treePromise = null;
+      throw err;
+    });
+    return treePromise;
+  }
+  function repoList(dir, extension) {
+    var prefix = String(dir || "").replace(/^\/+|\/+$/g, "") + "/";
+    return repoTree().then(function (paths) {
+      return paths.filter(function (path) {
+        if (path.indexOf(prefix) !== 0) return false;
+        var rest = path.slice(prefix.length);
+        if (!rest || rest.indexOf("/") >= 0) return false;
+        return !extension || String(path).toLowerCase().endsWith(String(extension).toLowerCase());
+      });
+    });
+  }
+  function repoText(path) {
+    var url = "https://raw.githubusercontent.com/" + REPO_OWNER + "/" + REPO_NAME + "/" + REPO_BRANCH + "/" + String(path).replace(/^\//, "") + "?_=" + Date.now();
+    return fetch(url, { cache: "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error(path + " " + r.status);
+      return r.text();
+    });
+  }
+  window.MSGRepo = window.MSGRepo || { tree: repoTree, list: repoList, text: repoText };
+
   /* ---------- 定義 ---------- */
   var MENU_URL = "index.html#explore";   /* 「TOP」＝8つの入口(メニュー画面) */
 
@@ -49,7 +136,7 @@
   /* TOP と Music Video は画面右下の丸ボタン(全ページ共通) */
   var FLOAT_BUTTONS = [
     { label: "MV",  title: "Music Video", href: "mv.html" },
-    { label: "TOP", title: "TOP（8つの入口）へ", href: MENU_URL, top: true }
+    { label: "TOP", title: "TOP（表紙）へ", href: MENU_URL, top: true }
   ];
 
   /* お知らせ：固定2件（ここを書き換えてください） */
@@ -127,7 +214,7 @@
     }).join("");
 
     return '' +
-      '<div class="mn-inner' + (pageBar ? ' has-page' : '') + '">' +
+      '<div class="mn-inner' + (pageBar ? ' has-page' : '') + (isTop() ? ' mn-inner--top-banner' : '') + '">' +
         '<a class="mn-brand" href="' + esc(MENU_URL) + '" aria-label="中くらいの政府 メニューへ">' +
           '<img src="assets/img/msg-logo-ja.png" alt="中くらいの政府" width="300" height="66">' +
           '<span class="mn-brand-en" aria-hidden="true">MSG — MEDIUM SIZED GOVERNMENT</span>' +
@@ -135,17 +222,26 @@
         pageBar +
         '<nav class="mn-nav" aria-label="メインメニュー">' + groups + '</nav>' +
         '<div class="mn-tools">' +
-          '<div class="mn-notice">' +
-            '<button class="mn-notice-btn" type="button" aria-expanded="false" aria-controls="mn-notice-panel">お知らせ</button>' +
-            '<div class="mn-notice-panel" id="mn-notice-panel" role="region" aria-label="お知らせ">' +
-              '<p class="mn-notice-head">お知らせ</p>' +
-              '<ul class="mn-notice-fixed"></ul>' +
-              '<p class="mn-notice-sub">新着</p>' +
-              '<ul class="mn-notice-new"><li class="mn-notice-loading">読み込み中…</li></ul>' +
-              '<a class="mn-notice-more" href="activity.html#news">すべて見る →</a>' +
+          (isTop() ?
+            '<div class="mn-top-banner-shell">' +
+              '<a class="mn-top-banner" href="whatsnew.html" aria-label="What\'s Newを見る">' +
+                '<span class="mn-top-banner-text">新着情報を読み込み中…</span>' +
+                '<span class="mn-top-banner-arrow" aria-hidden="true">→</span>' +
+              '</a>' +
+            '</div>'
+          :
+            '<div class="mn-notice">' +
+              '<button class="mn-notice-btn" type="button" aria-expanded="false" aria-controls="mn-notice-panel">お知らせ</button>' +
+              '<div class="mn-notice-panel" id="mn-notice-panel" role="region" aria-label="お知らせ">' +
+                '<p class="mn-notice-head">お知らせ</p>' +
+                '<ul class="mn-notice-fixed"></ul>' +
+                '<p class="mn-notice-sub">新着</p>' +
+                '<ul class="mn-notice-new"><li class="mn-notice-loading">読み込み中…</li></ul>' +
+                '<a class="mn-notice-more" href="activity.html#news">すべて見る →</a>' +
+              '</div>' +
             '</div>' +
-          '</div>' +
-          '<a class="mn-cta" href="join.html">参加する</a>' +
+            '<a class="mn-cta" href="join.html">参加する</a>'
+          ) +
           '<button class="mn-menu-btn" type="button" aria-expanded="false" aria-controls="mn-drawer" aria-label="メニューを開く"><span></span><span></span><span></span></button>' +
         '</div>' +
       '</div>' +
@@ -184,6 +280,258 @@
   }
 
   /* ---------- 右下の丸ボタン（MV / TOP） ---------- */
+  function activeAuxiliary(item, type) {
+    if (!item || item.featureType !== type || item.publishable === false) return false;
+    var now = Date.now();
+    var start = item.publishStartAt ? Date.parse(item.publishStartAt) : NaN;
+    var end = item.publishEndAt ? Date.parse(item.publishEndAt) : NaN;
+    if (!isNaN(start) && now < start) return false;
+    if (!isNaN(end) && now > end) return false;
+    return true;
+  }
+  function auxiliaryStamp(item) {
+    var d = Date.parse(item.updatedAt || item.publishStartAt || "");
+    return isNaN(d) ? 0 : d;
+  }
+  function applyMVConfig(box) {
+    var repo = window.MSGRepo;
+    if (!repo || !repo.list || !repo.text) return;
+    repo.list("content/auxiliary-display", ".json").then(function (paths) {
+      return Promise.all(paths.map(function (path) {
+        return repo.text(path).then(function (text) {
+          try { var data = JSON.parse(text); data.__path = path; return data; } catch (_) { return null; }
+        }).catch(function () { return null; });
+      }));
+    }).then(function (items) {
+      var list = items.filter(function (x) { return activeAuxiliary(x, "mv_button"); });
+      if (!list.length) return;
+      list.sort(function (a, b) { return auxiliaryStamp(b) - auxiliaryStamp(a) || String(b.__path).localeCompare(String(a.__path)); });
+      var item = list[0];
+      var mv = box.querySelector(".mn-float-btn:not(.mn-float-btn--top)");
+      if (!mv) return;
+      var line1 = String(item.mvLine1 || "").trim();
+      var line2 = String(item.mvLine2 || "").trim();
+      if (!line1 && line2) { line1 = line2; line2 = ""; }
+      if (line1) {
+        mv.innerHTML = '<span class="mn-float-line">' + esc(line1) + '</span>' + (line2 ? '<span class="mn-float-line">' + esc(line2) + '</span>' : '');
+        mv.classList.add("mn-float-btn--cms");
+        if (line2) mv.classList.add("mn-float-btn--two-line");
+        var label = line1 + (line2 ? " " + line2 : "");
+        mv.setAttribute("title", label);
+        mv.setAttribute("aria-label", label);
+      }
+      if (item.linkUrl) {
+        var href = String(item.linkUrl).trim();
+        mv.setAttribute("href", href);
+        try {
+          var u = new URL(href, location.href);
+          if (/^https?:$/.test(u.protocol) && u.origin !== location.origin) {
+            mv.setAttribute("target", "_blank");
+            mv.setAttribute("rel", "noopener noreferrer");
+          } else {
+            mv.removeAttribute("target");
+            mv.removeAttribute("rel");
+          }
+        } catch (_) {}
+      }
+    }).catch(function (e) { console.warn("[MV button] CMS setting could not be loaded", e); });
+  }
+  /* ---------- TOPテキストバナー（表紙のみ：固定2 + What's New最新3） ---------- */
+  var TOP_BANNER_INTERVAL = 5000;
+  var TOP_BANNER_FIXED_COUNT = 2;
+  var TOP_BANNER_FRESH_COUNT = 3;
+  var topBannerSubs = null;
+  var TOP_BANNER_SOURCES = [
+    { collection: "free", path: "content/free" },
+    { collection: "lp-links", path: "content/lp-links" },
+    { collection: "text-qa", path: "content/text-qa" },
+    { collection: "videos", path: "content/videos" }
+  ];
+
+  function bannerScalar(raw) {
+    var v = String(raw == null ? "" : raw).trim();
+    if (v === "true") return true;
+    if (v === "false") return false;
+    if (v === "null") return null;
+    if ((v.charAt(0) === '"' && v.charAt(v.length - 1) === '"') || (v.charAt(0) === "'" && v.charAt(v.length - 1) === "'")) v = v.slice(1, -1);
+    return v;
+  }
+  function parseBannerFrontmatter(text, fileName, collection) {
+    var m = String(text || "").replace(/^\uFEFF/, "").match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
+    if (!m) return null;
+    var data = {};
+    m[1].split(/\r?\n/).forEach(function (line) {
+      var i = line.indexOf(":");
+      if (i > 0) data[line.slice(0, i).trim()] = bannerScalar(line.slice(i + 1));
+    });
+    data.fileName = fileName;
+    data.collection = collection;
+    return data;
+  }
+  function bannerDate(v) {
+    if (!v) return null;
+    var d = new Date(v);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function bannerStamp(a) { return bannerDate(a.publishStartAt) || bannerDate(a.publishedAt); }
+  function bannerClip24(v) {
+    var chars = Array.from(String(v || "").replace(/\s+/g, " ").trim());
+    if (chars.length <= 24) return chars.join("");
+    return chars.slice(0, 23).join("") + "…";
+  }
+  function bannerYoutubeId(v) {
+    try {
+      var u = new URL(String(v || "").trim().replace(/^["']|["']$/g, ""));
+      var h = u.hostname.replace(/^www\./, "");
+      if (h === "youtu.be") return u.pathname.split("/").filter(Boolean)[0] || "";
+      if (["youtube.com","m.youtube.com","music.youtube.com","youtube-nocookie.com"].indexOf(h) >= 0) {
+        var q = u.searchParams.get("v");
+        if (q) return q;
+        var m = u.pathname.match(/\/(?:shorts|embed|live|v)\/([^/?]+)/);
+        return m ? m[1] : "";
+      }
+    } catch (_) {}
+    return "";
+  }
+  function bannerYoutubeTitle(a) {
+    if (a.collection !== "videos") return Promise.resolve(a.title || "");
+    if (!bannerYoutubeId(a.videoUrl)) return Promise.resolve(a.title || "動画");
+    return fetch("https://www.youtube.com/oembed?url=" + encodeURIComponent(a.videoUrl) + "&format=json", { cache: "force-cache" })
+      .then(function (r) { if (!r.ok) throw new Error("oembed " + r.status); return r.json(); })
+      .then(function (m) { return m && m.title ? m.title : (a.title || "動画"); })
+      .catch(function () { return a.title || "動画"; });
+  }
+  function topArticleVisible(a, now) {
+    if (!a || a.publishable !== true || a.whatsNew !== true || a.isDraft === true) return false;
+    var mgr = topBannerSubs;
+    if (mgr && mgr.isActive && !mgr.isActive(a.subcategory)) return false;
+    var start = bannerDate(a.publishStartAt), end = bannerDate(a.publishEndAt);
+    if (start && now < start) return false;
+    if (end && now > end) return false;
+    var isAdvance = mgr && mgr.matches ? mgr.matches(a.subcategory, "events_advance") : a.subcategory === "events_advance";
+    if (isAdvance) {
+      var ev = bannerDate(a.eventAt);
+      if (ev && now >= ev) return false;
+    }
+    var st = bannerStamp(a);
+    if (!st) return false;
+    var limit = new Date(now);
+    limit.setMonth(limit.getMonth() - 3);
+    return st >= limit;
+  }
+  function topArticleHref(a) {
+    if (a.collection === "videos") {
+      if (a.productionType === "external" && a.videoUrl) return a.videoUrl;
+      return "article.html?collection=videos&file=" + encodeURIComponent(a.fileName);
+    }
+    if (a.linkUrl) return a.linkUrl;
+    return "article.html?collection=" + encodeURIComponent(a.collection) + "&file=" + encodeURIComponent(a.fileName);
+  }
+  function loadTopBannerFixed() {
+    var repo = window.MSGRepo;
+    if (!repo || !repo.list || !repo.text) return Promise.resolve([]);
+    return repo.list("content/auxiliary-display", ".json").then(function (paths) {
+      return Promise.all(paths.map(function (path) {
+        return repo.text(path).then(function (text) {
+          try { var data = JSON.parse(text); data.__path = path; return data; } catch (_) { return null; }
+        }).catch(function () { return null; });
+      }));
+    }).then(function (items) {
+      return items.filter(function (x) {
+        return activeAuxiliary(x, "top_text_banner") && String(x.topBannerText || "").trim();
+      }).sort(function (a, b) {
+        return auxiliaryStamp(b) - auxiliaryStamp(a) || String(b.__path).localeCompare(String(a.__path));
+      }).slice(0, TOP_BANNER_FIXED_COUNT).map(function (x) {
+        return { text: bannerClip24(x.topBannerText), href: String(x.linkUrl || "whatsnew.html").trim() || "whatsnew.html", kind: "fixed" };
+      });
+    }).catch(function () { return []; });
+  }
+  function loadTopBannerFresh() {
+    var repo = window.MSGRepo;
+    if (!repo || !repo.list || !repo.text) return Promise.resolve([]);
+    var ready = window.MSGSubcategories && window.MSGSubcategories.ready ? window.MSGSubcategories.ready.catch(function () { return null; }) : Promise.resolve(null);
+    return ready.then(function (manager) {
+      topBannerSubs = manager || null;
+      return Promise.all(TOP_BANNER_SOURCES.map(function (src) {
+        return repo.list(src.path, ".md").then(function (paths) {
+          return Promise.all(paths.map(function (path) {
+            return repo.text(path).then(function (text) {
+              return parseBannerFrontmatter(text, path.split("/").pop(), src.collection);
+            }).catch(function () { return null; });
+          }));
+        }).then(function (items) { return items.filter(Boolean); }).catch(function () { return []; });
+      }));
+    }).then(function (groups) {
+      var now = new Date();
+      var all = [].concat.apply([], groups).filter(function (a) { return topArticleVisible(a, now); });
+      all.sort(function (a, b) { return bannerStamp(b) - bannerStamp(a); });
+      all = all.slice(0, TOP_BANNER_FRESH_COUNT);
+      return all.map(function (a) {
+        /* TOPバナーは24文字制御を優先し、動画も入力フォームのタイトルを使う。 */
+        return { text: bannerClip24(a.title || "新着情報"), href: topArticleHref(a), kind: "fresh" };
+      });
+    }).catch(function () { return []; });
+  }
+  function setTopBannerLink(link, item) {
+    var text = link.querySelector(".mn-top-banner-text");
+    if (!text || !item) return;
+    text.textContent = item.text || "What's Newを見る";
+    link.setAttribute("href", item.href || "whatsnew.html");
+    link.setAttribute("aria-label", item.text || "What's Newを見る");
+    link.setAttribute("title", item.text || "What's Newを見る");
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+    try {
+      var u = new URL(item.href || "whatsnew.html", location.href);
+      if (/^https?:$/.test(u.protocol) && u.origin !== location.origin) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+      }
+    } catch (_) {}
+  }
+  function mountTopBanner(root) {
+    var link = root && root.querySelector ? root.querySelector(".mn-top-banner") : null;
+    if (!link) return;
+    Promise.all([loadTopBannerFixed(), loadTopBannerFresh()]).then(function (parts) {
+      var items = parts[0].concat(parts[1]).slice(0, TOP_BANNER_FIXED_COUNT + TOP_BANNER_FRESH_COUNT);
+      if (!items.length) items = [{ text: "What's Newを見る", href: "whatsnew.html", kind: "fallback" }];
+      var index = 0, timer = null, changing = false;
+      setTopBannerLink(link, items[0]);
+      function show(next) {
+        if (changing || items.length < 2) return;
+        changing = true;
+        link.classList.remove("is-entering");
+        link.classList.add("is-changing");
+        setTimeout(function () {
+          index = (next + items.length) % items.length;
+          setTopBannerLink(link, items[index]);
+          link.classList.remove("is-changing");
+          link.classList.add("is-entering");
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              link.classList.remove("is-entering");
+              setTimeout(function () { changing = false; }, 190);
+            });
+          });
+        }, 180);
+      }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function start() {
+        stop();
+        if (items.length < 2) return;
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        timer = setInterval(function () { show(index + 1); }, TOP_BANNER_INTERVAL);
+      }
+      link.addEventListener("mouseenter", stop);
+      link.addEventListener("mouseleave", start);
+      link.addEventListener("focus", stop);
+      link.addEventListener("blur", start);
+      start();
+    }).catch(function () {
+      setTopBannerLink(link, { text: "What's Newを見る", href: "whatsnew.html" });
+    });
+  }
+
   function mountFloat() {
     if (document.querySelector(".mn-float")) return;
     var box = document.createElement("div");
@@ -192,6 +540,7 @@
       return '<a class="mn-float-btn' + (b.top ? ' mn-float-btn--top' : '') + '" href="' + esc(b.href) + '" title="' + esc(b.title) + '" aria-label="' + esc(b.title) + '">' + esc(b.label) + '</a>';
     }).join("");
     document.body.appendChild(box);
+    applyMVConfig(box);
     var topBtn = box.querySelector(".mn-float-btn--top");
     function sync() {
       var show = window.scrollY > 240 || document.body.getAttribute("data-page-title");
@@ -281,6 +630,7 @@
       head.className = "mn";
       head.innerHTML = headerHTML();
       fillNotice(head);
+      mountTopBanner(head);
 
       /* 現在地(ヘッダーの3分類ナビ／ドロワー)。#が変わっても追従 */
       markCurrent(head);
@@ -293,10 +643,10 @@
 
       var nb = head.querySelector(".mn-notice-btn"), np = head.querySelector(".mn-notice-panel");
       var mb = head.querySelector(".mn-menu-btn"), dr = head.querySelector(".mn-drawer");
-      function setNotice(o) { np.classList.toggle("is-open", o); nb.setAttribute("aria-expanded", o ? "true" : "false"); }
-      function setDrawer(o) { dr.classList.toggle("is-open", o); mb.setAttribute("aria-expanded", o ? "true" : "false"); mb.setAttribute("aria-label", o ? "メニューを閉じる" : "メニューを開く"); document.body.classList.toggle("mn-drawer-open", o); }
-      nb.addEventListener("click", function () { setNotice(!np.classList.contains("is-open")); setDrawer(false); });
-      mb.addEventListener("click", function () { setDrawer(!dr.classList.contains("is-open")); setNotice(false); });
+      function setNotice(o) { if (!np || !nb) return; np.classList.toggle("is-open", o); nb.setAttribute("aria-expanded", o ? "true" : "false"); }
+      function setDrawer(o) { if (!dr || !mb) return; dr.classList.toggle("is-open", o); mb.setAttribute("aria-expanded", o ? "true" : "false"); mb.setAttribute("aria-label", o ? "メニューを閉じる" : "メニューを開く"); document.body.classList.toggle("mn-drawer-open", o); }
+      if (nb && np) nb.addEventListener("click", function () { setNotice(!np.classList.contains("is-open")); setDrawer(false); });
+      if (mb && dr) mb.addEventListener("click", function () { setDrawer(!dr.classList.contains("is-open")); setNotice(false); });
       document.addEventListener("click", function (e) {
         if (!e.target.closest(".mn-notice")) setNotice(false);
       });

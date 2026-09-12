@@ -115,6 +115,8 @@
       if (timer) { window.clearInterval(timer); timer = 0; }
       render(1);
       root.classList.add("is-finished");
+      var liveGrid = root.closest(".top-live-grid");
+      if (liveGrid) liveGrid.classList.add("is-dashboard");
       document.body.classList.remove("prologue-running");
       document.dispatchEvent(new Event("MSGPrologueFinished"));
       /* 演出が終わったら、少し余韻を置いて8つの入口(メニュー画面)へ */
@@ -126,6 +128,8 @@
       offset = 0;
       startAt = performance.now();
       root.classList.remove("is-finished");
+      var liveGrid = root.closest(".top-live-grid");
+      if (liveGrid) liveGrid.classList.remove("is-dashboard");
       document.body.classList.add("prologue-running");
       if (raf) window.cancelAnimationFrame(raf);
       if (timer) window.clearInterval(timer);
@@ -268,26 +272,11 @@
   }
 
 
-  /* =========================================================
-     左下のボタン(SOUND/もう一度)がフッターと重ならないように、
-     フッターが見えてきたらその分だけ上へ逃がす
-  ========================================================= */
+  /* SOUND/もう一度は画面左上固定。フッター回避の上下移動は行わない。 */
   function initControlsClearFooter() {
     var box = document.querySelector(".msg-controls");
-    var foot = document.getElementById("msg-footer");
-    if (!box || !foot) return;
-    var tick = false;
-    function sync() {
-      tick = false;
-      var r = foot.getBoundingClientRect();
-      var overlap = window.innerHeight - r.top;
-      box.style.transform = overlap > 0 ? "translateY(" + (-overlap - 10) + "px)" : "";
-    }
-    window.addEventListener("scroll", function () {
-      if (!tick) { tick = true; window.requestAnimationFrame(sync); }
-    }, { passive: true });
-    window.addEventListener("resize", sync);
-    sync();
+    if (!box) return;
+    box.style.transform = "";
   }
 
   /* =========================================================
