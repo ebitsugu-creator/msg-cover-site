@@ -1113,8 +1113,7 @@
           "name": "thumbnail",
           "type": "image",
           "label": "サムネイル画像",
-          "required": true,
-          "note": "画像を直接アップロードしてください。Facebook向けは横長（推奨 1200×630px）が安定します。"
+          "note": "画像を直接アップロードしてください。Facebook向けは横長（推奨 1200×630px）が安定します。Pitの画像必須判定を避けるため設定上は任意ですが、SNS共有では画像を入れてください。"
         },
         {
           "name": "targetUrl",
