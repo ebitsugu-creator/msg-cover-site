@@ -293,6 +293,58 @@
     var d = Date.parse(item.updatedAt || item.publishStartAt || "");
     return isNaN(d) ? 0 : d;
   }
+
+  /* MV丸ボタン：円の大きさは固定したまま、各行の文字量に応じて文字だけ拡大する。
+     全角=1、半角=0.5で概算し、上下段のサイズ差は最大18%に抑える。 */
+  function mvTextUnits(text) {
+    return Array.from(String(text || "")).reduce(function (sum, ch) {
+      if (/\s/.test(ch)) return sum + 0.35;
+      return sum + (/^[\x00-\xff]$/.test(ch) ? 0.5 : 1);
+    }, 0);
+  }
+  function mvTwoLineFontSize(text) {
+    var u = mvTextUnits(text);
+    if (u >= 6) return 8;
+    if (u <= 2.5) return 11.6;
+    var stops = [
+      [2.5, 11.6],
+      [3, 11.2],
+      [4, 10.4],
+      [5, 8.9],
+      [6, 8]
+    ];
+    for (var i = 0; i < stops.length - 1; i++) {
+      var a = stops[i], b = stops[i + 1];
+      if (u >= a[0] && u <= b[0]) {
+        var t = (u - a[0]) / (b[0] - a[0]);
+        return a[1] + (b[1] - a[1]) * t;
+      }
+    }
+    return 8;
+  }
+  function mvOneLineFontSize(text) {
+    var u = mvTextUnits(text);
+    if (u >= 6) return 9;
+    if (u <= 2.5) return 12.5;
+    return Math.min(12.5, 9 + (6 - u) * 0.9);
+  }
+  function sizeMVLines(mv, line1, line2) {
+    var lines = mv.querySelectorAll(".mn-float-line");
+    if (!lines.length) return;
+    if (!line2 || lines.length < 2) {
+      lines[0].style.fontSize = mvOneLineFontSize(line1).toFixed(1) + "px";
+      return;
+    }
+    var s1 = mvTwoLineFontSize(line1);
+    var s2 = mvTwoLineFontSize(line2);
+    var smaller = Math.min(s1, s2);
+    var maxLarger = smaller * 1.18;
+    if (s1 > maxLarger) s1 = maxLarger;
+    if (s2 > maxLarger) s2 = maxLarger;
+    lines[0].style.fontSize = s1.toFixed(1) + "px";
+    lines[1].style.fontSize = s2.toFixed(1) + "px";
+  }
+
   function applyMVConfig(box) {
     var repo = window.MSGRepo;
     if (!repo || !repo.list || !repo.text) return;
@@ -316,6 +368,7 @@
         mv.innerHTML = '<span class="mn-float-line">' + esc(line1) + '</span>' + (line2 ? '<span class="mn-float-line">' + esc(line2) + '</span>' : '');
         mv.classList.add("mn-float-btn--cms");
         if (line2) mv.classList.add("mn-float-btn--two-line");
+        sizeMVLines(mv, line1, line2);
         var label = line1 + (line2 ? " " + line2 : "");
         mv.setAttribute("title", label);
         mv.setAttribute("aria-label", label);
