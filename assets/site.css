@@ -1315,3 +1315,37 @@ a.cms-event-image{display:block}
     scroll-snap-align:none!important;
   }
 }
+
+
+/* V159 PATCH — Events libraries: mobile one-row horizontal swipe.
+   Restores the intended swipe rail for Study / Event libraries only.
+   Notice cards and desktop/tablet layouts are untouched. */
+@media (max-width:600px){
+  #events .cms-library-rail .cms-mixed-library{
+    display:flex!important;
+    flex-flow:row nowrap!important;
+    align-items:stretch!important;
+    gap:10px!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    padding:0 0 6px!important;
+    scroll-snap-type:x mandatory!important;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  #events .cms-library-rail .cms-mixed-library::-webkit-scrollbar{display:none}
+  #events .cms-library-rail .cms-mixed-library>.cms-event-card,
+  #events .cms-library-rail .cms-mixed-library>.cms-video-card{
+    display:block!important;
+    flex:0 0 88%!important;
+    width:88%!important;
+    min-width:88%!important;
+    max-width:88%!important;
+    margin:0!important;
+    scroll-snap-align:start!important;
+  }
+}
