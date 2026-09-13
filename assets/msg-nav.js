@@ -332,7 +332,7 @@
     var lines = mv.querySelectorAll(".mn-float-line");
     if (!lines.length) return;
     if (!line2 || lines.length < 2) {
-      lines[0].style.fontSize = mvOneLineFontSize(line1).toFixed(1) + "px";
+      lines[0].style.setProperty("font-size", mvOneLineFontSize(line1).toFixed(1) + "px", "important");
       return;
     }
     var s1 = mvTwoLineFontSize(line1);
@@ -341,8 +341,8 @@
     var maxLarger = smaller * 1.18;
     if (s1 > maxLarger) s1 = maxLarger;
     if (s2 > maxLarger) s2 = maxLarger;
-    lines[0].style.fontSize = s1.toFixed(1) + "px";
-    lines[1].style.fontSize = s2.toFixed(1) + "px";
+    lines[0].style.setProperty("font-size", s1.toFixed(1) + "px", "important");
+    lines[1].style.setProperty("font-size", s2.toFixed(1) + "px", "important");
   }
 
   function applyMVConfig(box) {
